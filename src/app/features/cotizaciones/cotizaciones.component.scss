@@ -1,0 +1,150 @@
+// Layout general de la aplicación
+.main-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f7f9f7; // Fondo gris/verde muy claro de fondo
+}
+
+.content-container {
+  flex: 1;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+// Barra superior (Título y controles)
+.top-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  .left-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+}
+
+.view-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+// Botones y Filtros
+.btn-filter {
+  background-color: #b1c7f4; // Tono azulado de los filtros en tu mockup
+  color: #1e3d75;
+  border: none;
+  padding: 0.45rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .caret {
+    font-size: 0.65rem;
+  }
+}
+
+.input-search {
+  border: 1px solid #ced4da;
+  background-color: #e8f1f5; // Fondo azul pálido del buscador
+  padding: 0.45rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  width: 200px;
+  outline: none;
+
+  &:focus {
+    border-color: #90b4ce;
+  }
+}
+
+.btn-primary {
+  background-color: #1b633a; // Verde oscuro característico de tu botón
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #144d2c;
+  }
+}
+
+// Contenedor de la Tabla principal
+.table-card {
+  background-color: #eaf4f9; // Tono azul muy suave del fondo de la tabla
+  border: 1px solid #b8d2df;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  flex: 1; /* Hace que ocupe el resto del espacio disponible verticalmente */
+  min-height: 400px;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+// Estructura de la Tabla
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+
+  thead {
+    background-color: #d1e6f1; // Encabezado ligeramente más oscuro
+    border-bottom: 1px solid #a7c5d7;
+    
+    th {
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #2c4453;
+      white-space: nowrap;
+    }
+  }
+
+  tbody {
+    .empty-row {
+      td {
+        text-align: center;
+        padding: 5rem 1rem;
+        font-style: italic;
+        color: #708999;
+      }
+    }
+  }
+}
+
+// Responsivo para pantallas medianas/pequeñas
+@media (max-width: 768px) {
+  .top-actions {
+    flex-direction: column;
+    align-items: stretch;
+
+    .left-group {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  .input-search {
+    width: 100%;
+  }
+}

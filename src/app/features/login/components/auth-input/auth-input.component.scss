@@ -1,0 +1,50 @@
+// Campos de entrada
+.form-group {
+  text-align: left;
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    font-size: 0.85rem;
+    color: #333333;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .input-icon {
+    position: absolute;
+    left: 14px;
+    font-size: 1rem;
+    color: #888888;
+    pointer-events: none;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.85rem 1rem 0.85rem 2.7rem;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #333333;
+    outline: none;
+    transition: border-color 0.2s ease;
+
+    &::placeholder {
+      color: #b3b3b3;
+    }
+
+    &:focus {
+      border-color: #278354;
+    }
+
+    &.error {
+      border-color: #dc3545;
+    }
+  }
+}

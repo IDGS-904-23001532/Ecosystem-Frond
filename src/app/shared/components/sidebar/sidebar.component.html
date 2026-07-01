@@ -1,0 +1,54 @@
+<aside class="sidebar">
+  <div class="sidebar-topbar">
+    <div class="sidebar-brand">
+      <img src="assets/smartecologysystem.png" alt="Ecosystem Logo" class="brand-logo" />
+      <span class="brand-name">Ecosystem</span>
+    </div>
+
+    <button
+      type="button"
+      class="menu-toggle"
+      (click)="toggleMobileMenu()"
+      [attr.aria-expanded]="isMobileMenuOpen"
+      aria-label="Mostrar menu">
+      ☰
+    </button>
+  </div>
+  
+  <nav class="sidebar-menu" [class.mobile-open]="isMobileMenuOpen">
+    <div *ngFor="let section of sections" class="menu-group">
+      
+      <a
+        *ngIf="section.route"
+        class="group-title"
+        [routerLink]="section.route"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: section.exact ?? true }"
+        (click)="closeMobileMenu()">
+        <span class="group-icon">{{ section.icon }}</span>
+        <span class="group-label">{{ section.label }}</span>
+      </a>
+
+      <div 
+        *ngIf="!section.route" 
+        class="group-title static"
+        (click)="toggleSection(section)">
+        <span class="group-icon">{{ section.icon }}</span>
+        <span class="group-label">{{ section.label }}</span>
+        <span class="group-caret" [class.rotated]="section.isOpen">⌃</span>
+      </div>
+
+      <div class="group-children" *ngIf="section.children?.length && section.isOpen">
+        <a
+          *ngFor="let child of section.children"
+          class="child-item"
+          [routerLink]="child.route"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: child.exact ?? true }"
+          (click)="closeMobileMenu()">
+          {{ child.label }}
+        </a>
+      </div>
+    </div>
+  </nav>
+</aside>

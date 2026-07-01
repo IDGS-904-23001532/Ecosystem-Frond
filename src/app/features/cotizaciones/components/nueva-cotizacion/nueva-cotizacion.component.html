@@ -1,0 +1,95 @@
+<main class="content-container">
+  
+  <header class="view-header">
+    <button type="button" class="btn-back" aria-label="Regresar">
+      <span class="arrow">←</span>
+    </button>
+    <h1 class="view-title">Cotizaciones</h1>
+  </header>
+
+  <form class="quotation-form">
+    
+    <section class="form-card client-data-card">
+      <div class="form-grid">
+        <div class="form-group full-width">
+          <label for="clientSelect" class="form-label">Cliente / Prospecto</label>
+          <div class="select-wrapper">
+            <select id="clientSelect" class="form-control select-control">
+              <option value="" disabled selected></option>
+              </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="installationAddress" class="form-label">Dirección instalación</label>
+          <input type="text" id="installationAddress" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="clientContact" class="form-label">Contacto del cliente</label>
+          <input type="text" id="clientContact" class="form-control" />
+        </div>
+      </div>
+    </section>
+
+    <section class="concepts-section">
+      <h2 class="section-title">Conceptos</h2>
+      
+      <div class="table-card concepts-card">
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th scope="col" style="width: 15%;">Cantidad</th>
+                <th scope="col" style="width: 40%;">Conceptos</th>
+                <th scope="col" style="width: 15%;">Precio Unitario</th>
+                <th scope="col" style="width: 15%;">Descuento</th>
+                <th scope="col" style="width: 15%;">Importe</th>
+                <th scope="col" class="text-center" style="width: 5%;">
+                  <button type="button" class="btn-add-concept" aria-label="Agregar concepto">+</button>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="empty-row">
+                <td colspan="6"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <footer class="form-footer">
+      <div class="totals-and-buttons">
+        
+        <div class="totals-card">
+          <div class="total-row">
+            <span class="total-label">Subtotal:</span>
+            <span class="total-value"></span>
+          </div>
+          <div class="total-row">
+            <span class="total-label">Costo inst:</span>
+            <span class="total-value"></span>
+          </div>
+          <div class="total-row line-below">
+            <span class="total-label">Impuesto (IVA):</span>
+            <span class="total-value"></span>
+          </div>
+          <div class="total-row grand-total">
+            <span class="total-label">Total:</span>
+            <span class="total-value"></span>
+          </div>
+        </div>
+
+        <div class="actions-group">
+          <button type="button" class="btn btn-print">Imprimir</button>
+          <button type="button" class="btn btn-cancel">Cancelar</button>
+          <button type="submit" class="btn btn-pay">Pagar</button>
+        </div>
+
+      </div>
+    </footer>
+
+  </form>
+</main>

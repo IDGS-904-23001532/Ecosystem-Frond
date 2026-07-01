@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-header">
+    <span class="card-title">{{ title }}</span>
+    <span class="card-icon">{{ icon }}</span>
+  </div>
+  <div class="card-body">
+    <h3 class="card-value">{{ value }}</h3>
+    <p class="card-trend" [ngClass]="trendClass" *ngIf="trend">
+      {{ trend }}
+    </p>
+  </div>
+</div>

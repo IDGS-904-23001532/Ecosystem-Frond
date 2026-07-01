@@ -1,0 +1,51 @@
+<div class="main-layout">
+    <app-sidebar></app-sidebar>
+  <main class="content-container">
+    
+    <header class="top-actions">
+      <div class="left-group">
+        <h1 class="view-title">Cotizaciones</h1>
+        
+        <div class="filter-dropdown">
+          <button type="button" class="btn-filter">
+            Filtros "Estatus"
+            <span class="caret">▼</span>
+          </button>
+        </div>
+
+        <div class="search-box">
+          <input type="text" placeholder="Buscar" class="input-search" />
+        </div>
+      </div>
+
+      <button type="button" class="btn-primary" routerLink="/components/nueva-cotizacion">
+        Nueva cotización
+      </button>
+    </header>
+
+    <section class="table-card">
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th scope="col">Folio</th>
+              <th scope="col">Cliente / Prospecto</th>
+              <th scope="col">Fecha / vigencia</th>
+              <th scope="col">Monto total</th>
+              <th scope="col">Estatus</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="empty-row">
+              <td colspan="6" class="text-muted">
+                No se encontraron cotizaciones registradas.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>

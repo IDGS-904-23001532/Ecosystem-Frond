@@ -1,0 +1,16 @@
+<div class="dashboard-layout">
+  <app-sidebar></app-sidebar>
+
+  <main class="main-content">
+    <app-dashboard-header
+      [title]="title"
+      [subtitle]="subtitle"
+      [username]="username"
+      [userInitials]="userInitials">
+    </app-dashboard-header>
+
+    <app-dashboard-metrics [metrics]="metrics"></app-dashboard-metrics>
+
+    <app-dashboard-energy-chart></app-dashboard-energy-chart>
+  </main>
+</div>
