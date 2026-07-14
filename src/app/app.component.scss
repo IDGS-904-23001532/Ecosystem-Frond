@@ -1,0 +1,14 @@
+/* src/styles.scss */
+html, body {
+  height: 100vh; /* Usa 100vh para ocupar exactamente el alto de la pantalla */
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden; /* Evita scroll horizontal accidental */
+}
+
+/* Reseteo universal para evitar otros espacios indeseados */
+*, *:before, *:after {
+  box-sizing: inherit;
+}
