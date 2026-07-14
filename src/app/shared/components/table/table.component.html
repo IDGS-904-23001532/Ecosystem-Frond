@@ -1,0 +1,35 @@
+<section class="table-card">
+  <div class="table-responsive">
+    <table class="data-table">
+      
+      <thead>
+        <tr>
+          <th scope="col" *ngFor="let col of columns">{{ col.label }}</th>
+          <th scope="col" *ngIf="showActions" class="actions-header">Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr class="empty-row" *ngIf="data.length === 0">
+          <td [attr.colspan]="columns.length + (showActions ? 1 : 0)" class="text-muted">
+            {{ emptyMessage }}
+          </td>
+        </tr>
+
+        <tr *ngFor="let row of data">
+          <td *ngFor="let col of columns">{{ row[col.key] }}</td>
+          
+          <td *ngIf="showActions" class="actions-cell">
+            <button class="action-btn edit" (click)="onAction('edit', row)" title="Editar">
+              ✏️
+            </button>
+            <button class="action-btn delete" (click)="onAction('delete', row)" title="Eliminar">
+              🗑️
+            </button>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</section>

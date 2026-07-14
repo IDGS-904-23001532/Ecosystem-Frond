@@ -1,0 +1,106 @@
+// Botón "Iniciar Sesión" (Verde característico)
+.btn-iniciar-sesion, .btn-registrarse {
+  width: 100%;
+  padding: 0.9rem;
+  background-color: #278354; 
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+
+  &:hover {
+    background-color: #1e6540;
+    transform: scale(1.02);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    background-color: #6a9e81;
+    cursor: not-allowed;
+  }
+}
+
+// Botón "Volver" (Gris característico)
+.btn-volver{
+  width: 100%;
+  padding: 0.9rem;
+  background-color: black; 
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+
+  &:hover {
+    background-color: #4b3232;
+    transform: scale(1.02);
+  }
+
+}
+
+// Botón de Filtros
+.btn-filter {
+  width: 100%;
+  padding: 0.9rem;
+  background-color: #13488d; // Tono azulado de los filtros en tu mockup
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+// Boton agregar nuevo
+.btn-agregar {
+  width: 100%;
+  padding: 0.9rem;
+  background-color: #1b633a; // Tono azulado de los filtros en tu mockup
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+
+  &:hover {
+    background-color: #1e6540;
+    transform: scale(1.02);
+  }
+
+
+}
+
+
+    .btn-cotizar {
+      background-color: #607c5f;
+      color: #112b10;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+
+      &:hover {
+        background-color: #4e754f;
+        transform: translateY(-2px);
+        transition: background-color 0.2s ease, transform 0.1s ease;
+      }
+    }

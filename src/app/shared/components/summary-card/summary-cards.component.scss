@@ -1,0 +1,78 @@
+/* Variables (puedes ajustarlas o moverlas a un archivo global si prefieres) */
+$green-card: #a3d7a5; 
+$pink-icon: #d62d7c;  
+$text-dark: #1a1a1a;
+$text-gray: #555555;
+
+.summary-cards {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap; /* Permite que las tarjetas bajen a la siguiente línea si hay muchas */
+
+  .card {
+    background-color: $green-card;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex: 1;
+    min-width: 250px; /* Asegura que no se hagan demasiado pequeñas */
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+
+    .card-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.8rem;
+      color: white;
+
+      /* Variantes de estilo para los íconos */
+      &.icon-pink {
+        background-color: $pink-icon;
+      }
+
+      &.icon-outline {
+        background-color: transparent;
+        border: 2px solid $text-dark;
+        color: $text-dark;
+        font-size: 2rem;
+      }
+      
+      /* Puedes agregar más variantes aquí en el futuro (ej. icon-blue, icon-orange) */
+    }
+
+    .card-info {
+      display: flex;
+      flex-direction: column;
+
+      .card-label {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: $text-gray;
+        margin-bottom: 0.3rem;
+      }
+
+      .card-value {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #000;
+      }
+    }
+  }
+}
+
+/* Responsivo para móviles */
+@media (max-width: 900px) {
+  .summary-cards {
+    flex-direction: column;
+    .card {
+      max-width: 100%;
+    }
+  }
+}

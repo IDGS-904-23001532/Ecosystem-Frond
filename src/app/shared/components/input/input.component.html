@@ -1,0 +1,13 @@
+<div class="form-group" [formGroup]="parentForm">
+  <label [for]="controlName">{{ label }}</label>
+  <div class="input-wrapper">
+    <span class="input-icon">{{ icon }}</span>
+    <input
+      [type]="type"
+      [id]="controlName"
+      [formControlName]="controlName"
+      [placeholder]="placeholder"
+      [class.error]="isInvalid"
+    />
+  </div>
+</div>
