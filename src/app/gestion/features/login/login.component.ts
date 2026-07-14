@@ -9,7 +9,7 @@ import { RegistrarComponent } from '../registrarse/registrar.component';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputComponent, ButtonComponent, TopBarComponent, RegistrarComponent],
+  imports: [CommonModule, ReactiveFormsModule, InputComponent, ButtonComponent, RegistrarComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
