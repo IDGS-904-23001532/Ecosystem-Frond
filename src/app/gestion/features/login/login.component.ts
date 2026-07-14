@@ -5,11 +5,10 @@ import { Router } from '@angular/router';
 import { InputComponent } from '../../../shared/components/input/input.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { TopBarComponent } from "../../../ecommerce/shared/components/topbar/topbar.component";
-import { RegistrarComponent } from '../registrarse/registrar.component';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputComponent, ButtonComponent, RegistrarComponent],
+  imports: [CommonModule, ReactiveFormsModule, InputComponent, ButtonComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
