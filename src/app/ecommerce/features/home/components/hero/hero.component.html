@@ -1,0 +1,21 @@
+<section class="hero-section">
+  <div class="hero-content">
+    <h4 class="hero-subtitle">
+      Dile adiós a las facturas de luz altas,  comienza a 
+      <br/>generar tu propia energía limpia y renovable.
+    </h4>
+    <h1 class="hero-title">PANELES SOLARES</h1>
+    <p class="hero-description">
+      Cotización gratis en 2 minutos. Instalación profesional y garantía de 25 años. ¡Empieza a ahorrar hoy!
+    </p>
+    
+    <!--  Boton de Cotización -->
+    <app-button [text]="'Cotiza Gratis'" [type]="'submit'" [buttonClass]="'btn-cotizar'" [disabled]="false" onClick="navigateToCotizacion()">
+    </app-button>
+  </div>
+
+  <div class="hero-image">
+    <img src="assets/hero-personajes.png" alt="Equipo Solar" class="main-img"
+         onerror="this.src='https://enchufesolar.com/wp-content/uploads/2021/08/instalacion_panel-solar.jpg'">
+  </div>
+</section>

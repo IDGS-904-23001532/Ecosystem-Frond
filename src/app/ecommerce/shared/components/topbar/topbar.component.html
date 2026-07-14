@@ -1,0 +1,71 @@
+
+<!-- Menu Toggle Button -->
+<button type="button" class="menu-toggle" 
+            (click)="toggleMobileMenu()"
+            aria-label="Toggle menu">
+      ☰
+    </button>
+
+<!-- Overlay -->
+<div class="sidebar-overlay" 
+     [class.show]="isMobileMenuOpen" 
+     (click)="closeMobileMenu()"></div>
+
+<aside class="sidebar" [class.open]="isMobileMenuOpen">
+  <div class="sidebar-topbar">
+    <div class="sidebar-brand">
+      <img src="../../assets/smartecologysystem.png" 
+           alt="Ecosystem Logo" 
+           class="brand-logo"
+           onerror="this.src='https://img.freepik.com/premium-vector/green-white-logo-with-leaves-white-background_1240970-13528.jpg'" />
+      <span class="brand-name">Ecosystem</span>
+    </div>
+
+      <nav class="sidebar-menu">
+      <div *ngFor="let section of sections" class="menu-group">
+
+        <a *ngIf="section.route"
+           class="group-title"
+           [routerLink]="section.route"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{ exact: section.exact ?? true }"
+           (click)="closeMobileMenu()">
+
+          <span class="group-icon">{{ section.icon }}</span>
+          <span>{{ section.label }}</span>
+
+        </a>
+
+        <div *ngIf="!section.route"
+             class="group-title static"
+             (click)="toggleSection(section)">
+
+          <span class="group-icon">{{ section.icon }}</span>
+          <span>{{ section.label }}</span>
+          <span class="group-caret"
+                [class.rotated]="section.isOpen">⌃</span>
+
+        </div>
+
+        <div class="group-children"
+             *ngIf="section.children?.length && section.isOpen">
+
+          <a *ngFor="let child of section.children"
+             class="child-item"
+             [routerLink]="child.route"
+             routerLinkActive="active"
+             (click)="closeMobileMenu()">
+
+            <span class="child-icon">{{ child.icon || '•' }}</span>
+            <span>{{ child.label }}</span>
+
+          </a>
+
+        </div>
+
+      </div>
+    </nav>
+
+  </div>
+
+</aside>

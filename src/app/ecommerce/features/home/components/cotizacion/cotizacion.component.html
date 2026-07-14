@@ -1,0 +1,68 @@
+<section class="contact-section">
+  <div class="form-container">
+    <h2 class="form-title">Llena este formulario</h2>
+    <p class="form-subtitle">
+      Ingresa los siguientes datos y un asesor te estará contactando en un periodo no mayor a 24 horas.
+    </p>
+
+    <form [formGroup]="cotizacionForm" (ngSubmit)="enviarMensaje()">
+      <div class="form-group">
+        <input type="text" formControlName="nombre" placeholder="Escribe tu nombre*">
+      </div>
+
+      <div class="form-group">
+        <input type="email" formControlName="correo" placeholder="Ingresa tu correo electrónico*">
+      </div>
+
+      <div class="form-group telephone-group">
+        <label>Teléfono</label>
+        <input type="tel" formControlName="telefono" placeholder="Ingresa tu número de teléfono *">
+      </div>
+
+      <div class="form-group">
+        <textarea formControlName="mensaje" placeholder="Escribe tu mensaje *" rows="5"></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit" [disabled]="cotizacionForm.invalid">
+        Enviar mensaje
+      </button>
+    </form>
+  </div>
+
+  <div class="info-container">
+    <h2 class="info-title">Más información</h2>
+    <p class="info-description">
+      Con Grupo Proled cuentas con una amplia variedad de opciones para ponerte en contacto con nosotros:
+    </p>
+
+    <div class="info-grid">
+      <div class="info-item">
+        <div class="icon">📍</div>
+        <h3>Visita nuestra sucursal</h3>
+        <p>Blvd. J. J. Torres Landa Ote.<br>
+           3905, Jardines de Jerez, 37530<br>
+           León de los Aldama, Gto.</p>
+      </div>
+
+      <div class="info-item">
+        <div class="icon">🕒</div>
+        <h3>Horario de atención</h3>
+        <p>Lunes a Viernes: 09:00am -<br>
+           06:00pm<br>
+           sábado: 09:00am - 02:30pm</p>
+      </div>
+
+      <div class="info-item">
+        <div class="icon">✉️</div>
+        <h3>Correo electrónico</h3>
+        <p>contacto&#64;proledservice.com</p>
+      </div>
+
+      <div class="info-item">
+        <div class="icon">📞</div>
+        <h3>Teléfonos de contacto:</h3>
+        <p>+52 477 411 7664</p>
+      </div>
+    </div>
+  </div>
+</section>
