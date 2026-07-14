@@ -1,0 +1,41 @@
+<div class="clientes-layout">
+    <app-sidebar></app-sidebar>
+     <main class="main-content">
+
+        <!-- Título y subtítulo de clientes -->
+  <app-header-title
+    [title]="title"
+    [subtitle]="subtitle"
+    [username]="username"
+    [userInitials]="userInitials">
+    </app-header-title>
+
+        <section class="top-actions">
+      <div class="left-group">
+        <app-button [text]="'Filtrar Estatus'" [type]="'button'" [buttonClass]="'btn-filter'">
+                    <span class="caret">▼</span>
+        </app-button>
+          
+        <input type="text" placeholder="Buscar" class="input-search" />
+      </div>
+
+        <app-button [text]="'Nuevo Cliente'" [type]="'button'" [buttonClass]="'btn-agregar'">
+          <span class="icon">⭳</span>
+        </app-button>
+      </section>
+
+
+
+ <app-summary-cards [cards]="tarjetasClientes"></app-summary-cards>
+
+  
+    <app-table
+  [columns]="columnasClientes"
+  [data]="datosClientes"
+  [showActions]="true"
+  emptyMessage="No se encontraron prospectos registrados."
+  (actionClick)="manejarAccion($event)">
+</app-table>
+
+</main>
+</div>

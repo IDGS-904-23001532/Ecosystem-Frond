@@ -1,0 +1,21 @@
+<div class="dashboard-layout">
+  <app-sidebar></app-sidebar>
+
+  <main class="main-content">
+
+    <!-- Título y subtítulo del dashboard -->
+    <app-header-title
+      [title]="title"
+      [subtitle]="subtitle"
+      [username]="username"
+      [userInitials]="userInitials">
+    </app-header-title>
+
+    <!-- Metricas de Dashboard -->
+    <app-dashboard-metrics 
+    [metrics]="metrics"></app-dashboard-metrics>
+
+    <!-- Gráfica de energía -->
+    <app-dashboard-energy-chart></app-dashboard-energy-chart>
+  </main>
+</div>

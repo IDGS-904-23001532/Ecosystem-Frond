@@ -1,0 +1,55 @@
+<div class="login-container">
+
+  <div class="form-section">
+    <div class="login-card">
+
+      <!-- Logo and Title -->
+      <div class="logo-container">
+        <img src="../../assets/logo_ecosystem.jpg" alt="Ecosystem Logo" class="logo-img"
+          onerror="this.src='https://img.freepik.com/premium-vector/green-white-logo-with-leaves-white-background_1240970-13528.jpg'" />
+      </div>
+      <h2>Iniciar sesión</h2>
+
+      <!-- Login Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <!-- Email Input -->
+        <app-input [parentForm]="loginForm" controlName="email" label="Correo electrónico" type="email"
+          placeholder="usuario@gmail.com" icon="📧">
+        </app-input>
+
+        <!-- Password Input -->
+        <app-input [parentForm]="loginForm" controlName="password" label="Contraseña:" type="password"
+          placeholder="••••••••" icon="🔒">
+        </app-input>
+
+        <!-- Remember Me and Forgot Password -->
+        <div class="form-options">
+          <label class="checkbox-label">
+            <input type="checkbox" formControlName="rememberMe" />
+            <span class="custom-checkbox"></span>
+            Recuérdame
+          </label>
+
+          <!-- Forgot Password Link -->
+          <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <!-- Submit Button -->
+         <app-button [text]="'Iniciar sesión'" [type]="'submit'" [buttonClass]="'btn-iniciar-sesion'" [disabled]="loginForm.invalid" onClick="onSubmit()">
+         </app-button>
+      </form>
+
+      <!-- Volver-->
+        <app-button [text]="'Volver'" [type]="'button'" [buttonClass]="'btn-volver'" (click)="navigateToHome()">
+         </app-button>
+        <br>
+      <!-- Register Button -->
+         <a href="/registrarse" class="btn btn-registrarse">
+           ¿Aún no tienes una cuenta? Regístrate aquí
+         </a>
+    </div>
+  </div>
+  <div class="image-section"></div>
+
+</div>

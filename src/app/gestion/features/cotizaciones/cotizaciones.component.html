@@ -1,0 +1,37 @@
+<div class="cotizaciones-layout">
+   <app-sidebar></app-sidebar>
+
+  <main class="main-content">
+
+    <!-- Título y subtítulo de cotizaciones -->
+    <app-header-title
+      [title]="title"
+      [subtitle]="subtitle"
+      [username]="username"
+      [userInitials]="userInitials">
+    </app-header-title>    
+
+    <section class="top-actions">
+      <div class="left-group">
+        <app-button [text]="'Filtrar Estatus'" [type]="'button'" [buttonClass]="'btn-filter'">
+                    <span class="caret">▼</span>
+        </app-button>
+          
+        <input type="text" placeholder="Buscar" class="input-search" />
+      </div>
+
+        <app-button [text]="'Nueva Cotización'" [type]="'button'" [buttonClass]="'btn-agregar'">
+          <span class="icon">⭳</span>
+        </app-button>
+      </section>
+
+    <app-table
+  [columns]="columnasCotizacion"
+  [data]="datosCotizacion"
+  [showActions]="true"
+  emptyMessage="No se encontraron cotizaciones registradas."
+  (actionClick)="manejarAccion($event)">
+</app-table>
+
+  </main>
+</div>
