@@ -1,0 +1,51 @@
+<div class="registro-container">
+  <main class="main-content">
+  <div class="form-section">
+      <h2>Registrarse</h2>
+
+      <!-- Registration Form -->
+      <form [formGroup]="registrarForm" (ngSubmit)="onSubmit()">
+
+        <!-- Nombre Input -->
+        <app-input [parentForm]="registrarForm" controlName="name" label="Nombre completo" type="text"
+          placeholder="Juan Pérez" icon="">
+        </app-input>
+
+        <!-- Email Input -->
+        <app-input [parentForm]="registrarForm" controlName="email" label="Correo electrónico" type="email"
+          placeholder="usuario@gmail.com" icon="📧">
+        </app-input>
+
+        <!-- Teléfono Input -->
+        <app-input [parentForm]="registrarForm" controlName="phone" label="Teléfono" type="tel"
+          placeholder="123-456-7890" icon="📞">
+        </app-input>
+
+        <!-- Password Input -->
+        <app-input [parentForm]="registrarForm" controlName="password" label="Contraseña:" type="password"
+          placeholder="••••••••" icon="🔒">
+        </app-input>
+
+        <!-- Remember Me and Forgot Password -->
+        <div class="form-options">
+          <label class="checkbox-label">
+            <input type="checkbox" formControlName="rememberMe" />
+            <span class="custom-checkbox"></span>
+            Recuérdame
+          </label>
+
+          <!-- Forgot Password Link -->
+          <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <!-- Submit Button -->
+         <app-button [text]="'Registrarse'" [type]="'submit'" [buttonClass]="'btn-registrarse'" [disabled]="registrarForm.invalid">
+         </app-button>
+      </form>
+
+      <!-- Volver-->
+        <app-button [text]="'Ya tengo una cuenta'" [type]="'button'" [buttonClass]="'btn-volver'" (click)="navigateToLogin()">
+         </app-button>
+    </div>
+</main>
+</div>
