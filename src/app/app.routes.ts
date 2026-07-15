@@ -11,6 +11,7 @@ import { ProspectosComponent } from './gestion/features/prospectos/prospectos.co
 import { CotizacionesComponent } from './gestion/features/cotizaciones/cotizaciones.component';
 import { PlaceholderPageComponent } from './gestion/shared/components/placeholder-page/placeholder-page.component';
 import { ClientesComponent } from './gestion/features/clientes/clientes.component';
+import { UsuariosComponent } from './gestion/features/usuarios/usuarios.component';
 
 export const routes: Routes = [
   // Si la ruta está vacía, redirige automáticamente al login
@@ -39,6 +40,9 @@ export const routes: Routes = [
   // Rutas para clientes
   { path: 'clientes', component: ClientesComponent },
 
+  // Ruta para usuarios
+  { path: 'usuarios', component: UsuariosComponent },
+  
   {
     path: 'contabilidad',
     component: PlaceholderPageComponent,

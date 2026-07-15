@@ -72,7 +72,7 @@ export class SidebarComponent {
       icon: '⚙️',
       isOpen: false,
       children: [
-        { label: 'Usuarios', icon: '👥', route: '/configuracion', exact: true }]
+        { label: 'Usuarios', icon: '👥', route: '/usuarios', exact: true }]
     },
     {
       label: 'Salir',

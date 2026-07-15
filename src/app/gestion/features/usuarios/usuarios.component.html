@@ -1,0 +1,44 @@
+<div class="usuarios-layout">
+  <app-sidebar></app-sidebar>
+  <main class="main-content">
+
+    <!-- Título y subtítulo de clientes -->
+    <app-header-title [title]="title" [subtitle]="subtitle" [username]="username" [userInitials]="userInitials">
+    </app-header-title>
+
+    <section class="top-actions">
+      <div class="left-group">
+        <select class="input-search select-filter" [(ngModel)]="filtroPorEstado" (change)="filtrarPorEstado()">
+          <option value="todos">Todos los usuarios</option>
+          <option value="activo">Activos</option>
+          <option value="inactivo">Inactivos</option>
+        </select>
+        <select class="input-search select-filter" [(ngModel)]="filtroTipoUsuario" (change)="filtrarPorTipo()">
+          <option value="todos">Todos los usuarios</option>
+          <option value="cliente">Clientes</option>
+          <option value="empleado">Empleados</option>
+        </select>
+
+        <input type="text" placeholder="Buscar" class="input-search" />
+
+      <app-button [text]="'Nuevo Usuario'" [type]="'button'" [buttonClass]="'btn-agregar'" (click)="mostrarModalUsuario = true">
+        <span class="icon">+</span>
+      </app-button>
+      </div>
+    </section>
+
+    <app-summary-cards [cards]="tarjetasUsuarios"></app-summary-cards>
+
+    <app-modal-usuario [isVisible]="mostrarModalUsuario" (close)="mostrarModalUsuario = false"
+      (save)="guardarNuevoUsuario($event)">
+    </app-modal-usuario>
+
+    <app-modal-permisos [isVisible]="mostrarModalPermisos" [areaEmpleado]="areaEmpleadoSeleccionada"
+      (close)="mostrarModalPermisos = false">
+    </app-modal-permisos>
+
+    <app-table [columns]="columnasUsuarios" [data]="datosUsuarios" [showActions]="true"
+      emptyMessage="No se encontraron usuarios registrados." (actionClick)="manejarAccion($event)">
+    </app-table>
+  </main>
+</div>

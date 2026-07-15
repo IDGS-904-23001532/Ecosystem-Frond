@@ -1,5 +1,5 @@
 // Botón "Iniciar Sesión" (Verde característico)
-.btn-iniciar-sesion, .btn-registrarse {
+.btn-iniciar-sesion, .btn-registrarse, .btn-guardar {
   width: 100%;
   padding: 0.9rem;
   background-color: #278354; 
@@ -27,12 +27,10 @@
 }
 
 // Botón "Volver" (Gris característico)
-.btn-volver{
-  width: 100%;
+.btn-volver, .btn-cancelar {
+width: 100%;
   padding: 0.9rem;
   background-color: black; 
-  margin-top: 10px;
-  margin-bottom: 10px;
   color: #ffffff;
   border: none;
   border-radius: 30px;

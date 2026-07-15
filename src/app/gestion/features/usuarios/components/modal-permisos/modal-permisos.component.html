@@ -1,0 +1,21 @@
+ <div class="modal-backdrop" *ngIf="isVisible">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Asignar Permisos - Área: {{ areaEmpleado }}</h2>
+          <button class="btn-close" (click)="cerrar()">✕</button>
+        </div>
+        <div class="modal-body">
+          <p>Configura los accesos para el nuevo empleado basándote en su área.</p>
+          <div class="permisos-list">
+            <label><input type="checkbox" checked> Acceso al Dashboard</label>
+            <label><input type="checkbox" [checked]="areaEmpleado === 'ventas'"> Gestión de Cotizaciones</label>
+            <label><input type="checkbox" [checked]="areaEmpleado === 'instalacion'"> Ver Órdenes de Servicio</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <app-button variant="secondary" (click)="cerrar()">Cancelar</app-button>
+            <app-button variant="primary" (click)="guardar()">Guardar</app-button>
+        </div>
+      </div>
+    </div>
+  `
