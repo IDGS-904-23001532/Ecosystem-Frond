@@ -1,0 +1,2 @@
+root: dist/control-ecosystem/browser
+index_fallback: true
