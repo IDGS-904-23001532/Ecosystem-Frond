@@ -8,8 +8,7 @@ import { HeroComponent } from './components/hero/hero.component';
   standalone: true,
   // ¡Importante! Aquí inyectamos los componentes hijos
   imports: [CommonModule, TopBarComponent, HeroComponent], 
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  templateUrl: './home.component.html'
 })
 export class HomeComponent {
   // Toda la lógica pesada se movió a los componentes correspondientes

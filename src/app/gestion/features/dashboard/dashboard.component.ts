@@ -13,8 +13,7 @@ import { DashboardEnergyChartComponent } from './components/dashboard-energy-cha
     DashboardMetricsComponent,
     DashboardEnergyChartComponent
   ],
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent {
   title = 'Panel de Control';
@@ -24,9 +23,9 @@ export class DashboardComponent {
 
   // Datos simulados para las tarjetas
   metrics = [
-    { title: 'Prospectos Activos', value: '152', icon: '👥', trend: '+12% esta semana', trendClass: 'positive' as const },
-    { title: 'Ventas Totales', value: '$12,500', icon: '💰', trend: '+8% vs mes anterior', trendClass: 'positive' as const },
-    { title: 'Energía Generada', value: '5.8 MWh', icon: '☀️', trend: 'Rendimiento Óptimo', trendClass: 'positive' as const },
-    { title: 'Cotizaciones Pendientes', value: '48', icon: '⏳', trend: '-3% respecto a ayer', trendClass: 'negative' as const }
+    { title: 'Prospectos Activos', value: '152', icon: 'group', trend: '+12% esta semana', trendClass: 'positive' as const },
+    { title: 'Ventas Totales', value: '$12,500', icon: 'account_balance', trend: '+8% vs mes anterior', trendClass: 'positive' as const },
+    { title: 'Energía Generada', value: '5.8 MWh', icon: 'solar_power', trend: 'Rendimiento Óptimo', trendClass: 'positive' as const },
+    { title: 'Cotizaciones Pendientes', value: '48', icon: 'hourglass_bottom', trend: '-3% respecto a ayer', trendClass: 'negative' as const }
   ];
 }

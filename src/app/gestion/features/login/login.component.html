@@ -1,55 +1,83 @@
-<div class="login-container">
+<div class="min-h-screen w-full flex bg-slate-50">
+  <!-- Left Side: Form -->
+  <div
+    class="w-full lg:w-[500px] xl:w-[600px] flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-12 lg:py-0 bg-white shadow-2xl z-10 relative min-h-[100dvh] lg:min-h-0">
 
-  <div class="form-section">
-    <div class="login-card">
-
-      <!-- Logo and Title -->
-      <div class="logo-container">
-        <img src="../../assets/logo_ecosystem.jpg" alt="Ecosystem Logo" class="logo-img"
-          onerror="this.src='https://img.freepik.com/premium-vector/green-white-logo-with-leaves-white-background_1240970-13528.jpg'" />
+    <!-- Logo -->
+    <div class="mb-10 flex flex-col items-start">
+      <div class="p-3 bg-emerald-50 rounded-2xl mb-6 shadow-sm border border-emerald-100">
+        <img
+          src="https://img.freepik.com/premium-vector/green-white-logo-with-leaves-white-background_1240970-13528.jpg"
+          alt="Ecosystem" class="w-12 h-12 object-cover rounded-xl" />
       </div>
-      <h2>Iniciar sesión</h2>
+      <h1 class="text-3xl font-extrabold text-slate-800 mb-2">Bienvenido de nuevo</h1>
+      <p class="text-slate-500 font-medium">Ingresa tus credenciales para acceder a tu ecosistema.</p>
+    </div>
 
-      <!-- Login Form -->
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <!-- Form -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col w-full">
 
-        <!-- Email Input -->
-        <app-input [parentForm]="loginForm" controlName="email" label="Correo electrónico" type="email"
-          placeholder="usuario@gmail.com" icon="📧">
-        </app-input>
+      <app-input [parentForm]="loginForm" controlName="email" label="Correo electrónico" type="email"
+        placeholder="usuario@gmail.com" icon="mail"></app-input>
+      <app-input [parentForm]="loginForm" controlName="password" label="Contraseña" type="password"
+        placeholder="••••••••" icon="lock"></app-input>
 
-        <!-- Password Input -->
-        <app-input [parentForm]="loginForm" controlName="password" label="Contraseña:" type="password"
-          placeholder="••••••••" icon="🔒">
-        </app-input>
+      <div class="flex items-center justify-between mt-2 mb-8">
+        <label class="flex items-center gap-3 cursor-pointer group">
+          <div class="relative flex items-center">
+            <input type="checkbox" formControlName="rememberMe"
+              class="peer appearance-none w-5 h-5 border-2 border-slate-300 rounded-md checked:bg-emerald-500 checked:border-emerald-500 transition-all cursor-pointer" />
+            <span
+              class="material-symbols-rounded absolute text-white text-[16px] font-bold pointer-events-none opacity-0 peer-checked:opacity-100 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">check</span>
+          </div>
+          <span
+            class="text-sm font-medium text-slate-600 select-none group-hover:text-slate-800 transition-colors">Recuérdame</span>
+        </label>
 
-        <!-- Remember Me and Forgot Password -->
-        <div class="form-options">
-          <label class="checkbox-label">
-            <input type="checkbox" formControlName="rememberMe" />
-            <span class="custom-checkbox"></span>
-            Recuérdame
-          </label>
+        <a href="#" class="text-sm font-bold text-emerald-600 hover:text-emerald-500 transition-colors">¿Olvidaste tu
+          contraseña?</a>
+      </div>
 
-          <!-- Forgot Password Link -->
-          <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
-        </div>
+      <div class="flex flex-col gap-4">
+        <app-button [text]="'Iniciar sesión'" [type]="'submit'"
+          [buttonClass]="'bg-emerald-600 hover:bg-emerald-700 hover:shadow-lg hover:shadow-emerald-600/30 hover:-translate-y-0.5'"
+          [disabled]="loginForm.invalid"></app-button>
 
-        <!-- Submit Button -->
-         <app-button [text]="'Iniciar sesión'" [type]="'submit'" [buttonClass]="'btn-iniciar-sesion'" [disabled]="loginForm.invalid" onClick="onSubmit()">
-         </app-button>
-      </form>
+        <app-button [text]="'Volver al inicio'" [type]="'button'"
+          [buttonClass]="'bg-slate-800 text-white hover:bg-slate-900 shadow-md hover:shadow-lg hover:-translate-y-0.5'"
+          (click)="navigateToHome()"></app-button>
+      </div>
+    </form>
 
-      <!-- Volver-->
-        <app-button [text]="'Volver'" [type]="'button'" [buttonClass]="'btn-volver'" (click)="navigateToHome()">
-         </app-button>
-        <br>
-      <!-- Register Button -->
-         <a href="/registrarse" class="btn btn-registrarse">
-           ¿Aún no tienes una cuenta? Regístrate aquí
-         </a>
+    <div class="mt-10 text-center">
+      <p class="text-slate-500 font-medium">¿Aún no tienes una cuenta? <a href="/registrarse"
+          class="text-emerald-600 font-bold hover:underline">Regístrate aquí</a></p>
+    </div>
+
+  </div>
+
+  <!-- Right Side: Image Cover -->
+  <div class="hidden lg:block flex-1 relative bg-slate-900 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent z-10"></div>
+    <div class="absolute inset-0 bg-emerald-900/30 mix-blend-multiply z-10"></div>
+    <!-- Beautiful Solar Panel Image -->
+    <img src="https://images.unsplash.com/photo-1509391366360-1e97d5261852?q=80&w=2070&auto=format&fit=crop"
+      alt="Solar Panels"
+      class="absolute inset-0 w-full h-full object-cover opacity-90 scale-105 hover:scale-100 transition-transform duration-[10s]" />
+
+    <div class="absolute bottom-16 left-16 z-20 max-w-xl">
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-500/30 text-emerald-300 font-semibold text-sm mb-6">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        Energía Limpia y Renovable
+      </div>
+      <h2 class="text-4xl lg:text-5xl font-extrabold text-white mb-6 leading-tight">Controla tu ecosistema de forma
+        inteligente.</h2>
+      <p class="text-emerald-50/80 text-lg leading-relaxed">Únete a la revolución verde con los mejores paneles y
+        sistemas de monitoreo solar del mercado. Ahorra energía hoy mismo.</p>
     </div>
   </div>
-  <div class="image-section"></div>
-
 </div>

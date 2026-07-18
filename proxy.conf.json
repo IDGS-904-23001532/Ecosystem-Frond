@@ -1,0 +1,7 @@
+{
+  "/api": {
+    "target": "https://ecosystem-back-production.up.railway.app",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

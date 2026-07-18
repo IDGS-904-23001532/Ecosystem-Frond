@@ -14,8 +14,7 @@ interface MetricItem {
   selector: 'app-dashboard-metrics',
   standalone: true,
   imports: [CommonModule, CardComponent],
-  templateUrl: './dashboard-metrics.component.html',
-  styleUrls: ['./dashboard-metrics.component.scss']
+  templateUrl: './dashboard-metrics.component.html'
 })
 export class DashboardMetricsComponent {
   @Input() metrics: MetricItem[] = [];

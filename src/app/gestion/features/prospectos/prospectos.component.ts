@@ -12,8 +12,7 @@ import { SummaryCard, SummaryCardsComponent } from "../../../shared/components/s
   selector: 'app-prospectos',
   standalone: true,
   imports: [CommonModule, FormsModule, HeaderTitleComponent, SidebarComponent, TableComponent, SummaryCardsComponent, ButtonComponent],
-  templateUrl: './prospectos.component.html',
-  styleUrls: ['./prospectos.component.scss']
+  templateUrl: './prospectos.component.html'
 })
 export class ProspectosComponent {
 

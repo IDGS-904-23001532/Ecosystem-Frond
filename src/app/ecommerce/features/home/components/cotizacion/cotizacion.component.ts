@@ -6,8 +6,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-cotizacion',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './cotizacion.component.html',
-  styleUrls: ['./cotizacion.component.scss']
+  templateUrl: './cotizacion.component.html'
 })
 export class CotizacionComponent implements OnInit {
   cotizacionForm!: FormGroup;

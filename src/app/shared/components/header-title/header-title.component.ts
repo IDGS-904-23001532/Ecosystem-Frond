@@ -3,8 +3,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-header-title',
   standalone: true,
-  templateUrl: './header-title.component.html',
-  styleUrls: ['./header-title.component.scss']
+  templateUrl: './header-title.component.html'
 })
 export class HeaderTitleComponent {
   @Input() title!: string;

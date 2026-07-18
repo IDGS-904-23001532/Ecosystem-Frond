@@ -1,11 +1,15 @@
-<div class="card">
-  <div class="card-header">
-    <span class="card-title">{{ title }}</span>
-    <span class="card-icon">{{ icon }}</span>
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between hover:shadow-md transition-shadow h-full">
+  <div class="flex justify-between items-start mb-4">
+    <span class="text-slate-500 font-medium text-sm">{{ title }}</span>
+    <div class="w-10 h-10 rounded-full flex items-center justify-center bg-emerald-50 text-emerald-600">
+      <span class="material-symbols-rounded text-xl">{{ icon }}</span>
+    </div>
   </div>
-  <div class="card-body">
-    <h3 class="card-value">{{ value }}</h3>
-    <p class="card-trend" [ngClass]="trendClass" *ngIf="trend">
+  <div>
+    <h3 class="text-3xl font-bold text-slate-800 mb-2">{{ value }}</h3>
+    <p *ngIf="trend" class="flex items-center gap-1 text-sm font-medium" 
+       [ngClass]="trendClass === 'positive' ? 'text-emerald-600' : 'text-red-500'">
+      <span class="material-symbols-rounded text-sm">{{ trendClass === 'positive' ? 'trending_up' : 'trending_down' }}</span>
       {{ trend }}
     </p>
   </div>

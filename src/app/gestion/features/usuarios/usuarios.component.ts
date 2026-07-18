@@ -14,8 +14,7 @@ import { ModalPermisosComponent } from './components/modal-permisos/modal-permis
   selector: 'app-usuarios',
   standalone: true,
   imports: [CommonModule, FormsModule, HeaderTitleComponent, SidebarComponent, TableComponent, SummaryCardsComponent, ButtonComponent, ModalUsuarioComponent, ModalPermisosComponent],
-  templateUrl: './usuarios.component.html',
-  styleUrls: ['./usuarios.component.scss']
+  templateUrl: './usuarios.component.html'
 })
 export class UsuariosComponent {
 

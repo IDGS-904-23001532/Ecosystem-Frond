@@ -23,8 +23,7 @@ interface MenuSection {
   selector: 'app-top-bar',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './topbar.component.html',
-  styleUrls: ['./topbar.component.scss']
+  templateUrl: './topbar.component.html'
 })
 export class TopBarComponent {
   isMobileMenuOpen = false;

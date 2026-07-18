@@ -21,8 +21,7 @@ interface HardwareOption {
   selector: 'app-cotizaciones',
   standalone: true,
   imports: [CommonModule, SidebarComponent, HeaderTitleComponent, ButtonComponent, TableComponent],
-  templateUrl: './cotizaciones.component.html',
-  styleUrls: ['./cotizaciones.component.scss']
+  templateUrl: './cotizaciones.component.html'
 })
   
 export class CotizacionesComponent {

@@ -13,8 +13,7 @@ export interface SummaryCard {
   selector: 'app-summary-cards',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './summary-cards.component.html',
-  styleUrls: ['./summary-cards.component.scss']
+  templateUrl: './summary-cards.component.html'
 })
 export class SummaryCardsComponent {
   // Arreglo de tarjetas que el componente padre inyectará

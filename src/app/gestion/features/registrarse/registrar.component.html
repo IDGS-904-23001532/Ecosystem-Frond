@@ -1,51 +1,57 @@
-<div class="registro-container">
-  <main class="main-content">
-  <div class="form-section">
-      <h2>Registrarse</h2>
-
-      <!-- Registration Form -->
-      <form [formGroup]="registrarForm" (ngSubmit)="onSubmit()">
-
-        <!-- Nombre Input -->
-        <app-input [parentForm]="registrarForm" controlName="name" label="Nombre completo" type="text"
-          placeholder="Juan Pérez" icon="">
-        </app-input>
-
-        <!-- Email Input -->
-        <app-input [parentForm]="registrarForm" controlName="email" label="Correo electrónico" type="email"
-          placeholder="usuario@gmail.com" icon="📧">
-        </app-input>
-
-        <!-- Teléfono Input -->
-        <app-input [parentForm]="registrarForm" controlName="phone" label="Teléfono" type="tel"
-          placeholder="123-456-7890" icon="📞">
-        </app-input>
-
-        <!-- Password Input -->
-        <app-input [parentForm]="registrarForm" controlName="password" label="Contraseña:" type="password"
-          placeholder="••••••••" icon="🔒">
-        </app-input>
-
-        <!-- Remember Me and Forgot Password -->
-        <div class="form-options">
-          <label class="checkbox-label">
-            <input type="checkbox" formControlName="rememberMe" />
-            <span class="custom-checkbox"></span>
-            Recuérdame
-          </label>
-
-          <!-- Forgot Password Link -->
-          <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
-        </div>
-
-        <!-- Submit Button -->
-         <app-button [text]="'Registrarse'" [type]="'submit'" [buttonClass]="'btn-registrarse'" [disabled]="registrarForm.invalid">
-         </app-button>
-      </form>
-
-      <!-- Volver-->
-        <app-button [text]="'Ya tengo una cuenta'" [type]="'button'" [buttonClass]="'btn-volver'" (click)="navigateToLogin()">
-         </app-button>
+<div class="min-h-screen w-full flex bg-slate-50">
+  
+  <!-- Left Side: Image Cover (Reversed from Login for variety) -->
+  <div class="hidden lg:block flex-1 relative bg-emerald-900 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-t from-emerald-900 via-emerald-900/40 to-transparent z-10"></div>
+    <div class="absolute inset-0 bg-slate-900/30 mix-blend-multiply z-10"></div>
+    <img src="https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?q=80&w=2037&auto=format&fit=crop" alt="Eco Environment" class="absolute inset-0 w-full h-full object-cover opacity-90 scale-105 hover:scale-100 transition-transform duration-[10s]" />
+    
+    <div class="absolute bottom-16 left-16 z-20 max-w-xl">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-emerald-100 font-semibold text-sm mb-6">
+        Sé parte del cambio
+      </div>
+      <h2 class="text-4xl lg:text-5xl font-extrabold text-white mb-6 leading-tight">Empieza a transformar tu energía.</h2>
+      <p class="text-emerald-50/80 text-lg leading-relaxed">Únete a nuestra plataforma, obtén el control total de tu consumo energético y ayuda a cuidar el planeta con ecosistemas sostenibles.</p>
     </div>
-</main>
+  </div>
+
+  <!-- Right Side: Form -->
+  <div class="w-full lg:w-[500px] xl:w-[600px] flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-12 lg:py-0 bg-white shadow-2xl z-10 relative min-h-[100dvh] lg:min-h-0">
+    
+    <!-- Logo -->
+    <div class="mb-8 flex flex-col items-start">
+      <div class="p-3 bg-emerald-50 rounded-2xl mb-6 shadow-sm border border-emerald-100">
+        <img src="https://img.freepik.com/premium-vector/green-white-logo-with-leaves-white-background_1240970-13528.jpg" alt="Ecosystem" class="w-12 h-12 object-cover rounded-xl" />
+      </div>
+      <h1 class="text-3xl font-extrabold text-slate-800 mb-2">Crear una cuenta</h1>
+      <p class="text-slate-500 font-medium">Únete a nosotros y comienza a ahorrar hoy mismo.</p>
+    </div>
+
+    <!-- Registration Form -->
+    <form [formGroup]="registrarForm" (ngSubmit)="onSubmit()" class="flex flex-col w-full">
+      
+      <app-input [parentForm]="registrarForm" controlName="name" label="Nombre completo" type="text" placeholder="Juan Pérez" icon="person"></app-input>
+      <app-input [parentForm]="registrarForm" controlName="email" label="Correo electrónico" type="email" placeholder="usuario@gmail.com" icon="mail"></app-input>
+      <app-input [parentForm]="registrarForm" controlName="phone" label="Teléfono" type="tel" placeholder="123-456-7890" icon="call"></app-input>
+      <app-input [parentForm]="registrarForm" controlName="direccionInstalacion" label="Dirección de Instalación" type="text" placeholder="Av. Siempre Viva 123" icon="location_on"></app-input>
+      <app-input [parentForm]="registrarForm" controlName="password" label="Contraseña" type="password" placeholder="••••••••" icon="lock"></app-input>
+
+      <div class="flex items-center mt-2 mb-8">
+        <label class="flex items-center gap-3 cursor-pointer group">
+          <div class="relative flex items-center">
+            <input type="checkbox" formControlName="rememberMe" class="peer appearance-none w-5 h-5 border-2 border-slate-300 rounded-md checked:bg-emerald-500 checked:border-emerald-500 transition-all cursor-pointer" />
+            <span class="material-symbols-rounded absolute text-white text-[16px] font-bold pointer-events-none opacity-0 peer-checked:opacity-100 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">check</span>
+          </div>
+          <span class="text-sm font-medium text-slate-600 select-none group-hover:text-slate-800 transition-colors">Acepto los términos y condiciones</span>
+        </label>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <app-button [text]="'Crear cuenta'" [type]="'submit'" [buttonClass]="'bg-emerald-600 hover:bg-emerald-700 hover:shadow-lg hover:shadow-emerald-600/30 hover:-translate-y-0.5'" [disabled]="registrarForm.invalid"></app-button>
+        
+        <app-button [text]="'Ya tengo una cuenta'" [type]="'button'" [buttonClass]="'bg-slate-800 text-white hover:bg-slate-900 shadow-md hover:shadow-lg hover:-translate-y-0.5'" (click)="navigateToLogin()"></app-button>
+      </div>
+    </form>
+
+  </div>
 </div>

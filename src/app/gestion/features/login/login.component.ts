@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -9,8 +10,7 @@ import { TopBarComponent } from "../../../ecommerce/shared/components/topbar/top
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, InputComponent, ButtonComponent],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
@@ -27,9 +27,22 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      alert("Autenticando usuario:" + JSON.stringify(this.loginForm.value)); 
       console.log('Autenticando usuario:', this.loginForm.value);
-      this.router.navigate(['/dashboard']);
+      Swal.fire({
+        title: '¡Acceso concedido!',
+        text: 'Preparando tu panel de control...',
+        icon: 'success',
+        timer: 1500,
+        showConfirmButton: false,
+        background: '#ffffff',
+        color: '#1e293b',
+        iconColor: '#10b981',
+        customClass: {
+          popup: 'rounded-2xl shadow-xl'
+        }
+      }).then(() => {
+        this.router.navigate(['/dashboard']);
+      });
     } else {
       this.loginForm.markAllAsTouched();
     }

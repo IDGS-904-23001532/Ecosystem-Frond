@@ -5,8 +5,7 @@ import { Router } from '@angular/router';
   selector: 'app-hero',
   standalone: true,
   imports: [],
-  templateUrl: './hero.component.html',
-  styleUrls: ['./hero.component.scss']
+  templateUrl: './hero.component.html'
 })
 export class HeroComponent {
   private router = inject(Router);

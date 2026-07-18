@@ -5,8 +5,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-modal-permisos',
   standalone: true,
   imports: [CommonModule],
-  template: './modal-permisos.component.html',
-  styleUrls: ['../modal-usuario/modal-usuario.component.scss'] // Reutilizamos estilos
+  template: './modal-permisos.component.html' // Reutilizamos estilos
 })
 export class ModalPermisosComponent {
   @Input() isVisible: boolean = false;

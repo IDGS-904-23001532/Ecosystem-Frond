@@ -7,8 +7,7 @@ import { ButtonComponent } from '../../../../../shared/components/button/button.
   selector: 'app-modal-usuario',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, ButtonComponent],
-  templateUrl: './modal-usuario.component.html',
-  styleUrls: ['./modal-usuario.component.scss']
+  templateUrl: './modal-usuario.component.html'
 })
 export class ModalUsuarioComponent implements OnInit {
   @Input() isVisible: boolean = false;

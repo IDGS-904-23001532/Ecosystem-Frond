@@ -23,8 +23,7 @@ interface SidebarSection {
   selector: 'app-sidebar',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  templateUrl: './sidebar.component.html'
 })
 
 export class SidebarComponent {
@@ -33,50 +32,50 @@ export class SidebarComponent {
   sections: SidebarSection[] = [
     {
       label: 'Dashboard',
-      icon: '🏠',
+      icon: 'home',
       route: '/dashboard',
       exact: true
     },
     {
       label: 'Comercial',
-      icon: '🏪',
+      icon: 'store',
       isOpen: false,
       children: [
-        { label: 'Prospectos', icon: '👥', route: '/prospectos', exact: true },
-        { label: 'Cotizaciones', icon: '📋', route: '/cotizaciones', exact: true },
-        { label: 'Clientes', icon: '🧑‍💼', route: '/clientes', exact: true },
-        { label: 'Ventas', icon: '🛒', route: '/ventas', exact: true }
+        { label: 'Prospectos', icon: 'group', route: '/prospectos', exact: true },
+        { label: 'Cotizaciones', icon: 'list_alt', route: '/cotizaciones', exact: true },
+        { label: 'Clientes', icon: 'manage_accounts', route: '/clientes', exact: true },
+        { label: 'Ventas', icon: 'shopping_cart', route: '/ventas', exact: true }
       ]
     },
     {
       label: 'Contabilidad',
-      icon: '💰',
+      icon: 'account_balance',
       isOpen: false,
       children: [
-         { label: 'Empleados', icon: '👥', route: '/empleados', exact: true },
-        { label: 'Ingresos', icon: '💵', route: '/facturas', exact: true },
-        { label: 'Gastos', icon: '💸', route: '/gastos', exact: true }
+         { label: 'Empleados', icon: 'badge', route: '/empleados', exact: true },
+        { label: 'Ingresos', icon: 'attach_money', route: '/facturas', exact: true },
+        { label: 'Gastos', icon: 'money_off', route: '/gastos', exact: true }
       ]
     },
     {
       label: 'Archivos',
-      icon: '📁',
+      icon: 'folder',
       isOpen: false,
       children: [
-        { label: 'Ordenes de Servicio', icon: '📋', route: '/ordenes-servicio', exact: true },
-        { label: 'Bitácoras', icon: '📓', route: '/bitacoras', exact: true }
+        { label: 'Ordenes de Servicio', icon: 'assignment', route: '/ordenes-servicio', exact: true },
+        { label: 'Bitácoras', icon: 'menu_book', route: '/bitacoras', exact: true }
       ]
     },
     {
       label: 'Configuracion',
-      icon: '⚙️',
+      icon: 'settings',
       isOpen: false,
       children: [
-        { label: 'Usuarios', icon: '👥', route: '/usuarios', exact: true }]
+        { label: 'Usuarios', icon: 'group', route: '/usuarios', exact: true }]
     },
     {
       label: 'Salir',
-      icon: '🚪',
+      icon: 'logout',
       route: '/logout',
       exact: true
     }

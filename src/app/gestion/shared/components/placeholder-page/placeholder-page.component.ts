@@ -7,8 +7,7 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
   selector: 'app-placeholder-page',
   standalone: true,
   imports: [CommonModule, SidebarComponent],
-  templateUrl: './placeholder-page.component.html',
-  styleUrls: ['./placeholder-page.component.scss']
+  templateUrl: './placeholder-page.component.html'
 })
 export class PlaceholderPageComponent {
   private route = inject(ActivatedRoute);

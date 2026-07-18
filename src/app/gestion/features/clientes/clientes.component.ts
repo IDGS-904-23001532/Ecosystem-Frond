@@ -12,8 +12,7 @@ import { SummaryCard, SummaryCardsComponent } from "../../../shared/components/s
   selector: 'app-clientes',
   standalone: true,
   imports: [CommonModule, FormsModule, HeaderTitleComponent, SidebarComponent, TableComponent, SummaryCardsComponent, ButtonComponent],
-  templateUrl: './clientes.component.html',
-  styleUrls: ['./clientes.component.scss']
+  templateUrl: './clientes.component.html'
 })
 export class ClientesComponent {
 
