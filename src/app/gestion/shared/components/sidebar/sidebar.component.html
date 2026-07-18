@@ -1,62 +1,92 @@
-
 <!-- Mobile Toggle -->
-<button class="fixed top-4 left-4 z-[90] lg:hidden p-2.5 bg-white rounded-xl shadow-sm border border-slate-200 text-slate-600 hover:bg-emerald-50 hover:text-emerald-600 transition-colors" (click)="toggleMobileMenu()">
+<button
+  class="fixed top-4 left-4 z-[90] lg:hidden p-2.5 bg-white rounded-xl shadow-sm border border-slate-200 text-slate-600 hover:bg-emerald-50 hover:text-emerald-600 transition-colors"
+  (click)="toggleMobileMenu()"
+>
   <span class="material-symbols-rounded">menu</span>
 </button>
 
 <!-- Overlay -->
-<div class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[95] lg:hidden transition-opacity duration-300" 
-     [class.opacity-0]="!isMobileMenuOpen" 
-     [class.pointer-events-none]="!isMobileMenuOpen" 
-     (click)="closeMobileMenu()"></div>
+<div
+  class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[95] lg:hidden transition-opacity duration-300"
+  [class.opacity-0]="!isMobileMenuOpen"
+  [class.pointer-events-none]="!isMobileMenuOpen"
+  (click)="closeMobileMenu()"
+></div>
 
 <!-- Sidebar -->
-<aside class="fixed top-0 left-0 h-[100dvh] w-[280px] bg-white border-r border-slate-200 z-[100] transition-transform duration-300 flex flex-col lg:translate-x-0" 
-       [class.-translate-x-full]="!isMobileMenuOpen">
-  
+<aside
+  class="fixed top-0 left-0 h-[100dvh] w-[280px] bg-white border-r border-slate-200 z-[100] transition-transform duration-300 flex flex-col lg:translate-x-0"
+  [class.-translate-x-full]="!isMobileMenuOpen"
+>
   <div class="h-20 flex items-center px-6 border-b border-slate-100 shrink-0">
-    <img src="https://img.freepik.com/premium-vector/green-white-logo-with-leaves-white-background_1240970-13528.jpg" class="w-8 h-8 rounded-lg mr-3 object-cover shadow-sm">
-    <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-500">Ecosystem</span>
+    <img src="/Ecosystem.jpeg" class="w-8 h-8 rounded-lg mr-3 object-cover shadow-sm" />
+    <span
+      class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-500"
+      >Ecosystem</span
+    >
   </div>
 
   <div class="flex-1 overflow-y-auto py-6 px-4 flex flex-col gap-1 sidebar-scroll">
     <div *ngFor="let section of sections" class="mb-1">
-      
       <!-- No children -->
-      <a *ngIf="section.route" 
-         [routerLink]="section.route" 
-         routerLinkActive="bg-emerald-50 text-emerald-700 font-bold" 
-         [routerLinkActiveOptions]="{ exact: section.exact ?? true }" 
-         (click)="closeMobileMenu()" 
-         class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 font-medium hover:bg-slate-50 transition-colors group">
-        <span class="material-symbols-rounded text-[22px] text-slate-400 group-[.active]:text-emerald-600 group-hover:text-emerald-500 transition-colors">{{ section.icon }}</span>
+      <a
+        *ngIf="section.route"
+        [routerLink]="section.route"
+        routerLinkActive="bg-emerald-50 text-emerald-700 font-bold"
+        [routerLinkActiveOptions]="{ exact: section.exact ?? true }"
+        (click)="closeMobileMenu()"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 font-medium hover:bg-slate-50 transition-colors group"
+      >
+        <span
+          class="material-symbols-rounded text-[22px] text-slate-400 group-[.active]:text-emerald-600 group-hover:text-emerald-500 transition-colors"
+          >{{ section.icon }}</span
+        >
         <span>{{ section.label }}</span>
       </a>
 
       <!-- With children -->
-      <button *ngIf="!section.route" 
-              (click)="toggleSection(section)" 
-              class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-600 font-medium hover:bg-slate-50 transition-colors group">
+      <button
+        *ngIf="!section.route"
+        (click)="toggleSection(section)"
+        class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-600 font-medium hover:bg-slate-50 transition-colors group"
+      >
         <div class="flex items-center gap-3">
-          <span class="material-symbols-rounded text-[22px] text-slate-400 group-hover:text-emerald-500 transition-colors" [class.text-emerald-500]="section.isOpen">{{ section.icon }}</span>
-          <span [class.font-bold]="section.isOpen" [class.text-emerald-700]="section.isOpen">{{ section.label }}</span>
+          <span
+            class="material-symbols-rounded text-[22px] text-slate-400 group-hover:text-emerald-500 transition-colors"
+            [class.text-emerald-500]="section.isOpen"
+            >{{ section.icon }}</span
+          >
+          <span [class.font-bold]="section.isOpen" [class.text-emerald-700]="section.isOpen">{{
+            section.label
+          }}</span>
         </div>
-        <span class="material-symbols-rounded text-sm transition-transform text-slate-400" [class.rotate-180]="section.isOpen">expand_more</span>
+        <span
+          class="material-symbols-rounded text-sm transition-transform text-slate-400"
+          [class.rotate-180]="section.isOpen"
+          >expand_more</span
+        >
       </button>
 
       <!-- Children -->
-      <div *ngIf="section.children?.length && section.isOpen" class="pl-11 pr-3 py-2 flex flex-col gap-1.5 animate-in slide-in-from-top-2 duration-200 fade-in">
-        <a *ngFor="let child of section.children" 
-           [routerLink]="child.route" 
-           routerLinkActive="text-emerald-600 font-bold bg-emerald-50/50" 
-           [routerLinkActiveOptions]="{ exact: child.exact ?? true }"
-           (click)="closeMobileMenu()" 
-           class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-500 hover:text-emerald-600 hover:bg-emerald-50/30 transition-colors">
-          <span class="material-symbols-rounded text-[18px] opacity-70">{{ child.icon || 'arrow_right' }}</span>
+      <div
+        *ngIf="section.children?.length && section.isOpen"
+        class="pl-11 pr-3 py-2 flex flex-col gap-1.5 animate-in slide-in-from-top-2 duration-200 fade-in"
+      >
+        <a
+          *ngFor="let child of section.children"
+          [routerLink]="child.route"
+          routerLinkActive="text-emerald-600 font-bold bg-emerald-50/50"
+          [routerLinkActiveOptions]="{ exact: child.exact ?? true }"
+          (click)="closeMobileMenu()"
+          class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-500 hover:text-emerald-600 hover:bg-emerald-50/30 transition-colors"
+        >
+          <span class="material-symbols-rounded text-[18px] opacity-70">{{
+            child.icon || 'arrow_right'
+          }}</span>
           <span>{{ child.label }}</span>
         </a>
       </div>
-      
     </div>
   </div>
 </aside>
