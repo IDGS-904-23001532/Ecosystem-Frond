@@ -1,80 +1,63 @@
-<div class="modal-backdrop" *ngIf="isVisible">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2>Ficha de Usuario</h2>
-      <button class="btn-close" (click)="cerrar()">✕</button>
+<div class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[150] flex items-center justify-center p-4 transition-opacity duration-300" *ngIf="isVisible">
+  <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden flex flex-col animate-in zoom-in-95 duration-200">
+    
+    <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+      <h2 class="text-xl font-bold text-slate-800">Registrar Empleado</h2>
+      <button class="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-600 hover:bg-slate-200 transition-colors" (click)="cerrar()">
+        <span class="material-symbols-rounded text-[20px]">close</span>
+      </button>
     </div>
 
-    <form [formGroup]="userForm" class="modal-body">
-      <div class="form-group">
-        <label>Nombre completo</label>
-        <input type="text" formControlName="nombre" placeholder="Nombre completo">
-      </div>
+    <form [formGroup]="userForm" class="p-6 flex flex-col gap-4">
       
-      <div class="form-row">
-        <div class="form-group half">
-          <label>Teléfono</label>
-          <input type="tel" formControlName="telefono" placeholder="Teléfono">
-        </div>
-        <div class="form-group half">
-          <label>Correo</label>
-          <input type="email" formControlName="correo" placeholder="Correo electrónico">
+      <div class="flex flex-col gap-1.5">
+        <label class="text-sm font-semibold text-slate-700">Nombre completo</label>
+        <div class="relative">
+          <span class="material-symbols-rounded absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">person</span>
+          <input type="text" formControlName="nombreCompleto" placeholder="Ej. Ana García" class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all">
         </div>
       </div>
 
-      <div class="form-group">
-        <label>Dirección</label>
-        <input type="text" formControlName="direccion" placeholder="Dirección completa">
+      <div class="flex flex-col gap-1.5">
+        <label class="text-sm font-semibold text-slate-700">Correo electrónico</label>
+        <div class="relative">
+          <span class="material-symbols-rounded absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">mail</span>
+          <input type="email" formControlName="correo" placeholder="ana@ecosystem.com" class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all">
+        </div>
       </div>
 
-      <div class="form-group">
-        <label>Rol</label>
-        <select formControlName="rol">
-          <option value="cliente">Cliente</option>
-          <option value="empleado">Empleado</option>
-        </select>
+      <div class="flex flex-col gap-1.5">
+        <label class="text-sm font-semibold text-slate-700">Contraseña temporal</label>
+        <div class="relative">
+          <span class="material-symbols-rounded absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">lock</span>
+          <input type="password" formControlName="password" placeholder="••••••••" class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all">
+        </div>
       </div>
 
-      <ng-container *ngIf="userForm.get('rol')?.value === 'empleado'">
-        <hr class="divider">
-        <h3>Datos de Empleado</h3>
-        
-        <div class="form-row">
-          <div class="form-group half">
-            <label>Usuario del sistema</label>
-            <input type="text" formControlName="usuario" placeholder="Usuario">
-          </div>
-          <div class="form-group half">
-            <label>Contraseña</label>
-            <input type="password" formControlName="contrasena" placeholder="Contraseña">
-          </div>
+      <div class="flex flex-col gap-1.5">
+        <label class="text-sm font-semibold text-slate-700">Puesto</label>
+        <div class="relative">
+          <span class="material-symbols-rounded absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">work</span>
+          <select formControlName="puesto" class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all appearance-none">
+            <option value="" disabled selected>Seleccione un puesto</option>
+            <option value="Administrador">Administrador</option>
+            <option value="Vendedor">Vendedor</option>
+            <option value="Técnico Instalador">Técnico Instalador</option>
+            <option value="Soporte">Soporte</option>
+          </select>
+          <span class="material-symbols-rounded absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px] pointer-events-none">expand_more</span>
         </div>
+      </div>
 
-        <div class="form-row">
-          <div class="form-group half">
-            <label>Área</label>
-            <select formControlName="area">
-              <option value="">Seleccione un área...</option>
-              <option value="instalacion">Instalación</option>
-              <option value="ventas">Ventas</option>
-              <option value="soporte">Soporte</option>
-            </select>
-          </div>
-          <div class="form-group half">
-            <label>Fecha de Contratación</label>
-            <input type="date" formControlName="fechaContratacion">
-          </div>
-        </div>
-      </ng-container>
     </form>
 
-    <div class="modal-footer">
-      <app-button [text]="'Guardar'" [type]="'button'" [buttonClass]="'btn-guardar'" (click)="guardar()">
-        <span class="icon">⭳</span>
-      </app-button>
-<app-button [text]="'Cancelar'" [type]="'button'" [buttonClass]="'btn-cancelar'" (click)="cerrar()">
-        <span class="icon">✕</span>
-      </app-button>
+    <div class="px-6 py-4 border-t border-slate-100 bg-slate-50 flex items-center justify-end gap-3">
+      <button type="button" class="px-4 py-2 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-200 transition-colors" (click)="cerrar()">
+        Cancelar
+      </button>
+      <button type="button" class="px-6 py-2 rounded-xl text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 hover:shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed" [disabled]="userForm.invalid" (click)="guardar()">
+        Registrar
+      </button>
     </div>
   </div>
 </div>

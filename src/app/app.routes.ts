@@ -40,8 +40,9 @@ export const routes: Routes = [
   // Rutas para clientes
   { path: 'clientes', component: ClientesComponent },
 
-  // Ruta para usuarios
-  { path: 'usuarios', component: UsuariosComponent },
+  // Ruta para empleados (antes usuarios)
+  { path: 'empleados', component: UsuariosComponent },
+  { path: 'usuarios', redirectTo: 'empleados', pathMatch: 'full' },
   
   {
     path: 'contabilidad',

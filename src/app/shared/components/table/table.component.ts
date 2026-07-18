@@ -25,11 +25,16 @@ export class TableComponent {
   @Input() data: any[] = [];
   @Input() emptyMessage: string = 'No se encontraron registros.';
   @Input() showActions: boolean = true;
+  @Input() isLoading: boolean = false;
 
   // Salida para notificar al componente padre de una acción
   @Output() actionClick = new EventEmitter<TableAction>();
 
   onAction(actionName: string, row: any): void {
     this.actionClick.emit({ actionName, rowData: row });
+  }
+
+  trackByFn(index: number, item: any): any {
+    return item.idEmpleado || item.id || index;
   }
 }

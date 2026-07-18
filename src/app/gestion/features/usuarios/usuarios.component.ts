@@ -1,5 +1,4 @@
-
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HeaderTitleComponent } from "../../../shared/components/header-title/header-title.component";
@@ -9,6 +8,8 @@ import { TableAction, TableColumn, TableComponent } from "../../../shared/compon
 import { SummaryCard, SummaryCardsComponent } from "../../../shared/components/summary-card/summary-cards.component";
 import { ModalUsuarioComponent } from './components/modal-usuario/modal-usuario.component';
 import { ModalPermisosComponent } from './components/modal-permisos/modal-permisos.component';
+import { AuthService } from '../../../core/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-usuarios',
@@ -16,33 +17,40 @@ import { ModalPermisosComponent } from './components/modal-permisos/modal-permis
   imports: [CommonModule, FormsModule, HeaderTitleComponent, SidebarComponent, TableComponent, SummaryCardsComponent, ButtonComponent, ModalUsuarioComponent, ModalPermisosComponent],
   templateUrl: './usuarios.component.html'
 })
-export class UsuariosComponent {
+export class UsuariosComponent implements OnInit {
 
     // Datos para el componente HeaderTitle
-    title: string = 'Usuarios';
-    subtitle: string = 'Gestión de usuarios y permisos.';
+    title: string = 'Empleados';
+    subtitle: string = 'Gestión de personal y accesos del sistema.';
     username: string = 'Karla Martinez';
     userInitials: string = 'KM';
+    isLoading: boolean = true;
 
-    // Datos para el componente SummaryCards
-  totalUsuarios: number = 24;
-  usuariosActivos: number = 10;
+    constructor(private authService: AuthService) {}
+
+    ngOnInit(): void {
+      this.cargarEmpleados();
+    }
+
+  // Datos para el componente SummaryCards
+  totalUsuarios: number = 0;
+  usuariosActivos: number = 0;
 
   // Configuración de las tarjetas
-tarjetasUsuarios: SummaryCard[] = [
-  {
-    label: 'Total Usuarios',
-    value: this.totalUsuarios,
-    icon: '👥',
-    iconClass: 'icon-pink'
-  },
-  {
-    label: 'Usuarios Activos',
-    value: this.usuariosActivos,
-    icon: '✔️',
-    iconClass: 'icon-outline'
-  }
-];
+  tarjetasUsuarios: SummaryCard[] = [
+    {
+      label: 'Total Empleados',
+      value: this.totalUsuarios,
+      icon: 'group',
+      iconClass: 'icon-pink'
+    },
+    {
+      label: 'Empleados Activos',
+      value: this.usuariosActivos,
+      icon: 'check_circle',
+      iconClass: 'icon-outline'
+    }
+  ];
 
   // Variables para el filtro y búsqueda
   terminoBusqueda: string = '';
@@ -60,16 +68,22 @@ tarjetasUsuarios: SummaryCard[] = [
   }
 
   guardarNuevoUsuario(datosUsuario: any): void {
-    console.log('Datos recibidos del formulario:', datosUsuario);
-    // Aquí puedes agregar la lógica para guardar el nuevo usuario en tu sistema
+    Swal.fire({
+      title: 'Guardando...',
+      allowOutsideClick: false,
+      didOpen: () => { Swal.showLoading(); }
+    });
 
-    if(datosUsuario.rol === 'Empleado') {
-      this.areaEmpleadoSeleccionada = datosUsuario.area;
-      this.mostrarModalPermisos = true;
-    } else {
-      console.log('Usuario guardado sin permisos adicionales.');
+    this.authService.registroEmpleado(datosUsuario).subscribe({
+      next: () => {
+        Swal.fire('¡Éxito!', 'Empleado registrado correctamente.', 'success');
+        this.cargarEmpleados(true);
+      },
+      error: () => {
+        Swal.fire('Error', 'No se pudo registrar al empleado.', 'error');
+      }
+    });
   }
-}
 
 // Metodo para filtrar por estado de usuario
 filtrarPorEstado(): void {
@@ -83,18 +97,41 @@ filtrarPorTipo(): void {
   // Aquí puedes agregar la lógica para filtrar los usuarios según el tipo seleccionado
 }
 
-  // Columnas de la tabla de usuarios
-    columnasUsuarios: TableColumn[] = [
-    { key: 'nombre', label: 'Nombre' },
-    { key: 'necesidad', label: 'Necesidad' },
-    { key: 'telefono', label: 'Teléfono' },
-    { key: 'correo', label: 'Correo' },
-    { key: 'nivelInteres', label: 'Nivel de Interés' },
-    { key: 'estado', label: 'Estado' }
+  // Columnas de la tabla de empleados
+  columnasUsuarios: TableColumn[] = [
+    { key: 'idEmpleado', label: 'ID' },
+    { key: 'nombreCompleto', label: 'Nombre Completo' },
+    { key: 'puesto', label: 'Puesto' },
+    { key: 'fechaIngreso', label: 'Fecha de Ingreso' }
   ];
   
-  // Si está vacío se mostrará tu mensaje. Si tiene datos, se pintarán automáticamente.
-  datosUsuarios = []; 
+  datosUsuarios: any[] = []; 
+  
+  cargarEmpleados(forceRefresh: boolean = false): void {
+    if (forceRefresh || this.datosUsuarios.length === 0) {
+      this.isLoading = true;
+    }
+    
+    this.authService.listarEmpleados(forceRefresh).subscribe({
+      next: (data) => {
+        // Formatear la fecha para que se vea bonita
+        this.datosUsuarios = data.map(empleado => ({
+          ...empleado,
+          fechaIngreso: empleado.fechaIngreso ? new Date(empleado.fechaIngreso).toLocaleDateString() : 'N/A'
+        }));
+        
+        this.totalUsuarios = data.length;
+        this.usuariosActivos = data.length; // Asumimos activos
+        this.tarjetasUsuarios[0].value = this.totalUsuarios;
+        this.tarjetasUsuarios[1].value = this.usuariosActivos;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Error cargando empleados', err);
+        this.isLoading = false;
+      }
+    });
+  }
   
   manejarAccion(evento: TableAction) {
     if (evento.actionName === 'edit') {

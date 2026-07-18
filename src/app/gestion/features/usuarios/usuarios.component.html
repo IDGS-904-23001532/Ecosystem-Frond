@@ -1,44 +1,47 @@
-<div class="usuarios-layout">
+<div class="min-h-[100dvh] bg-slate-50 flex">
   <app-sidebar></app-sidebar>
-  <main class="main-content">
+  <main class="flex-1 flex flex-col w-full lg:pl-[280px] min-w-0 transition-all">
+    <div class="p-6 pt-20 lg:pt-8 lg:p-8 flex flex-col gap-6 max-w-[1600px] w-full mx-auto">
+      
+      <!-- Título -->
+      <app-header-title [title]="title" [subtitle]="subtitle" [username]="username" [userInitials]="userInitials"></app-header-title>
 
-    <!-- Título y subtítulo de clientes -->
-    <app-header-title [title]="title" [subtitle]="subtitle" [username]="username" [userInitials]="userInitials">
-    </app-header-title>
+      <!-- Top Actions -->
+      <section class="flex flex-col sm:flex-row gap-4 items-center justify-between bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+          <div class="relative">
+            <span class="material-symbols-rounded absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+            <input type="text" placeholder="Buscar empleado..." [(ngModel)]="terminoBusqueda" class="w-full sm:w-64 pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all" />
+          </div>
+        </div>
 
-    <section class="top-actions">
-      <div class="left-group">
-        <select class="input-search select-filter" [(ngModel)]="filtroPorEstado" (change)="filtrarPorEstado()">
-          <option value="todos">Todos los usuarios</option>
-          <option value="activo">Activos</option>
-          <option value="inactivo">Inactivos</option>
-        </select>
-        <select class="input-search select-filter" [(ngModel)]="filtroTipoUsuario" (change)="filtrarPorTipo()">
-          <option value="todos">Todos los usuarios</option>
-          <option value="cliente">Clientes</option>
-          <option value="empleado">Empleados</option>
-        </select>
+        <app-button [text]="'Nuevo Empleado'" [type]="'button'" [buttonClass]="'bg-emerald-600 hover:bg-emerald-700 hover:shadow-md hover:shadow-emerald-600/20 w-full sm:w-auto transition-all rounded-xl py-2 px-4 flex items-center justify-center gap-2'" (click)="mostrarModalUsuario = true">
+          <span class="material-symbols-rounded text-sm">add</span>
+        </app-button>
+      </section>
 
-        <input type="text" placeholder="Buscar" class="input-search" />
-
-      <app-button [text]="'Nuevo Usuario'" [type]="'button'" [buttonClass]="'btn-agregar'" (click)="mostrarModalUsuario = true">
-        <span class="icon">+</span>
-      </app-button>
+      <!-- Tarjetas -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div *ngFor="let card of tarjetasUsuarios" class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl bg-emerald-50 text-emerald-600">
+            <span class="material-symbols-rounded">{{ card.icon }}</span>
+          </div>
+          <div>
+            <p class="text-sm font-medium text-slate-500">{{ card.label }}</p>
+            <h3 class="text-2xl font-bold text-slate-800">{{ card.value }}</h3>
+          </div>
+        </div>
       </div>
-    </section>
 
-    <app-summary-cards [cards]="tarjetasUsuarios"></app-summary-cards>
+      <!-- Tabla -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+        <app-table [columns]="columnasUsuarios" [data]="datosUsuarios" [isLoading]="isLoading" [showActions]="true" emptyMessage="No hay empleados registrados." (actionClick)="manejarAccion($event)"></app-table>
+      </div>
 
-    <app-modal-usuario [isVisible]="mostrarModalUsuario" (close)="mostrarModalUsuario = false"
-      (save)="guardarNuevoUsuario($event)">
-    </app-modal-usuario>
+      <!-- Modales -->
+      <app-modal-usuario [isVisible]="mostrarModalUsuario" (close)="mostrarModalUsuario = false" (save)="guardarNuevoUsuario($event)"></app-modal-usuario>
+      <app-modal-permisos [isVisible]="mostrarModalPermisos" [areaEmpleado]="areaEmpleadoSeleccionada" (close)="mostrarModalPermisos = false"></app-modal-permisos>
 
-    <app-modal-permisos [isVisible]="mostrarModalPermisos" [areaEmpleado]="areaEmpleadoSeleccionada"
-      (close)="mostrarModalPermisos = false">
-    </app-modal-permisos>
-
-    <app-table [columns]="columnasUsuarios" [data]="datosUsuarios" [showActions]="true"
-      emptyMessage="No se encontraron usuarios registrados." (actionClick)="manejarAccion($event)">
-    </app-table>
+    </div>
   </main>
 </div>
