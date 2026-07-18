@@ -1,71 +1,77 @@
+<!-- Mobile Menu Toggle Button (Visible only on mobile) -->
+<button type="button" class="fixed top-4 left-4 z-[1001] lg:hidden p-2 rounded-xl bg-emerald-100 text-emerald-800 shadow-sm"
+        (click)="toggleMobileMenu()"
+        aria-label="Toggle menu">
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+</button>
 
-<!-- Menu Toggle Button -->
-<button type="button" class="menu-toggle" 
-            (click)="toggleMobileMenu()"
-            aria-label="Toggle menu">
-      ☰
-    </button>
-
-<!-- Overlay -->
-<div class="sidebar-overlay" 
-     [class.show]="isMobileMenuOpen" 
+<!-- Mobile Overlay -->
+<div class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[999] transition-opacity duration-300 lg:hidden"
+     [class.opacity-0]="!isMobileMenuOpen"
+     [class.pointer-events-none]="!isMobileMenuOpen"
      (click)="closeMobileMenu()"></div>
 
-<aside class="sidebar" [class.open]="isMobileMenuOpen">
-  <div class="sidebar-topbar">
-    <div class="sidebar-brand">
-      <img src="../../assets/smartecologysystem.png" 
+<!-- Topbar / Sidebar Navbar -->
+<header class="fixed top-0 left-0 w-full lg:w-full h-screen lg:h-20 bg-white/80 backdrop-blur-xl border-b border-white/20 lg:border-emerald-100/50 shadow-sm z-[1000] transition-transform duration-300 transform lg:translate-x-0"
+       [class.-translate-x-full]="!isMobileMenuOpen"
+       [class.translate-x-0]="isMobileMenuOpen"
+       [class.max-w-[280px]]="true"
+       [class.lg:max-w-none]="true">
+  
+  <div class="flex flex-col lg:flex-row h-full lg:items-center px-6 lg:px-12 max-w-7xl mx-auto">
+    <!-- Brand -->
+    <div class="flex items-center gap-3 py-6 lg:py-0 shrink-0">
+      <img src="assets/smartecologysystem.png" 
            alt="Ecosystem Logo" 
-           class="brand-logo"
+           class="w-10 h-10 rounded-full shadow-md object-cover"
            onerror="this.src='https://img.freepik.com/premium-vector/green-white-logo-with-leaves-white-background_1240970-13528.jpg'" />
-      <span class="brand-name">Ecosystem</span>
+      <span class="text-xl font-bold bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">Ecosystem</span>
     </div>
 
-      <nav class="sidebar-menu">
-      <div *ngFor="let section of sections" class="menu-group">
-
+    <!-- Navigation Menu -->
+    <nav class="flex flex-col lg:flex-row lg:ml-12 lg:items-center gap-2 lg:gap-6 w-full pb-8 lg:pb-0 overflow-y-auto lg:overflow-visible relative">
+      <div *ngFor="let section of sections" class="relative group">
+        
+        <!-- Direct Link -->
         <a *ngIf="section.route"
-           class="group-title"
+           class="flex items-center gap-3 lg:gap-2 px-4 py-3 lg:py-2 rounded-xl text-slate-600 font-medium transition-all hover:bg-emerald-50 hover:text-emerald-600 cursor-pointer"
            [routerLink]="section.route"
-           routerLinkActive="active"
+           routerLinkActive="bg-emerald-50 text-emerald-600 shadow-sm"
            [routerLinkActiveOptions]="{ exact: section.exact ?? true }"
            (click)="closeMobileMenu()">
-
-          <span class="group-icon">{{ section.icon }}</span>
+          <span class="material-symbols-rounded text-xl lg:text-lg">{{ section.icon }}</span>
           <span>{{ section.label }}</span>
-
         </a>
 
+        <!-- Dropdown Trigger -->
         <div *ngIf="!section.route"
-             class="group-title static"
+             class="flex items-center justify-between lg:justify-start gap-3 lg:gap-2 px-4 py-3 lg:py-2 rounded-xl text-slate-600 font-medium transition-all hover:bg-emerald-50 hover:text-emerald-600 cursor-pointer"
              (click)="toggleSection(section)">
-
-          <span class="group-icon">{{ section.icon }}</span>
-          <span>{{ section.label }}</span>
-          <span class="group-caret"
-                [class.rotated]="section.isOpen">⌃</span>
-
+          <div class="flex items-center gap-3 lg:gap-2">
+            <span class="material-symbols-rounded text-xl lg:text-lg">{{ section.icon }}</span>
+            <span>{{ section.label }}</span>
+          </div>
+          <svg class="w-4 h-4 transition-transform duration-200" [class.rotate-180]="section.isOpen" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </div>
 
-        <div class="group-children"
-             *ngIf="section.children?.length && section.isOpen">
-
-          <a *ngFor="let child of section.children"
-             class="child-item"
-             [routerLink]="child.route"
-             routerLinkActive="active"
-             (click)="closeMobileMenu()">
-
-            <span class="child-icon">{{ child.icon || '•' }}</span>
-            <span>{{ child.label }}</span>
-
-          </a>
-
+        <!-- Dropdown Menu -->
+        <div *ngIf="!section.route && section.children?.length"
+             class="lg:absolute lg:top-full lg:left-0 lg:mt-2 lg:w-56 lg:bg-white lg:shadow-xl lg:rounded-2xl lg:border lg:border-emerald-50 overflow-hidden transition-all duration-200 lg:opacity-0 lg:invisible lg:group-hover:opacity-100 lg:group-hover:visible z-50"
+             [class.hidden]="!section.isOpen && isMobileMenuOpen"
+             [class.block]="section.isOpen || !isMobileMenuOpen">
+          <div class="flex flex-col pl-12 lg:pl-0 py-2 lg:p-2 gap-1 bg-slate-50/50 lg:bg-transparent rounded-xl mt-2 lg:mt-0">
+            <a *ngFor="let child of section.children"
+               class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-slate-500 font-medium hover:bg-emerald-50 hover:text-emerald-600 transition-colors cursor-pointer"
+               [routerLink]="child.route"
+               routerLinkActive="bg-emerald-50 text-emerald-600"
+               (click)="closeMobileMenu()">
+              <span class="material-symbols-rounded text-lg">{{ child.icon || 'chevron_right' }}</span>
+              <span>{{ child.label }}</span>
+            </a>
+          </div>
         </div>
-
+        
       </div>
     </nav>
-
   </div>
-
-</aside>
+</header>

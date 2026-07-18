@@ -1,67 +1,67 @@
-<section class="contact-section">
-  <div class="form-container">
-    <h2 class="form-title">Llena este formulario</h2>
-    <p class="form-subtitle">
+<section class="flex flex-col md:flex-row w-full max-w-[1200px] my-8 md:my-16 mx-4 lg:mx-auto bg-white shadow-[0_4px_15px_rgba(0,0,0,0.05)]">
+  <div class="flex-1 p-8 md:p-12">
+    <h2 class="text-[2rem] font-medium text-[#111] mb-4">Llena este formulario</h2>
+    <p class="text-[#666] text-[0.95rem] mb-8 leading-[1.5]">
       Ingresa los siguientes datos y un asesor te estará contactando en un periodo no mayor a 24 horas.
     </p>
 
-    <form [formGroup]="cotizacionForm" (ngSubmit)="enviarMensaje()">
-      <div class="form-group">
-        <input type="text" formControlName="nombre" placeholder="Escribe tu nombre*">
+    <form [formGroup]="cotizacionForm" (ngSubmit)="enviarMensaje()" class="flex flex-col gap-[1.2rem]">
+      <div class="w-full">
+        <input type="text" formControlName="nombre" placeholder="Escribe tu nombre*" class="w-full p-4 border border-[#eaeaea] rounded-[4px] font-inherit text-[0.95rem] outline-none transition-colors duration-200 focus:border-[#d47622] placeholder:text-[#aaa]">
       </div>
 
-      <div class="form-group">
-        <input type="email" formControlName="correo" placeholder="Ingresa tu correo electrónico*">
+      <div class="w-full">
+        <input type="email" formControlName="correo" placeholder="Ingresa tu correo electrónico*" class="w-full p-4 border border-[#eaeaea] rounded-[4px] font-inherit text-[0.95rem] outline-none transition-colors duration-200 focus:border-[#d47622] placeholder:text-[#aaa]">
       </div>
 
-      <div class="form-group telephone-group">
-        <label>Teléfono</label>
-        <input type="tel" formControlName="telefono" placeholder="Ingresa tu número de teléfono *">
+      <div class="w-full">
+        <label class="block text-[0.85rem] text-[#666] font-semibold mb-2">Teléfono</label>
+        <input type="tel" formControlName="telefono" placeholder="Ingresa tu número de teléfono *" class="w-full max-w-[300px] p-4 border border-[#eaeaea] rounded-[4px] font-inherit text-[0.95rem] outline-none transition-colors duration-200 focus:border-[#d47622] placeholder:text-[#aaa]">
       </div>
 
-      <div class="form-group">
-        <textarea formControlName="mensaje" placeholder="Escribe tu mensaje *" rows="5"></textarea>
+      <div class="w-full">
+        <textarea formControlName="mensaje" placeholder="Escribe tu mensaje *" rows="5" class="w-full p-4 border border-[#eaeaea] rounded-[4px] font-inherit text-[0.95rem] outline-none transition-colors duration-200 focus:border-[#d47622] placeholder:text-[#aaa] resize-y"></textarea>
       </div>
 
-      <button type="submit" class="btn-submit" [disabled]="cotizacionForm.invalid">
+      <button type="submit" class="self-start bg-[#d47622] text-white border-none py-[0.8rem] px-8 text-[1rem] font-semibold cursor-pointer rounded-[4px] mt-4 transition-opacity duration-200 hover:not:disabled:opacity-90 disabled:bg-[#ccc] disabled:cursor-not-allowed" [disabled]="cotizacionForm.invalid">
         Enviar mensaje
       </button>
     </form>
   </div>
 
-  <div class="info-container">
-    <h2 class="info-title">Más información</h2>
-    <p class="info-description">
+  <div class="flex-1 bg-[#0a0a0a] text-white p-12 lg:p-[4rem_3rem] flex flex-col items-center text-center">
+    <h2 class="text-[1.8rem] font-medium mb-6">Más información</h2>
+    <p class="text-[0.95rem] leading-[1.6] text-[#ccc] mb-12 max-w-[80%]">
       Con Grupo Proled cuentas con una amplia variedad de opciones para ponerte en contacto con nosotros:
     </p>
 
-    <div class="info-grid">
-      <div class="info-item">
-        <div class="icon">📍</div>
-        <h3>Visita nuestra sucursal</h3>
-        <p>Blvd. J. J. Torres Landa Ote.<br>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-[2.5rem] w-full">
+      <div class="text-center">
+        <div class="text-[1.8rem] text-[#d47622] mb-4">📍</div>
+        <h3 class="text-[1.05rem] font-semibold mb-[0.8rem]">Visita nuestra sucursal</h3>
+        <p class="text-[0.9rem] text-[#ccc] leading-[1.5] m-0">Blvd. J. J. Torres Landa Ote.<br>
            3905, Jardines de Jerez, 37530<br>
            León de los Aldama, Gto.</p>
       </div>
 
-      <div class="info-item">
-        <div class="icon">🕒</div>
-        <h3>Horario de atención</h3>
-        <p>Lunes a Viernes: 09:00am -<br>
+      <div class="text-center">
+        <div class="text-[1.8rem] text-[#d47622] mb-4">🕒</div>
+        <h3 class="text-[1.05rem] font-semibold mb-[0.8rem]">Horario de atención</h3>
+        <p class="text-[0.9rem] text-[#ccc] leading-[1.5] m-0">Lunes a Viernes: 09:00am -<br>
            06:00pm<br>
            sábado: 09:00am - 02:30pm</p>
       </div>
 
-      <div class="info-item">
-        <div class="icon">✉️</div>
-        <h3>Correo electrónico</h3>
-        <p>contacto&#64;proledservice.com</p>
+      <div class="text-center">
+        <div class="text-[1.8rem] text-[#d47622] mb-4">✉️</div>
+        <h3 class="text-[1.05rem] font-semibold mb-[0.8rem]">Correo electrónico</h3>
+        <p class="text-[0.9rem] text-[#ccc] leading-[1.5] m-0">contacto&#64;proledservice.com</p>
       </div>
 
-      <div class="info-item">
-        <div class="icon">📞</div>
-        <h3>Teléfonos de contacto:</h3>
-        <p>+52 477 411 7664</p>
+      <div class="text-center">
+        <div class="text-[1.8rem] text-[#d47622] mb-4">📞</div>
+        <h3 class="text-[1.05rem] font-semibold mb-[0.8rem]">Teléfonos de contacto:</h3>
+        <p class="text-[0.9rem] text-[#ccc] leading-[1.5] m-0">+52 477 411 7664</p>
       </div>
     </div>
   </div>
