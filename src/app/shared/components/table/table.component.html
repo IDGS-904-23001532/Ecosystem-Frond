@@ -1,35 +1,55 @@
-<section class="table-card">
-  <div class="table-responsive">
-    <table class="data-table">
+<div class="w-full overflow-x-auto">
+  <table class="w-full text-left border-collapse">
+    <thead>
+      <tr class="bg-slate-50/50 border-b border-slate-100">
+        <th scope="col" *ngFor="let col of columns" class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+          {{ col.label }}
+        </th>
+        <th scope="col" *ngIf="showActions" class="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider text-right">
+          Acciones
+        </th>
+      </tr>
+    </thead>
+
+    <tbody class="divide-y divide-slate-100 bg-white">
       
-      <thead>
-        <tr>
-          <th scope="col" *ngFor="let col of columns">{{ col.label }}</th>
-          <th scope="col" *ngIf="showActions" class="actions-header">Acciones</th>
-        </tr>
-      </thead>
+      <!-- Loading State -->
+      <tr *ngIf="isLoading">
+        <td [attr.colspan]="columns.length + (showActions ? 1 : 0)" class="px-6 py-12 text-center">
+          <div class="flex flex-col items-center justify-center gap-3">
+            <span class="material-symbols-rounded animate-spin text-emerald-500 text-4xl">autorenew</span>
+            <span class="text-sm font-medium text-slate-500">Cargando información...</span>
+          </div>
+        </td>
+      </tr>
 
-      <tbody>
-        <tr class="empty-row" *ngIf="data.length === 0">
-          <td [attr.colspan]="columns.length + (showActions ? 1 : 0)" class="text-muted">
-            {{ emptyMessage }}
+      <!-- Empty State -->
+      <tr *ngIf="!isLoading && data.length === 0">
+        <td [attr.colspan]="columns.length + (showActions ? 1 : 0)" class="px-6 py-12 text-center text-slate-500 text-sm font-medium">
+          {{ emptyMessage }}
+        </td>
+      </tr>
+
+      <!-- Data Rows -->
+      <ng-container *ngIf="!isLoading">
+        <tr *ngFor="let row of data; trackBy: trackByFn" class="hover:bg-slate-50/50 transition-colors group">
+          <td *ngFor="let col of columns" class="px-6 py-4 text-sm text-slate-700 whitespace-nowrap">
+            {{ row[col.key] }}
           </td>
-        </tr>
-
-        <tr *ngFor="let row of data">
-          <td *ngFor="let col of columns">{{ row[col.key] }}</td>
           
-          <td *ngIf="showActions" class="actions-cell">
-            <button class="action-btn edit" (click)="onAction('edit', row)" title="Editar">
-              ✏️
-            </button>
-            <button class="action-btn delete" (click)="onAction('delete', row)" title="Eliminar">
-              🗑️
-            </button>
+          <td *ngIf="showActions" class="px-6 py-4 whitespace-nowrap text-right">
+            <div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <button class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 transition-colors" (click)="onAction('edit', row)" title="Editar">
+                <span class="material-symbols-rounded text-[18px]">edit</span>
+              </button>
+              <button class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors" (click)="onAction('delete', row)" title="Eliminar">
+                <span class="material-symbols-rounded text-[18px]">delete</span>
+              </button>
+            </div>
           </td>
         </tr>
-      </tbody>
+      </ng-container>
 
-    </table>
-  </div>
-</section>
+    </tbody>
+  </table>
+</div>

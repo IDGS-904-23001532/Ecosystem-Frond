@@ -52,7 +52,6 @@ export class SidebarComponent {
       icon: 'account_balance',
       isOpen: false,
       children: [
-         { label: 'Empleados', icon: 'badge', route: '/empleados', exact: true },
         { label: 'Ingresos', icon: 'attach_money', route: '/facturas', exact: true },
         { label: 'Gastos', icon: 'money_off', route: '/gastos', exact: true }
       ]
@@ -71,7 +70,7 @@ export class SidebarComponent {
       icon: 'settings',
       isOpen: false,
       children: [
-        { label: 'Usuarios', icon: 'group', route: '/usuarios', exact: true }]
+        { label: 'Empleados', icon: 'badge', route: '/empleados', exact: true }]
     },
     {
       label: 'Salir',
