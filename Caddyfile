@@ -1,16 +1,17 @@
 :{$PORT:8080} {
     encode gzip
 
-    # Serve static files from the build output directory
-    root * dist/control-ecosystem/browser
-
-    # Proxy API calls to the backend hosted on Railway
-    reverse_proxy /api* https://ecosystem-back-production.up.railway.app {
-        header_up Host ecosystem-back-production.up.railway.app
+    # 1. API Proxy: Handle all requests starting with /api
+    handle /api* {
+        reverse_proxy https://ecosystem-back-production.up.railway.app {
+            header_up Host ecosystem-back-production.up.railway.app
+        }
     }
 
-    # Fallback to index.html for Angular client-side routing (SPA)
-    try_files {path} /index.html
-
-    file_server
+    # 2. Static Files & SPA Routing: Catch-all fallback for Angular frontend
+    handle {
+        root * dist/control-ecosystem/browser
+        try_files {path} /index.html
+        file_server
+    }
 }
