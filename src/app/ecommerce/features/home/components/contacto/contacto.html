@@ -1,0 +1,85 @@
+<section class="relative min-h-screen overflow-hidden flex items-center">
+
+  <!-- Imagen de fondo -->
+  <div class="absolute inset-0">
+    <img src="/solar-contact-bg.jpg" alt="Fondo solar" class="w-full h-full object-cover" />
+    <div class="absolute inset-0 bg-slate-900/75"></div>
+  </div>
+
+  <!-- Contenido -->
+  <div class="relative z-10 w-full max-w-6xl mx-auto px-6 lg:px-12 py-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+    <!-- Texto izquierda -->
+    <div>
+      <p class="text-emerald-400 text-sm font-semibold tracking-widest uppercase mb-4">Contacto</p>
+      <h2 class="text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-6">
+        Estamos listos <br />
+        <span class="text-white">
+          para ayudarte
+        </span>
+      </h2>
+      <p class="text-slate-300 text-base leading-relaxed mb-10">
+        Deja tus datos y uno de nuestros asesores se pondrá en contacto contigo para orientarte sobre la mejor solución de energía solar para ti.
+      </p>
+
+      <div class="flex flex-col gap-6 border-t border-white/10 pt-8">
+        <div class="flex flex-col gap-1">
+          <span class="text-slate-400 text-xs uppercase tracking-widest">Correo</span>
+          <span class="text-white font-medium">contacto&#64;ecosystem.mx</span>
+        </div>
+        <div class="flex flex-col gap-1">
+          <span class="text-slate-400 text-xs uppercase tracking-widest">Horario de atención</span>
+          <span class="text-white font-medium">Lunes a Viernes, 9:00 - 18:00 hrs</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulario derecha -->
+    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
+      <form [formGroup]="contactoForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="flex flex-col gap-2">
+            <label class="text-slate-300 text-sm">Nombre*</label>
+            <input formControlName="nombre" type="text" placeholder="Tu nombre"
+              class="px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 transition-colors duration-200"
+              [class.border-red-500]="contactoForm.get('nombre')?.invalid && contactoForm.get('nombre')?.touched" />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label class="text-slate-300 text-sm">Apellido*</label>
+            <input formControlName="apellido" type="text" placeholder="Tu apellido"
+              class="px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 transition-colors duration-200"
+              [class.border-red-500]="contactoForm.get('apellido')?.invalid && contactoForm.get('apellido')?.touched" />
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label class="text-slate-300 text-sm">Teléfono*</label>
+          <input formControlName="telefono" type="tel" placeholder="10 dígitos"
+            class="px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 transition-colors duration-200"
+            [class.border-red-500]="contactoForm.get('telefono')?.invalid && contactoForm.get('telefono')?.touched" />
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label class="text-slate-300 text-sm">Empresa <span class="text-slate-500">(Opcional)</span></label>
+          <input formControlName="corporativo" type="text" placeholder="Nombre de tu empresa"
+            class="px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 transition-colors duration-200" />
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label class="text-slate-300 text-sm">Localidad*</label>
+          <input formControlName="localidad" type="text" placeholder="Tu ciudad o municipio"
+            class="px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 transition-colors duration-200"
+            [class.border-red-500]="contactoForm.get('localidad')?.invalid && contactoForm.get('localidad')?.touched" />
+        </div>
+
+        <button type="submit" [disabled]="enviando"
+          class="mt-2 w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base tracking-wide rounded-lg transition-all duration-300 hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed">
+          {{ enviando ? 'Enviando...' : 'Enviar información' }}
+        </button>
+
+      </form>
+    </div>
+
+  </div>
+</section>

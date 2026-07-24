@@ -12,6 +12,7 @@ import { CotizacionesComponent } from './gestion/features/cotizaciones/cotizacio
 import { PlaceholderPageComponent } from './gestion/shared/components/placeholder-page/placeholder-page.component';
 import { ClientesComponent } from './gestion/features/clientes/clientes.component';
 import { UsuariosComponent } from './gestion/features/usuarios/usuarios.component';
+import { ContactoComponent } from './ecommerce/features/home/components/contacto/contacto';
 
 export const routes: Routes = [
   // Si la ruta está vacía, redirige automáticamente al login
@@ -43,6 +44,9 @@ export const routes: Routes = [
   // Ruta para empleados (antes usuarios)
   { path: 'empleados', component: UsuariosComponent },
   { path: 'usuarios', redirectTo: 'empleados', pathMatch: 'full' },
+
+  // Ruta para contacto
+  { path: 'conocenos/contactar', component: ContactoComponent },
   
   {
     path: 'contabilidad',
