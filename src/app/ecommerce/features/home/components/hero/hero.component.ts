@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class HeroComponent {
   private router = inject(Router);
 
-  navigateToCotizacion() {
-    this.router.navigate(['/conocenos/cotizacion']);
+  navigateToCalculadora() {
+    this.router.navigate(['/calculadora-ahorro']);
   }
 }

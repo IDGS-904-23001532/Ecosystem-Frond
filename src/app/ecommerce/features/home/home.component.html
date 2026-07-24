@@ -1,5 +1,255 @@
-<div class="min-h-[100dvh] w-full bg-[#f8fafc] overflow-x-hidden font-sans">
+<div class="min-h-[100dvh] w-full bg-[#fcfdfc] overflow-x-hidden font-sans">
   <app-top-bar></app-top-bar>
   <app-hero></app-hero>
-  <app-cta-contacto></app-cta-contacto>
+  
+  <main class="w-full flex flex-col">
+    
+    <!-- SECCIÓN DE PAQUETES / SOLUCIONES -->
+    <section class="py-28 px-6 max-w-7xl mx-auto w-full relative">
+      <!-- Glow decorativo -->
+      <div class="absolute top-10 left-10 w-72 h-72 bg-[#a3e635]/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+      <div class="text-center mb-20 relative z-10">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-[#103627] mb-6 tracking-tight">Soluciones Energéticas <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#457c14] to-[#a3e635]">Inteligentes</span></h2>
+        <p class="text-slate-500 text-lg max-w-2xl mx-auto">Diseñadas para maximizar tu eficiencia, integrarse a tu arquitectura y brindarte el control total de tu energía.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto relative z-10">
+        <!-- Tarjeta 1: Hogar -->
+        <div class="group bg-white rounded-3xl p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col items-start hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300">
+          <div class="w-14 h-14 bg-gradient-to-br from-[#103627] to-[#1c5c43] rounded-2xl flex items-center justify-center mb-8 shadow-lg group-hover:scale-110 transition-transform duration-300">
+            <span class="material-symbols-rounded text-white text-2xl">solar_power</span>
+          </div>
+          <h3 class="text-2xl font-bold text-[#103627] mb-4">Paquete Hogar</h3>
+          <p class="text-slate-500 mb-10 flex-grow text-base leading-relaxed">
+            Paneles solares estéticos y eficientes diseñados para integrarse perfectamente a la arquitectura de tu hogar maximizando el ahorro de energía.
+          </p>
+          <a routerLink="/paquetes/hogar" class="text-base font-bold text-[#457c14] group-hover:text-[#a3e635] flex items-center gap-2 transition-colors">
+            Ver paquete <span class="material-symbols-rounded text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          </a>
+        </div>
+
+        <!-- Tarjeta 2: Empresarial -->
+        <div class="group bg-white rounded-3xl p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col items-start hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#103627] to-[#a3e635]"></div>
+          
+          <div class="w-14 h-14 bg-gradient-to-br from-[#103627] to-[#1c5c43] rounded-2xl flex items-center justify-center mb-8 shadow-lg group-hover:scale-110 transition-transform duration-300">
+            <span class="material-symbols-rounded text-white text-2xl">domain</span>
+          </div>
+          <h3 class="text-2xl font-bold text-[#103627] mb-4">Paquete Empresarial</h3>
+          <p class="text-slate-500 mb-10 flex-grow text-base leading-relaxed">
+            Soluciones industriales de alto rendimiento diseñadas para entornos urbanos y comerciales, reduciendo drásticamente los costos operativos.
+          </p>
+          <a routerLink="/paquetes/empresarial" class="text-base font-bold text-[#457c14] group-hover:text-[#a3e635] flex items-center gap-2 transition-colors">
+            Ver proyectos <span class="material-symbols-rounded text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          </a>
+        </div>
+
+        <!-- Tarjeta 3: Monitoreo / App -->
+        <div class="group bg-white rounded-3xl p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col items-start hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300">
+          <div class="w-14 h-14 bg-gradient-to-br from-[#103627] to-[#1c5c43] rounded-2xl flex items-center justify-center mb-8 shadow-lg group-hover:scale-110 transition-transform duration-300">
+            <span class="material-symbols-rounded text-white text-2xl">grid_view</span>
+          </div>
+          <h3 class="text-2xl font-bold text-[#103627] mb-4">Monitoreo Inteligente</h3>
+          <p class="text-slate-500 mb-10 flex-grow text-base leading-relaxed">
+            Sistemas de gestión de energía basados en IA que optimizan el consumo y almacenamiento en tiempo real desde tu aplicación móvil.
+          </p>
+          <a routerLink="/conocenos/por-que-escogernos" class="text-base font-bold text-[#457c14] group-hover:text-[#a3e635] flex items-center gap-2 transition-colors">
+            Especificaciones <span class="material-symbols-rounded text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN POR QUÉ ELEGIRNOS (Dividida y Premium) -->
+    <section class="py-32 w-full bg-[#f4f5f4] relative overflow-hidden">
+      <!-- Elemento decorativo de fondo -->
+      <div class="absolute -top-40 -right-40 w-96 h-96 bg-[#a3e635] rounded-full blur-[200px] opacity-10"></div>
+
+      <div class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-20 relative z-10">
+        
+        <!-- Contenido Izquierdo (Imagen) -->
+        <div class="w-full lg:w-1/2 relative group">
+          <div class="absolute -inset-4 bg-gradient-to-r from-[#a3e635] to-[#103627] rounded-[3rem] blur-lg opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
+          <img src="/home-hero.png" alt="Ingenieros Ecosystem" class="relative w-full h-[500px] object-cover rounded-[2.5rem] shadow-2xl" />
+          <!-- Badge flotante -->
+          <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-xl flex items-center gap-4">
+            <div class="w-12 h-12 bg-[#e8faeb] rounded-full flex items-center justify-center">
+              <span class="material-symbols-rounded text-[#103627]">verified</span>
+            </div>
+            <div>
+              <p class="text-sm text-slate-500 font-medium">Más de</p>
+              <p class="text-xl font-extrabold text-[#103627]">1,000 Instalaciones</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Contenido Derecho (Texto) -->
+        <div class="w-full lg:w-1/2 flex flex-col items-start pt-10 lg:pt-0">
+          <h2 class="text-4xl md:text-5xl font-extrabold text-[#103627] mb-8 tracking-tight">¿Por qué elegir a Ecosystem?</h2>
+          <p class="text-slate-600 mb-12 text-lg leading-relaxed">
+            El Dashboard de Ecosystem proporciona información granular en tiempo real sobre tu producción y consumo. Nuestros algoritmos predicen patrones climáticos para optimizar tu energía automáticamente.
+          </p>
+          
+          <div class="space-y-8 mb-12 w-full">
+            <div class="flex items-start gap-5 p-4 rounded-2xl hover:bg-white/60 transition-colors">
+              <div class="w-10 h-10 rounded-full bg-[#103627] flex items-center justify-center flex-shrink-0 mt-1 shadow-md">
+                <span class="material-symbols-rounded text-[#a3e635] text-sm">done</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-[#103627] text-lg mb-1">Mantenimiento Predictivo</h4>
+                <p class="text-slate-500 text-base">Identificamos caídas de eficiencia antes de que ocurran para asegurar un rendimiento óptimo siempre.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-5 p-4 rounded-2xl hover:bg-white/60 transition-colors">
+              <div class="w-10 h-10 rounded-full bg-[#103627] flex items-center justify-center flex-shrink-0 mt-1 shadow-md">
+                <span class="material-symbols-rounded text-[#a3e635] text-sm">done</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-[#103627] text-lg mb-1">Balanceo de Carga Dinámico</h4>
+                <p class="text-slate-500 text-base">Enrutamiento automático de energía hacia los aparatos de alta demanda durante picos solares.</p>
+              </div>
+            </div>
+          </div>
+
+          <button class="px-10 py-4 rounded-xl bg-[#103627] text-white font-bold text-lg hover:bg-[#0c2a1e] hover:-translate-y-1 transition-all shadow-xl shadow-[#103627]/20">
+            Agenda una demostración
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN CALCULADORA DE AHORRO (Glassmorphism) -->
+    <section class="py-32 bg-gradient-to-br from-[#0a1f16] via-[#103627] to-[#0a1f16] text-white relative overflow-hidden">
+      <!-- Luces de fondo -->
+      <div class="absolute inset-0 z-0">
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[#a3e635] rounded-full blur-[150px] opacity-10"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-teal-500 rounded-full blur-[150px] opacity-10"></div>
+      </div>
+
+      <div class="container mx-auto px-6 max-w-6xl relative z-10">
+        
+        <div class="mb-14 text-center md:text-left">
+          <span class="inline-block px-4 py-1.5 rounded-full bg-[#a3e635]/10 border border-[#a3e635]/20 text-[#a3e635] text-sm font-bold tracking-widest uppercase mb-6">Calculadora</span>
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight">Descubre cuánto ahorrarías</h2>
+          <p class="text-emerald-100/70 text-lg md:text-xl max-w-2xl">
+            Ingresa tu consumo actual y estima el ahorro en tu factura eléctrica en cuestión de segundos.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <!-- Input 1 -->
+          <div class="flex flex-col gap-3 group">
+            <span class="text-sm font-medium text-white/80">Consumo promedio (kWh)</span>
+            <div class="relative">
+              <input type="text" placeholder="Ej. 500" class="w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-[#a3e635] focus:bg-white/10 transition-all text-base shadow-inner" />
+            </div>
+          </div>
+
+          <!-- Select 1 -->
+          <div class="flex flex-col gap-3 group">
+            <span class="text-sm font-medium text-white/80">Estado de la República</span>
+            <div class="relative">
+              <select class="w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl px-5 py-4 text-white appearance-none focus:outline-none focus:border-[#a3e635] focus:bg-white/10 transition-all text-base shadow-inner">
+                <option value="" disabled selected class="text-slate-800">Selecciona tu estado</option>
+                <option value="NL" class="text-slate-800">Nuevo León</option>
+                <option value="JAL" class="text-slate-800">Jalisco</option>
+              </select>
+              <span class="material-symbols-rounded absolute right-4 top-4 text-[#a3e635] pointer-events-none">expand_more</span>
+            </div>
+          </div>
+
+          <!-- Select 2 -->
+          <div class="flex flex-col gap-3 group">
+            <span class="text-sm font-medium text-white/80">Tarifa de CFE</span>
+            <div class="relative">
+              <select class="w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl px-5 py-4 text-white appearance-none focus:outline-none focus:border-[#a3e635] focus:bg-white/10 transition-all text-base shadow-inner">
+                <option value="" disabled selected class="text-slate-800">Selecciona tu tarifa</option>
+                <option value="GDMTH" class="text-slate-800">GDMTH</option>
+                <option value="GDMTO" class="text-slate-800">GDMTO</option>
+              </select>
+              <span class="material-symbols-rounded absolute right-4 top-4 text-[#a3e635] pointer-events-none">expand_more</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center md:text-left">
+          <button routerLink="/calculadora-ahorro" class="w-full md:w-auto px-12 py-4 rounded-xl bg-[#a3e635] text-[#103627] font-bold text-lg hover:bg-[#b5eb54] hover:scale-105 transition-all shadow-[0_0_30px_rgba(163,230,53,0.3)]">
+            Calcular mi ahorro
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN CONTÁCTANOS (FOOTER CTA) -->
+    <section class="w-full bg-[#fcfdfc] pt-32 pb-16">
+      <div class="max-w-7xl mx-auto px-6">
+        
+        <!-- Banner CTA Premium -->
+        <div class="relative w-full rounded-[3rem] overflow-hidden bg-[#103627] py-24 px-8 text-center flex flex-col items-center justify-center mb-24 shadow-2xl">
+          <div class="absolute inset-0 z-0 opacity-40 mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#103627] to-transparent z-10 opacity-80"></div>
+          
+          <div class="relative z-20 max-w-3xl">
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight">Agenda una asesoría <span class="text-[#a3e635]">personalizada</span></h2>
+            <p class="text-emerald-50/80 mb-12 text-lg md:text-xl font-medium">
+              Habla con nuestros expertos para diseñar la solución energética ideal que transformará tu hogar o negocio.
+            </p>
+            <button routerLink="/conocenos/contactar" class="px-12 py-4 rounded-xl bg-white text-[#103627] font-bold text-lg hover:bg-[#f4f5f4] hover:scale-105 transition-all shadow-xl">
+              Agendar asesoría ahora
+            </button>
+          </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="border-t border-slate-200 pt-16 pb-8">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            <!-- Columna Logo -->
+            <div class="col-span-1">
+              <span class="text-2xl font-black text-[#103627] block mb-6 tracking-tight">Ecosystem<span class="text-[#a3e635]">.</span></span>
+              <p class="text-slate-500 text-sm mb-8 max-w-xs leading-relaxed">
+                © 2026 Ecosystem Energy. Preservando el futuro a través de la innovación tecnológica.
+              </p>
+              <div class="flex gap-4">
+                <a class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#103627] hover:text-[#a3e635] transition-colors cursor-pointer"><span class="material-symbols-rounded text-xl">language</span></a>
+                <a class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#103627] hover:text-[#a3e635] transition-colors cursor-pointer"><span class="material-symbols-rounded text-xl">share</span></a>
+                <a class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#103627] hover:text-[#a3e635] transition-colors cursor-pointer"><span class="material-symbols-rounded text-xl">mail</span></a>
+              </div>
+            </div>
+
+            <!-- Columnas Enlaces -->
+            <div class="col-span-1">
+              <h4 class="text-[#103627] font-bold text-sm uppercase tracking-widest mb-6">Soluciones</h4>
+              <ul class="space-y-4 text-base font-medium text-slate-500">
+                <li><a class="hover:text-[#a3e635] transition-colors cursor-pointer">Paquete Hogar</a></li>
+                <li><a class="hover:text-[#a3e635] transition-colors cursor-pointer">Paquete Empresarial</a></li>
+                <li><a class="hover:text-[#a3e635] transition-colors cursor-pointer">Monitoreo Inteligente</a></li>
+              </ul>
+            </div>
+
+            <div class="col-span-1">
+              <h4 class="text-[#103627] font-bold text-sm uppercase tracking-widest mb-6">Recursos</h4>
+              <ul class="space-y-4 text-base font-medium text-slate-500">
+                <li><a class="hover:text-[#a3e635] transition-colors cursor-pointer">Blog de Sustentabilidad</a></li>
+                <li><a class="hover:text-[#a3e635] transition-colors cursor-pointer">Casos de Éxito</a></li>
+                <li><a class="hover:text-[#a3e635] transition-colors cursor-pointer">Asesoramiento Técnico</a></li>
+              </ul>
+            </div>
+
+            <div class="col-span-1">
+              <h4 class="text-[#103627] font-bold text-sm uppercase tracking-widest mb-6">Legal</h4>
+              <ul class="space-y-4 text-base font-medium text-slate-500">
+                <li><a class="hover:text-[#a3e635] transition-colors cursor-pointer">Política de Privacidad</a></li>
+                <li><a class="hover:text-[#a3e635] transition-colors cursor-pointer">Términos de Servicio</a></li>
+                <li><a class="hover:text-[#a3e635] transition-colors cursor-pointer">Contáctanos</a></li>
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+    </section>
+
+  </main>
 </div>

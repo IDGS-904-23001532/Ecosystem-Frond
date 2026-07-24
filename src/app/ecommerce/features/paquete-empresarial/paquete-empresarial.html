@@ -1,0 +1,64 @@
+<div class="min-h-screen w-full bg-[#fcfdfc] font-sans flex flex-col">
+  <app-top-bar></app-top-bar>
+
+  <main class="flex-grow pt-32 pb-24">
+    
+    <!-- Hero Paquete Empresarial -->
+    <section class="max-w-7xl mx-auto px-6 mb-24 text-center">
+      <div class="inline-flex items-center justify-center w-20 h-20 bg-[#103627] rounded-3xl mb-8 shadow-xl">
+        <span class="material-symbols-rounded text-[#84cc16] text-4xl">domain</span>
+      </div>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#103627] mb-6 tracking-tight">
+        Paquete <span class="text-[#84cc16]">Empresarial</span>
+      </h1>
+      <p class="text-slate-500 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-10">
+        Optimiza los costos operativos de tu negocio y alcanza tus metas ESG. Diseñamos e implementamos plantas solares a gran escala con almacenamiento y control de picos de demanda para maximizar la rentabilidad.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a routerLink="/calculadora-ahorro" class="px-10 py-4 rounded-xl bg-[#84cc16] text-[#103627] font-bold text-center hover:bg-[#65a30d] hover:-translate-y-1 transition-all shadow-xl">
+          Proyección financiera
+        </a>
+        <a routerLink="/conocenos/contactar" class="px-10 py-4 rounded-xl bg-[#103627] text-white font-bold text-center hover:bg-[#0c2a1e] hover:-translate-y-1 transition-all shadow-xl">
+          Agendar reunión
+        </a>
+      </div>
+    </section>
+
+    <!-- Beneficios Industriales -->
+    <section class="bg-[#103627] text-white py-24">
+      <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-8 tracking-tight">Potencia y Control Absoluto</h2>
+          <ul class="space-y-6">
+            <li class="flex items-start gap-4">
+              <span class="material-symbols-rounded text-[#84cc16] mt-1">trending_down</span>
+              <div>
+                <h4 class="font-bold text-lg mb-1">Deducción de Impuestos</h4>
+                <p class="text-emerald-50/70 text-base">Deduce hasta el 100% de la inversión en el primer año (Artículo 34 LISR) acelerando tu ROI.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <span class="material-symbols-rounded text-[#84cc16] mt-1">insights</span>
+              <div>
+                <h4 class="font-bold text-lg mb-1">Peak Shaving</h4>
+                <p class="text-emerald-50/70 text-base">Baterías industriales y algoritmos para reducir los costosos picos de demanda de CFE en tarifa GDMTH.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <span class="material-symbols-rounded text-[#84cc16] mt-1">support_agent</span>
+              <div>
+                <h4 class="font-bold text-lg mb-1">Soporte 24/7</h4>
+                <p class="text-emerald-50/70 text-base">Mantenimiento preventivo garantizado y línea directa con ingenieros para asegurar 99.9% de uptime.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="relative">
+          <div class="absolute -inset-4 bg-[#84cc16]/10 blur-3xl rounded-full"></div>
+          <img src="/home-hero.png" alt="Instalación Industrial" class="relative rounded-[2.5rem] shadow-2xl h-[450px] w-full object-cover object-center border border-white/10" />
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
