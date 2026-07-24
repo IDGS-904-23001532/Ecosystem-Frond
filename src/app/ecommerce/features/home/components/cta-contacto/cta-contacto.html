@@ -1,0 +1,32 @@
+<section class="relative min-h-[60vh] overflow-hidden flex items-center">
+
+  <!-- Imagen de fondo -->
+  <div class="absolute inset-0">
+    <img src="/cta-bg.jpg" alt="Energia solar" class="w-full h-full object-cover object-center" />
+    <div class="absolute inset-0 bg-slate-900/70"></div>
+  </div>
+
+  <!-- Contenido -->
+  <div class="relative z-10 max-w-6xl mx-auto px-6 lg:px-12 py-24 flex flex-col lg:flex-row items-center justify-between gap-10">
+
+    <!-- Texto izquierda -->
+    <div class="max-w-2xl">
+      <h2 class="text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-6">
+  Tu próximo proyecto de energía empieza con una conversación
+</h2>
+      <p class="text-slate-300 text-lg leading-relaxed">
+        Contar con un socio energético de largo plazo implica tener respaldo técnico, operativo y financiero en cada etapa del proyecto. Agenda una llamada con nuestros expertos para evaluar el esquema más conveniente para ti.
+      </p>
+    </div>
+
+    <!-- Botón derecha -->
+    <div class="shrink-0">
+      <button (click)="navegarAContacto()"
+        class="px-10 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg transition-all duration-300 hover:-translate-y-1">
+        Contáctanos
+      </button>
+    </div>
+
+  </div>
+
+</section>
