@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-clientes',
   standalone: true,
-  imports: [CommonModule, FormsModule, HeaderTitleComponent, SidebarComponent, TableComponent, SummaryCardsComponent, ButtonComponent, ModalClienteComponent],
+  imports: [CommonModule, FormsModule, HeaderTitleComponent, SidebarComponent, TableComponent, ButtonComponent, ModalClienteComponent],
   templateUrl: './clientes.component.html'
 })
 export class ClientesComponent implements OnInit {

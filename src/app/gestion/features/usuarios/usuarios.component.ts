@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-usuarios',
   standalone: true,
-  imports: [CommonModule, FormsModule, HeaderTitleComponent, SidebarComponent, TableComponent, SummaryCardsComponent, ButtonComponent, ModalUsuarioComponent, ModalPermisosComponent],
+  imports: [CommonModule, FormsModule, HeaderTitleComponent, SidebarComponent, TableComponent, ButtonComponent, ModalUsuarioComponent, ModalPermisosComponent],
   templateUrl: './usuarios.component.html'
 })
 export class UsuariosComponent implements OnInit {

@@ -6,7 +6,7 @@ import { ButtonComponent } from '../../../../../shared/components/button/button.
 @Component({
   selector: 'app-modal-usuario',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ButtonComponent],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './modal-usuario.component.html'
 })
 export class ModalUsuarioComponent implements OnInit {

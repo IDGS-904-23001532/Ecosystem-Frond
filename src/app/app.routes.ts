@@ -2,6 +2,12 @@ import { Routes } from '@angular/router';
 
 // Importar los componentes de las rutas ecommerce publicas
 import { HomeComponent } from './ecommerce/features/home/home.component';
+import { CalculadoraAhorroComponent } from './ecommerce/features/calculadora-ahorro/calculadora-ahorro.component';
+import { LandingPlaceholderPageComponent } from './ecommerce/shared/components/landing-placeholder-page/landing-placeholder-page.component';
+import { PorQueEscogernosComponent } from './ecommerce/features/por-que-escogernos/por-que-escogernos.component';
+import { PaqueteHogarComponent } from './ecommerce/features/paquete-hogar/paquete-hogar';
+import { PaqueteEmpresarialComponent } from './ecommerce/features/paquete-empresarial/paquete-empresarial';
+import { NosotrosComponent } from './ecommerce/features/nosotros/nosotros';
 
 // Importar los componentes de las rutas gestion administrativas
 import { LoginComponent } from './gestion/features/login/login.component';
@@ -63,6 +69,25 @@ export const routes: Routes = [
     }
   },
   
+  // Rutas de la Landing Page
+  {
+    path: 'paquetes/hogar',
+    component: PaqueteHogarComponent
+  },
+  {
+    path: 'paquetes/empresarial',
+    component: PaqueteEmpresarialComponent
+  },
+  {
+    path: 'conocenos/nosotros',
+    component: NosotrosComponent
+  },
+
+  {
+    path: 'calculadora-ahorro',
+    component: CalculadoraAhorroComponent
+  },
+
   // Comodín por si escriben una ruta inexistente, redirige al login
   { path: '**', redirectTo: 'login' }
 ];

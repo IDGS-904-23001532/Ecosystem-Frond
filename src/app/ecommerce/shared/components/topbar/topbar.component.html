@@ -28,7 +28,7 @@
     </div>
 
     <!-- Navigation Menu -->
-    <nav class="flex flex-col lg:flex-row lg:ml-12 lg:items-center gap-2 lg:gap-6 w-full pb-8 lg:pb-0 overflow-y-auto lg:overflow-visible relative">
+    <nav class="flex flex-col lg:flex-row lg:flex-1 lg:justify-center lg:items-center gap-2 lg:gap-6 w-full pb-8 lg:pb-0 overflow-y-auto lg:overflow-visible relative">
       <div *ngFor="let section of sections" class="relative group">
         
         <!-- Direct Link -->
@@ -53,20 +53,53 @@
           <svg class="w-4 h-4 transition-transform duration-200" [class.rotate-180]="section.isOpen" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </div>
 
-        <!-- Dropdown Menu -->
         <div *ngIf="!section.route && section.children?.length"
-             class="lg:absolute lg:top-full lg:left-0 lg:mt-2 lg:w-56 lg:bg-white lg:shadow-xl lg:rounded-2xl lg:border lg:border-emerald-50 overflow-hidden transition-all duration-200 lg:opacity-0 lg:invisible lg:group-hover:opacity-100 lg:group-hover:visible z-50"
+             class="lg:absolute lg:top-full lg:left-0 lg:mt-2 lg:w-56 lg:bg-white lg:shadow-xl lg:rounded-2xl lg:border lg:border-emerald-50 transition-all duration-200 lg:opacity-0 lg:invisible lg:group-hover:opacity-100 lg:group-hover:visible z-50"
              [class.hidden]="!section.isOpen && isMobileMenuOpen"
              [class.block]="section.isOpen || !isMobileMenuOpen">
           <div class="flex flex-col pl-12 lg:pl-0 py-2 lg:p-2 gap-1 bg-slate-50/50 lg:bg-transparent rounded-xl mt-2 lg:mt-0">
-            <a *ngFor="let child of section.children"
-               class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-slate-500 font-medium hover:bg-emerald-50 hover:text-emerald-600 transition-colors cursor-pointer"
-               [routerLink]="child.route"
-               routerLinkActive="bg-emerald-50 text-emerald-600"
-               (click)="closeMobileMenu()">
-              <span class="material-symbols-rounded text-lg">{{ child.icon || 'chevron_right' }}</span>
-              <span>{{ child.label }}</span>
-            </a>
+            <ng-container *ngFor="let child of section.children">
+              
+              <!-- Normal link -->
+              <a *ngIf="!child.children"
+                 class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-slate-500 font-medium hover:bg-emerald-50 hover:text-emerald-600 transition-colors cursor-pointer"
+                 [routerLink]="child.route"
+                 routerLinkActive="bg-emerald-50 text-emerald-600"
+                 (click)="closeMobileMenu()">
+                <span class="material-symbols-rounded text-lg">{{ child.icon || 'chevron_right' }}</span>
+                <span>{{ child.label }}</span>
+              </a>
+
+              <!-- Submenu -->
+              <div *ngIf="child.children" class="relative group/sub">
+                <!-- Trigger submenu -->
+                <div class="flex items-center justify-between gap-3 px-4 py-2.5 rounded-lg text-sm text-slate-500 font-medium hover:bg-emerald-50 hover:text-emerald-600 transition-colors cursor-pointer"
+                     (click)="child.isOpen = !child.isOpen; $event.stopPropagation()">
+                  <div class="flex items-center gap-3">
+                    <span class="material-symbols-rounded text-lg">{{ child.icon || 'chevron_right' }}</span>
+                    <span>{{ child.label }}</span>
+                  </div>
+                  <svg class="w-4 h-4 transition-transform duration-200" [class.rotate-180]="child.isOpen" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </div>
+                
+                <!-- Submenu content -->
+                <div class="lg:absolute lg:top-0 lg:left-full lg:ml-2 lg:w-48 lg:bg-white lg:shadow-xl lg:rounded-2xl lg:border lg:border-emerald-50 overflow-hidden transition-all duration-200 lg:opacity-0 lg:invisible lg:group-hover/sub:opacity-100 lg:group-hover/sub:visible z-[60]"
+                     [class.hidden]="!child.isOpen && isMobileMenuOpen"
+                     [class.block]="child.isOpen || !isMobileMenuOpen">
+                  <div class="flex flex-col pl-6 lg:pl-0 py-1 lg:p-2 gap-1 bg-slate-100/50 lg:bg-transparent rounded-xl mt-1 lg:mt-0">
+                    <a *ngFor="let subchild of child.children"
+                       class="flex items-center gap-2 px-3 py-2 rounded-lg text-xs text-slate-500 font-medium hover:bg-emerald-50 hover:text-emerald-600 transition-colors cursor-pointer"
+                       [routerLink]="subchild.route"
+                       routerLinkActive="bg-emerald-50 text-emerald-600"
+                       (click)="closeMobileMenu()">
+                      <span class="material-symbols-rounded text-base">{{ subchild.icon || 'chevron_right' }}</span>
+                      <span>{{ subchild.label }}</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </ng-container>
           </div>
         </div>
         

@@ -1,0 +1,23 @@
+<div class="min-h-screen w-full bg-[#f8fafc] font-sans flex flex-col">
+  <!-- Navegación -->
+  <app-top-bar></app-top-bar>
+
+  <!-- Contenido Principal -->
+  <main class="flex-grow flex items-center justify-center pt-20">
+    <div class="bg-white rounded-2xl shadow-xl max-w-lg w-full mx-4 p-8 text-center border border-slate-100">
+      <div class="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-6 text-emerald-500">
+        <span class="material-icons text-4xl">{{ icon }}</span>
+      </div>
+      
+      <h1 class="text-3xl font-bold text-slate-800 mb-4">{{ title }}</h1>
+      <p class="text-slate-600 text-lg mb-8 leading-relaxed">
+        {{ description }}
+      </p>
+      
+      <div class="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 px-4 py-2 rounded-full font-medium">
+        <span class="material-icons text-sm">construction</span>
+        Página en construcción
+      </div>
+    </div>
+  </main>
+</div>
