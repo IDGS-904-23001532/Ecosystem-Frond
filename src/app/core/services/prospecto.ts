@@ -21,4 +21,8 @@ export class ProspectoService {
   registrarProspecto(data: RegistroProspectoDto): Observable<any> {
     return this.http.post(`${this.apiUrl}/registrar-prospecto`, data);
   }
+
+  listarProspectos(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/listar-prospectos`);
+  }
 }
