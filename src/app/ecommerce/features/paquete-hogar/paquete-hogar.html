@@ -1,59 +1,168 @@
 <div class="min-h-screen w-full bg-[#fcfdfc] font-sans flex flex-col">
   <app-top-bar></app-top-bar>
 
-  <main class="flex-grow pt-32 pb-24">
-    
+  <main class="flex-grow pt-24 pb-16">
     <!-- Hero Paquete Hogar -->
-    <section class="max-w-7xl mx-auto px-6 mb-24 text-center">
-      <div class="inline-flex items-center justify-center w-20 h-20 bg-[#103627] rounded-3xl mb-8 shadow-xl">
-        <span class="material-symbols-rounded text-[#84cc16] text-4xl">solar_power</span>
-      </div>
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#103627] mb-6 tracking-tight">
-        Paquete <span class="text-[#84cc16]">Hogar</span>
-      </h1>
-      <p class="text-slate-500 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-10">
-        Transforma tu casa en un ecosistema inteligente y sustentable. Nuestro kit residencial incluye todo lo que necesitas para generar, almacenar y administrar tu propia energía limpia, reduciendo tu recibo hasta en un 95%.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a routerLink="/calculadora-ahorro" class="px-10 py-4 rounded-xl bg-[#84cc16] text-[#103627] font-bold text-center hover:bg-[#65a30d] hover:-translate-y-1 transition-all shadow-xl">
-          Calcular mi ahorro
-        </a>
-        <a routerLink="/conocenos/contactar" class="px-10 py-4 rounded-xl bg-[#103627] text-white font-bold text-center hover:bg-[#0c2a1e] hover:-translate-y-1 transition-all shadow-xl">
-          Contratar paquete
-        </a>
+    <section class="py-24 w-full bg-white relative overflow-hidden">
+      <!-- Glow decorativo -->
+      <div
+        class="absolute top-10 left-10 w-96 h-96 bg-[#00E676]/5 rounded-full blur-[150px] pointer-events-none"
+      ></div>
+
+      <div
+        class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-stretch gap-20 relative z-10"
+      >
+        <!-- Contenido Izquierdo (Texto y Acciones) -->
+        <div class="w-full lg:w-1/2 flex flex-col items-start justify-center">
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1B3B2B] mb-6 tracking-tight leading-[1.1]"
+          >
+            Energía inteligente <br />
+            para tu hogar
+          </h1>
+          <p class="text-slate-600 text-lg leading-relaxed mb-10">
+            Transforma tu casa en un ecosistema inteligente y sustentable. Nuestro kit residencial
+            combina paneles fotovoltaicos de última generación con tecnología IoT y monitoreo en
+            tiempo real, permitiéndote generar tu propia energía limpia y reducir tu recibo de luz.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <a
+              routerLink="/conocenos/contactar"
+              class="px-10 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg text-center transition-all duration-300 hover:-translate-y-1 rounded-full shadow-lg"
+            >
+              Contratar paquete
+            </a>
+            <a
+              routerLink="/calculadora-ahorro"
+              class="px-10 py-4 bg-transparent border border-[#1B3B2B]/20 text-[#1B3B2B] font-bold text-lg text-center transition-all duration-300 hover:bg-[#1B3B2B]/5 hover:-translate-y-1 rounded-full"
+            >
+              Calcular ahorro
+            </a>
+          </div>
+        </div>
+
+        <!-- Contenido Derecho (Imagen Premium) -->
+        <div class="w-full lg:w-1/2 relative group flex flex-col">
+          <img
+            src="/panel_solar_4.jfif"
+            alt="Instalación Residencial de Paneles Solares"
+            class="relative w-full h-[400px] lg:h-full min-h-[450px] object-cover rounded-[2.5rem] shadow-2xl flex-grow"
+          />
+        </div>
       </div>
     </section>
 
-    <!-- Beneficios / Qué incluye -->
-    <section class="bg-[#f4f5f4] py-24">
-      <div class="max-w-7xl mx-auto px-6">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-[#103627] mb-16 text-center">¿Qué incluye el paquete?</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="bg-white p-10 rounded-[2rem] shadow-sm border border-slate-100 flex flex-col items-start hover:-translate-y-2 transition-all">
-            <span class="material-symbols-rounded text-[#84cc16] text-4xl mb-6">solar_panel</span>
-            <h3 class="text-2xl font-bold text-[#103627] mb-4">Paneles de Alta Eficiencia</h3>
-            <p class="text-slate-500 text-base leading-relaxed">
-              Módulos fotovoltaicos de última generación con tecnología monocristalina y garantía de 25 años de rendimiento.
+    <!-- Características y Componentes del Paquete -->
+    <section class="py-32 w-full bg-[#f4f5f4] relative overflow-hidden">
+      <!-- Glow decorativo -->
+      <div
+        class="absolute -bottom-40 -left-40 w-96 h-96 bg-[#00E676] rounded-full blur-[200px] opacity-10 pointer-events-none"
+      ></div>
+
+      <div class="max-w-5xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-20">
+          <span
+            class="inline-block px-4 py-1.5 rounded-full bg-[#1B3B2B]/5 border border-[#1B3B2B]/10 text-[#1B3B2B] text-xs font-bold tracking-widest uppercase mb-4"
+          >
+            Tecnología Integrada
+          </span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#1B3B2B] tracking-tight">
+            ¿Qué incluye el Paquete Hogar?
+          </h2>
+          <p class="text-slate-500 text-base max-w-xl mx-auto mt-4">
+            Equipamiento de grado industrial adaptado para brindarte la máxima eficiencia y
+            seguridad en tu hogar.
+          </p>
+        </div>
+
+        <!-- Rows list matching image.png row layout from home page -->
+        <div class="border-t border-slate-300/60 mt-12 w-full flex flex-col">
+          <!-- Row 1: Paneles de Alta Eficiencia -->
+          <div
+            class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 py-8 border-b border-slate-300/60 w-full transition-all hover:bg-white/30 px-4 rounded-xl"
+          >
+            <div class="flex items-center gap-8 lg:w-4/12 flex-shrink-0">
+              <span class="text-sm font-mono text-slate-400">01</span>
+              <h3 class="text-xl font-extrabold text-[#1B3B2B]">Paneles de Alta Eficiencia</h3>
+            </div>
+            <p class="text-slate-500 text-sm leading-relaxed lg:w-6/12 lg:pl-4">
+              Módulos fotovoltaicos monocristalinos de última generación con tecnología de celdas
+              divididas para maximizar la captación incluso en días nublados.
             </p>
+            <span
+              class="text-[10px] font-bold tracking-widest text-[#1B3B2B]/60 uppercase lg:w-2/12 text-left lg:text-right"
+            >
+              Hardware
+            </span>
           </div>
-          <div class="bg-white p-10 rounded-[2rem] shadow-sm border border-slate-100 flex flex-col items-start hover:-translate-y-2 transition-all">
-            <span class="material-symbols-rounded text-[#84cc16] text-4xl mb-6">battery_charging_full</span>
-            <h3 class="text-2xl font-bold text-[#103627] mb-4">Inversor Inteligente</h3>
-            <p class="text-slate-500 text-base leading-relaxed">
-              Inversor híbrido que transforma la corriente y se conecta a nuestra plataforma cloud para monitoreo en tiempo real.
+
+          <!-- Row 2: Inversor Híbrido Inteligente -->
+          <div
+            class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 py-8 border-b border-slate-300/60 w-full transition-all hover:bg-white/30 px-4 rounded-xl"
+          >
+            <div class="flex items-center gap-8 lg:w-4/12 flex-shrink-0">
+              <span class="text-sm font-mono text-slate-400">02</span>
+              <h3 class="text-xl font-extrabold text-[#1B3B2B]">Inversor Híbrido Inteligente</h3>
+            </div>
+            <p class="text-slate-500 text-sm leading-relaxed lg:w-6/12 lg:pl-4">
+              Administra la energía en tiempo real, convierte la corriente continua de forma
+              eficiente y está preparado para añadir baterías de respaldo en el futuro.
             </p>
+            <span
+              class="text-[10px] font-bold tracking-widest text-[#1B3B2B]/60 uppercase lg:w-2/12 text-left lg:text-right"
+            >
+              Tecnología
+            </span>
           </div>
-          <div class="bg-white p-10 rounded-[2rem] shadow-sm border border-slate-100 flex flex-col items-start hover:-translate-y-2 transition-all">
-            <span class="material-symbols-rounded text-[#84cc16] text-4xl mb-6">phone_iphone</span>
-            <h3 class="text-2xl font-bold text-[#103627] mb-4">App de Monitoreo</h3>
-            <p class="text-slate-500 text-base leading-relaxed">
-              Control total en la palma de tu mano. Revisa tu generación, consumo y exportación de energía desde nuestra aplicación móvil.
+
+          <!-- Row 3: App de Monitoreo IoT -->
+          <div
+            class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 py-8 border-b border-slate-300/60 w-full transition-all hover:bg-white/30 px-4 rounded-xl"
+          >
+            <div class="flex items-center gap-8 lg:w-4/12 flex-shrink-0">
+              <span class="text-sm font-mono text-slate-400">03</span>
+              <h3 class="text-xl font-extrabold text-[#1B3B2B]">App de Monitoreo IoT</h3>
+            </div>
+            <p class="text-slate-500 text-sm leading-relaxed lg:w-6/12 lg:pl-4">
+              Visualiza tu producción solar, consumo histórico y proyección de ahorro mensual desde
+              tu dispositivo móvil con nuestra aplicación inteligente.
             </p>
+            <span
+              class="text-[10px] font-bold tracking-widest text-[#1B3B2B]/60 uppercase lg:w-2/12 text-left lg:text-right"
+            >
+              Software
+            </span>
+          </div>
+
+          <!-- Row 4: Certificación y Soporte -->
+          <div
+            class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 py-8 border-b border-slate-300/60 w-full transition-all hover:bg-white/30 px-4 rounded-xl"
+          >
+            <div class="flex items-center gap-8 lg:w-4/12 flex-shrink-0">
+              <span class="text-sm font-mono text-slate-400">04</span>
+              <h3 class="text-xl font-extrabold text-[#1B3B2B]">Instalación Llave en Mano</h3>
+            </div>
+            <p class="text-slate-500 text-sm leading-relaxed lg:w-6/12 lg:pl-4">
+              Nos encargamos de todo el proceso: diseño arquitectónico, trámites de interconexión
+              ante la CFE, instalación profesional certificada y puesta en marcha.
+            </p>
+            <span
+              class="text-[10px] font-bold tracking-widest text-[#1B3B2B]/60 uppercase lg:w-2/12 text-left lg:text-right"
+            >
+              Servicio
+            </span>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Banner de Contacto CTA -->
+    <section class="w-full bg-[#fcfdfc] pt-24 pb-16">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="relative w-full rounded-[3rem] overflow-hidden shadow-2xl">
+          <app-cta-contacto></app-cta-contacto>
+        </div>
+      </div>
+    </section>
   </main>
 </div>

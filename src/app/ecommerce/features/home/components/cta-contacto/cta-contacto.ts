@@ -1,16 +1,10 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-cta-contacto',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './cta-contacto.html'
 })
-export class CtaContactoComponent {
-  constructor(private router: Router) {}
-
-  navegarAContacto(): void {
-    this.router.navigate(['/conocenos/contactar']);
-  }
-}
+export class CtaContactoComponent {}

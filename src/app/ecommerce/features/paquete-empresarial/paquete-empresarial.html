@@ -1,64 +1,167 @@
 <div class="min-h-screen w-full bg-[#fcfdfc] font-sans flex flex-col">
   <app-top-bar></app-top-bar>
 
-  <main class="flex-grow pt-32 pb-24">
-    
+  <main class="flex-grow pt-24 pb-16">
     <!-- Hero Paquete Empresarial -->
-    <section class="max-w-7xl mx-auto px-6 mb-24 text-center">
-      <div class="inline-flex items-center justify-center w-20 h-20 bg-[#103627] rounded-3xl mb-8 shadow-xl">
-        <span class="material-symbols-rounded text-[#84cc16] text-4xl">domain</span>
-      </div>
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#103627] mb-6 tracking-tight">
-        Paquete <span class="text-[#84cc16]">Empresarial</span>
-      </h1>
-      <p class="text-slate-500 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-10">
-        Optimiza los costos operativos de tu negocio y alcanza tus metas ESG. Diseñamos e implementamos plantas solares a gran escala con almacenamiento y control de picos de demanda para maximizar la rentabilidad.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a routerLink="/calculadora-ahorro" class="px-10 py-4 rounded-xl bg-[#84cc16] text-[#103627] font-bold text-center hover:bg-[#65a30d] hover:-translate-y-1 transition-all shadow-xl">
-          Proyección financiera
-        </a>
-        <a routerLink="/conocenos/contactar" class="px-10 py-4 rounded-xl bg-[#103627] text-white font-bold text-center hover:bg-[#0c2a1e] hover:-translate-y-1 transition-all shadow-xl">
-          Agendar reunión
-        </a>
-      </div>
-    </section>
+    <section class="py-24 w-full bg-white relative overflow-hidden">
+      <!-- Glow decorativo -->
+      <div
+        class="absolute top-10 left-10 w-96 h-96 bg-[#00E676]/5 rounded-full blur-[150px] pointer-events-none"
+      ></div>
 
-    <!-- Beneficios Industriales -->
-    <section class="bg-[#103627] text-white py-24">
-      <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-        <div>
-          <h2 class="text-3xl md:text-4xl font-extrabold mb-8 tracking-tight">Potencia y Control Absoluto</h2>
-          <ul class="space-y-6">
-            <li class="flex items-start gap-4">
-              <span class="material-symbols-rounded text-[#84cc16] mt-1">trending_down</span>
-              <div>
-                <h4 class="font-bold text-lg mb-1">Deducción de Impuestos</h4>
-                <p class="text-emerald-50/70 text-base">Deduce hasta el 100% de la inversión en el primer año (Artículo 34 LISR) acelerando tu ROI.</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-4">
-              <span class="material-symbols-rounded text-[#84cc16] mt-1">insights</span>
-              <div>
-                <h4 class="font-bold text-lg mb-1">Peak Shaving</h4>
-                <p class="text-emerald-50/70 text-base">Baterías industriales y algoritmos para reducir los costosos picos de demanda de CFE en tarifa GDMTH.</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-4">
-              <span class="material-symbols-rounded text-[#84cc16] mt-1">support_agent</span>
-              <div>
-                <h4 class="font-bold text-lg mb-1">Soporte 24/7</h4>
-                <p class="text-emerald-50/70 text-base">Mantenimiento preventivo garantizado y línea directa con ingenieros para asegurar 99.9% de uptime.</p>
-              </div>
-            </li>
-          </ul>
+      <div
+        class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-stretch gap-20 relative z-10"
+      >
+        <!-- Contenido Izquierdo (Texto y Acciones) -->
+        <div class="w-full lg:w-1/2 flex flex-col items-start justify-center">
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1B3B2B] mb-6 tracking-tight leading-[1.1]"
+          >
+            Energía inteligente para tu <span class="text-[#4e7964]">Empresa</span>
+          </h1>
+          <p class="text-slate-600 text-lg leading-relaxed mb-10">
+            Optimiza los costos operativos de tu negocio y alcanza tus metas ESG. Diseñamos e
+            implementamos plantas solares a gran escala con almacenamiento y control de picos de
+            demanda para maximizar la rentabilidad.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <a
+              routerLink="/conocenos/contactar"
+              class="px-10 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg text-center transition-all duration-300 hover:-translate-y-1 rounded-full shadow-lg"
+            >
+              Agendar reunión
+            </a>
+            <a
+              routerLink="/calculadora-ahorro"
+              class="px-10 py-4 bg-transparent border border-[#1B3B2B]/20 text-[#1B3B2B] font-bold text-lg text-center transition-all duration-300 hover:bg-[#1B3B2B]/5 hover:-translate-y-1 rounded-full"
+            >
+              Proyección financiera
+            </a>
+          </div>
         </div>
-        <div class="relative">
-          <div class="absolute -inset-4 bg-[#84cc16]/10 blur-3xl rounded-full"></div>
-          <img src="/home-hero.png" alt="Instalación Industrial" class="relative rounded-[2.5rem] shadow-2xl h-[450px] w-full object-cover object-center border border-white/10" />
+
+        <!-- Contenido Derecho (Imagen Premium) -->
+        <div class="w-full lg:w-1/2 relative group flex flex-col">
+          <img
+            src="/panel_solar_3.jfif"
+            alt="Instalación Comercial de Paneles Solares"
+            class="relative w-full h-[400px] lg:h-full min-h-[450px] object-cover rounded-[2.5rem] shadow-2xl flex-grow"
+          />
         </div>
       </div>
     </section>
 
+    <!-- Características y Componentes del Paquete -->
+    <section class="py-32 w-full bg-[#f4f5f4] relative overflow-hidden">
+      <!-- Glow decorativo -->
+      <div
+        class="absolute -bottom-40 -left-40 w-96 h-96 bg-[#00E676] rounded-full blur-[200px] opacity-10 pointer-events-none"
+      ></div>
+
+      <div class="max-w-5xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-20">
+          <span
+            class="inline-block px-4 py-1.5 rounded-full bg-[#1B3B2B]/5 border border-[#1B3B2B]/10 text-[#1B3B2B] text-xs font-bold tracking-widest uppercase mb-4"
+          >
+            Potencia y Control Absoluto
+          </span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#1B3B2B] tracking-tight">
+            ¿Qué incluye el Paquete Empresarial?
+          </h2>
+          <p class="text-slate-500 text-base max-w-xl mx-auto mt-4">
+            Equipamiento de grado industrial adaptado para brindarte la máxima potencia y seguridad
+            en tu empresa o negocio.
+          </p>
+        </div>
+
+        <!-- Rows list matching row layout -->
+        <div class="border-t border-slate-300/60 mt-12 w-full flex flex-col">
+          <!-- Row 1: Capacidad Escalable por Fases -->
+          <div
+            class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 py-8 border-b border-slate-300/60 w-full transition-all hover:bg-white/30 px-4 rounded-xl"
+          >
+            <div class="flex items-center gap-8 lg:w-4/12 flex-shrink-0">
+              <span class="text-sm font-mono text-slate-400">01</span>
+              <h3 class="text-xl font-extrabold text-[#1B3B2B]">Capacidad escalable por fases</h3>
+            </div>
+            <p class="text-slate-500 text-sm leading-relaxed lg:w-6/12 lg:pl-4">
+              Diseñamos tu sistema de manera modular para que puedas incrementar la potencia
+              contratada de forma progresiva según el crecimiento y necesidades de tu empresa.
+            </p>
+            <span
+              class="text-[10px] font-bold tracking-widest text-[#1B3B2B]/60 uppercase lg:w-2/12 text-left lg:text-right"
+            >
+              Tecnología
+            </span>
+          </div>
+
+          <!-- Row 2: Estudio de Viabilidad Gratuito -->
+          <div
+            class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 py-8 border-b border-slate-300/60 w-full transition-all hover:bg-white/30 px-4 rounded-xl"
+          >
+            <div class="flex items-center gap-8 lg:w-4/12 flex-shrink-0">
+              <span class="text-sm font-mono text-slate-400">02</span>
+              <h3 class="text-xl font-extrabold text-[#1B3B2B]">Estudio de viabilidad gratuito</h3>
+            </div>
+            <p class="text-slate-500 text-sm leading-relaxed lg:w-6/12 lg:pl-4">
+              Realizamos un análisis técnico y financiero detallado de tus consumos históricos de
+              CFE y espacio disponible en sitio sin costo alguno.
+            </p>
+            <span
+              class="text-[10px] font-bold tracking-widest text-[#1B3B2B]/60 uppercase lg:w-2/12 text-left lg:text-right"
+            >
+              Servicio
+            </span>
+          </div>
+
+          <!-- Row 3: Soporte Técnico 24/7 -->
+          <div
+            class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 py-8 border-b border-slate-300/60 w-full transition-all hover:bg-white/30 px-4 rounded-xl"
+          >
+            <div class="flex items-center gap-8 lg:w-4/12 flex-shrink-0">
+              <span class="text-sm font-mono text-slate-400">03</span>
+              <h3 class="text-xl font-extrabold text-[#1B3B2B]">Soporte técnico 24/7</h3>
+            </div>
+            <p class="text-slate-500 text-sm leading-relaxed lg:w-6/12 lg:pl-4">
+              Línea de atención directa y mantenimiento preventivo garantizado para asegurar el
+              correcto funcionamiento y máximo rendimiento de tus sistemas de generación.
+            </p>
+            <span
+              class="text-[10px] font-bold tracking-widest text-[#1B3B2B]/60 uppercase lg:w-2/12 text-left lg:text-right"
+            >
+              Soporte
+            </span>
+          </div>
+
+          <!-- Row 4: App de Monitoreo en Tiempo Real -->
+          <div
+            class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 py-8 border-b border-slate-300/60 w-full transition-all hover:bg-white/30 px-4 rounded-xl"
+          >
+            <div class="flex items-center gap-8 lg:w-4/12 flex-shrink-0">
+              <span class="text-sm font-mono text-slate-400">04</span>
+              <h3 class="text-xl font-extrabold text-[#1B3B2B]">App de monitoreo en tiempo real</h3>
+            </div>
+            <p class="text-slate-500 text-sm leading-relaxed lg:w-6/12 lg:pl-4">
+              Control absoluto de tu generación y consumos históricos desde cualquier dispositivo
+              móvil o de escritorio, ideal para reportes de sustentabilidad corporativos.
+            </p>
+            <span
+              class="text-[10px] font-bold tracking-widest text-[#1B3B2B]/60 uppercase lg:w-2/12 text-left lg:text-right"
+            >
+              Software
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Banner de Contacto CTA -->
+    <section class="w-full bg-[#fcfdfc] pt-24 pb-16">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="relative w-full rounded-[3rem] overflow-hidden shadow-2xl">
+          <app-cta-contacto></app-cta-contacto>
+        </div>
+      </div>
+    </section>
   </main>
 </div>
