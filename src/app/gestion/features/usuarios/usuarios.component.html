@@ -35,7 +35,7 @@
 
       <!-- Tabla -->
       <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-        <app-table [columns]="columnasUsuarios" [data]="datosUsuarios" [isLoading]="isLoading" [showActions]="true" emptyMessage="No hay empleados registrados." (actionClick)="manejarAccion($event)"></app-table>
+        <app-table [columns]="columnasUsuarios" [data]="empleadosFiltrados" [isLoading]="isLoading" [showActions]="true" emptyMessage="No se encontraron empleados registrados." (actionClick)="manejarAccion($event)"></app-table>
       </div>
 
       <!-- Modales -->

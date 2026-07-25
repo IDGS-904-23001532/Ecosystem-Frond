@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HeaderTitleComponent } from "../../../shared/components/header-title/header-title.component";
@@ -54,10 +54,25 @@ export class ProspectosComponent implements OnInit {
 
   datosProspectos: any[] = [];
 
-  constructor(private prospectoService: ProspectoService) {}
+  constructor(private prospectoService: ProspectoService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.cargarProspectos();
+  }
+
+  get prospectosFiltrados(): any[] {
+    if (!this.terminoBusqueda) {
+      return this.datosProspectos;
+    }
+    const term = this.terminoBusqueda.toLowerCase().trim();
+    return this.datosProspectos.filter(prospecto => 
+      (prospecto.nombre?.toLowerCase().includes(term)) ||
+      (prospecto.apellido?.toLowerCase().includes(term)) ||
+      (prospecto.telefono?.toLowerCase().includes(term)) ||
+      (prospecto.corporativo?.toLowerCase().includes(term)) ||
+      (prospecto.localidad?.toLowerCase().includes(term)) ||
+      (prospecto.estatus?.toLowerCase().includes(term))
+    );
   }
 
   cargarProspectos(): void {
@@ -82,10 +97,12 @@ export class ProspectosComponent implements OnInit {
           }
         ];
         this.isLoading = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('Error al cargar prospectos:', err);
         this.isLoading = false;
+        this.cdr.detectChanges();
       }
     });
   }

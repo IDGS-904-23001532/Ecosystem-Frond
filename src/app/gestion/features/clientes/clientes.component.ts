@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HeaderTitleComponent } from "../../../shared/components/header-title/header-title.component";
@@ -25,7 +25,7 @@ export class ClientesComponent implements OnInit {
     userInitials: string = 'KM';
     isLoading: boolean = true;
 
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService, private cdr: ChangeDetectorRef) {}
 
     ngOnInit(): void {
       this.cargarClientes();
@@ -66,6 +66,19 @@ export class ClientesComponent implements OnInit {
   datosClientes: any[] = []; 
   mostrarModalCliente: boolean = false; 
   
+  get clientesFiltrados(): any[] {
+    if (!this.terminoBusqueda) {
+      return this.datosClientes;
+    }
+    const term = this.terminoBusqueda.toLowerCase().trim();
+    return this.datosClientes.filter(cliente => 
+      (cliente.idCliente?.toString().includes(term)) ||
+      (cliente.nombreCompleto?.toLowerCase().includes(term)) ||
+      (cliente.telefono?.toLowerCase().includes(term)) ||
+      (cliente.direccionInstalacion?.toLowerCase().includes(term))
+    );
+  }
+
   cargarClientes(forceRefresh: boolean = false): void {
     if (forceRefresh || this.datosClientes.length === 0) {
       this.isLoading = true;
@@ -79,10 +92,12 @@ export class ClientesComponent implements OnInit {
         this.tarjetasClientes[0].value = this.totalClientes;
         this.tarjetasClientes[1].value = this.clientesActivos;
         this.isLoading = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('Error cargando clientes', err);
         this.isLoading = false;
+        this.cdr.detectChanges();
       }
     });
   }

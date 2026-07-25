@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HeaderTitleComponent } from "../../../shared/components/header-title/header-title.component";
@@ -26,7 +26,7 @@ export class UsuariosComponent implements OnInit {
     userInitials: string = 'KM';
     isLoading: boolean = true;
 
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService, private cdr: ChangeDetectorRef) {}
 
     ngOnInit(): void {
       this.cargarEmpleados();
@@ -107,6 +107,19 @@ filtrarPorTipo(): void {
   
   datosUsuarios: any[] = []; 
   
+  get empleadosFiltrados(): any[] {
+    if (!this.terminoBusqueda) {
+      return this.datosUsuarios;
+    }
+    const term = this.terminoBusqueda.toLowerCase().trim();
+    return this.datosUsuarios.filter(empleado => 
+      (empleado.idEmpleado?.toString().includes(term)) ||
+      (empleado.nombreCompleto?.toLowerCase().includes(term)) ||
+      (empleado.puesto?.toLowerCase().includes(term)) ||
+      (empleado.fechaIngreso?.toLowerCase().includes(term))
+    );
+  }
+
   cargarEmpleados(forceRefresh: boolean = false): void {
     if (forceRefresh || this.datosUsuarios.length === 0) {
       this.isLoading = true;
@@ -125,10 +138,12 @@ filtrarPorTipo(): void {
         this.tarjetasUsuarios[0].value = this.totalUsuarios;
         this.tarjetasUsuarios[1].value = this.usuariosActivos;
         this.isLoading = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('Error cargando empleados', err);
         this.isLoading = false;
+        this.cdr.detectChanges();
       }
     });
   }
