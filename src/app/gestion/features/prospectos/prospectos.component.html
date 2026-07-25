@@ -1,41 +1,47 @@
-<div class="prospectos-layout">
-    <app-sidebar></app-sidebar>
-     <main class="main-content">
+<div class="min-h-[100dvh] bg-slate-50 flex">
+  <app-sidebar></app-sidebar>
+  <main class="flex-1 flex flex-col w-full lg:pl-[280px] min-w-0 transition-all">
+    <div class="p-6 pt-20 lg:pt-8 lg:p-8 flex flex-col gap-6 max-w-[1600px] w-full mx-auto">
 
-        <!-- Título y subtítulo de prospectos -->
-  <app-header-title
-    [title]="title"
-    [subtitle]="subtitle"
-    [username]="username"
-    [userInitials]="userInitials">
-    </app-header-title>
+      <app-header-title
+        [title]="title"
+        [subtitle]="subtitle"
+        [username]="username"
+        [userInitials]="userInitials">
+      </app-header-title>
 
-        <section class="top-actions">
-      <div class="left-group">
-        <app-button [text]="'Filtrar Estatus'" [type]="'button'" [buttonClass]="'btn-filter'">
-                    <span class="caret">▼</span>
-        </app-button>
-          
-        <input type="text" placeholder="Buscar" class="input-search" />
-      </div>
-
-        <app-button [text]="'Nuevo Prospecto'" [type]="'button'" [buttonClass]="'btn-agregar'">
-          <span class="icon">⭳</span>
-        </app-button>
+      <section class="flex flex-col sm:flex-row gap-4 items-center justify-between bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+          <div class="relative">
+            <input type="text" placeholder="Buscar prospecto..." [(ngModel)]="terminoBusqueda"
+              class="w-full sm:w-64 pl-4 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all" />
+          </div>
+        </div>
       </section>
 
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div *ngFor="let card of tarjetasProspectos" class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl bg-emerald-50 text-emerald-600">
+            <span>{{ card.icon }}</span>
+          </div>
+          <div>
+            <p class="text-sm font-medium text-slate-500">{{ card.label }}</p>
+            <h3 class="text-2xl font-bold text-slate-800">{{ card.value }}</h3>
+          </div>
+        </div>
+      </div>
 
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+        <app-table
+          [columns]="columnasProspectos"
+          [data]="datosProspectos"
+          [isLoading]="isLoading"
+          [showActions]="false"
+          emptyMessage="No se encontraron prospectos registrados."
+          (actionClick)="manejarAccion($event)">
+        </app-table>
+      </div>
 
- <app-summary-cards [cards]="tarjetasProspectos"></app-summary-cards>
-
-  
-    <app-table
-  [columns]="columnasProspectos"
-  [data]="datosProspectos"
-  [showActions]="true"
-  emptyMessage="No se encontraron prospectos registrados."
-  (actionClick)="manejarAccion($event)">
-</app-table>
-
-</main>
+    </div>
+  </main>
 </div>
