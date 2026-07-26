@@ -19,6 +19,7 @@ import { PlaceholderPageComponent } from './gestion/shared/components/placeholde
 import { ClientesComponent } from './gestion/features/clientes/clientes.component';
 import { UsuariosComponent } from './gestion/features/usuarios/usuarios.component';
 import { ContactoComponent } from './ecommerce/features/home/components/contacto/contacto';
+import { ProveedoresComponent } from './gestion/features/proveedores/proveedores';
 
 export const routes: Routes = [
   // Si la ruta está vacía, redirige automáticamente al login
@@ -53,6 +54,9 @@ export const routes: Routes = [
 
   // Ruta para contacto
   { path: 'conocenos/contactar', component: ContactoComponent },
+
+  // Ruta para proveedores
+  { path: 'proveedores', component: ProveedoresComponent },
   
   {
     path: 'contabilidad',

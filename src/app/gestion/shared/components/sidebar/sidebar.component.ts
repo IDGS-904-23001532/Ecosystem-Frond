@@ -66,11 +66,21 @@ export class SidebarComponent {
       ]
     },
     {
+      label: 'Catálogo',
+      icon: 'inventory_2',
+      isOpen: false,
+      children: [
+        { label: 'Proveedores', icon: 'local_shipping', route: '/proveedores', exact: true },
+        { label: 'Productos', icon: 'category', route: '/productos', exact: true }
+      ]
+    },
+    {
       label: 'Configuracion',
       icon: 'settings',
       isOpen: false,
       children: [
-        { label: 'Empleados', icon: 'badge', route: '/empleados', exact: true }]
+        { label: 'Empleados', icon: 'badge', route: '/empleados', exact: true }
+      ]
     },
     {
       label: 'Salir',
@@ -80,7 +90,7 @@ export class SidebarComponent {
     }
   ];
 
-toggleMobileMenu(): void {
+  toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 
