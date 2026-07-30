@@ -15,6 +15,10 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/registro-cliente`, userData);
   }
 
+  actualizarCliente(id: number, userData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/actualizar-cliente/${id}`, userData);
+  }
+
   registroEmpleado(userData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/registro-empleado`, userData);
   }

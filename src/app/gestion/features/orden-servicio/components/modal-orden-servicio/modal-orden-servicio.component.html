@@ -1,0 +1,55 @@
+<div class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[150] flex items-center justify-center p-4 transition-opacity duration-300" *ngIf="isVisible">
+  <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden flex flex-col animate-in zoom-in-95 duration-200">
+    
+    <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+      <h2 class="text-xl font-bold text-slate-800">Registrar Orden de Servicio</h2>
+      <button class="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-600 hover:bg-slate-200 transition-colors" (click)="cerrar()">
+        <span class="material-symbols-rounded text-[20px]">close</span>
+      </button>
+    </div>
+
+    <form [formGroup]="ordenForm" class="p-6 flex flex-col gap-4 max-h-[70vh] overflow-y-auto">
+
+      <div class="flex flex-col gap-1.5">
+        <label class="text-sm font-semibold text-slate-700">Cliente</label>
+        <div class="relative">
+          <span class="material-symbols-rounded absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">person</span>
+          <select formControlName="idCliente"
+            class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all appearance-none">
+            <option [ngValue]="null" disabled selected>Seleccione un cliente</option>
+            <option *ngFor="let cli of clientes" [value]="cli.idCliente">{{ cli.nombreCompleto }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label class="text-sm font-semibold text-slate-700">Fecha Programada</label>
+        <div class="relative">
+          <span class="material-symbols-rounded absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">calendar_today</span>
+          <input type="datetime-local" formControlName="fechaProgramada"
+            class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all">
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label class="text-sm font-semibold text-slate-700">Detalle Manual</label>
+        <div class="relative">
+          <span class="material-symbols-rounded absolute left-3 top-3 text-slate-400 text-[20px]">description</span>
+          <textarea formControlName="detalleManual" placeholder="Descripción de la orden" rows="3"
+            class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all resize-none"></textarea>
+        </div>
+      </div>
+
+    </form>
+
+    <div class="px-6 py-4 border-t border-slate-100 bg-slate-50 flex items-center justify-end gap-3">
+      <button type="button" class="px-4 py-2 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-200 transition-colors" (click)="cerrar()">
+        Cancelar
+      </button>
+      <button type="button" class="px-6 py-2 rounded-xl text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 hover:shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed" [disabled]="ordenForm.invalid" (click)="guardar()">
+        Registrar
+      </button>
+    </div>
+
+  </div>
+</div>

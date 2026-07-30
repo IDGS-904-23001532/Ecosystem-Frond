@@ -86,7 +86,11 @@ export class ClientesComponent implements OnInit {
 
     this.authService.listarClientes(forceRefresh).subscribe({
       next: (data) => {
-        this.datosClientes = data;
+        this.datosClientes = data.map((cliente: any) => ({
+          ...cliente,
+          nombreCompleto: cliente.nombreCompleto || `${cliente.nombre || ''} ${cliente.apellido || ''}`.trim(),
+          direccionInstalacion: cliente.direccionInstalacion || cliente.localidad || ''
+        }));
         this.totalClientes = data.length;
         this.clientesActivos = data.length;
         this.tarjetasClientes[0].value = this.totalClientes;
@@ -102,13 +106,17 @@ export class ClientesComponent implements OnInit {
     });
   }
 
+  clienteEditar: any = null;
+
   manejarAccion(evento: TableAction) {
     if (evento.actionName === 'edit') {
-      console.log('Editando el cliente:', evento.rowData);
+      this.clienteEditar = evento.rowData;
+      this.mostrarModalCliente = true;
     }
   }
 
   agregarCliente(): void {
+    this.clienteEditar = null;
     this.mostrarModalCliente = true;
   }
 
@@ -119,14 +127,27 @@ export class ClientesComponent implements OnInit {
       didOpen: () => { Swal.showLoading(); }
     });
 
-    this.authService.registroCliente(datosCliente).subscribe({
-      next: () => {
-        Swal.fire('¡Éxito!', 'Cliente registrado correctamente.', 'success');
-        this.cargarClientes(true); // Refresca la tabla y caché
-      },
-      error: () => {
-        Swal.fire('Error', 'No se pudo registrar al cliente.', 'error');
-      }
-    });
+    if (this.clienteEditar) {
+      const id = this.clienteEditar.idCliente || this.clienteEditar.id;
+      this.authService.actualizarCliente(id, datosCliente).subscribe({
+        next: () => {
+          Swal.fire('¡Éxito!', 'Cliente actualizado correctamente.', 'success');
+          this.cargarClientes(true); // Refresca la tabla y caché
+        },
+        error: () => {
+          Swal.fire('Error', 'No se pudo actualizar al cliente. Verifica si el endpoint existe.', 'error');
+        }
+      });
+    } else {
+      this.authService.registroCliente(datosCliente).subscribe({
+        next: () => {
+          Swal.fire('¡Éxito!', 'Cliente registrado correctamente.', 'success');
+          this.cargarClientes(true); // Refresca la tabla y caché
+        },
+        error: () => {
+          Swal.fire('Error', 'No se pudo registrar al cliente.', 'error');
+        }
+      });
+    }
   }
 }
