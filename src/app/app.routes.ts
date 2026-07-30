@@ -20,6 +20,7 @@ import { ClientesComponent } from './gestion/features/clientes/clientes.componen
 import { UsuariosComponent } from './gestion/features/usuarios/usuarios.component';
 import { ContactoComponent } from './ecommerce/features/home/components/contacto/contacto';
 import { ProveedoresComponent } from './gestion/features/proveedores/proveedores';
+import { GastosComponent } from './gestion/features/gastos/gastos.component';
 
 export const routes: Routes = [
   // Si la ruta está vacía, redirige automáticamente al login
@@ -57,6 +58,9 @@ export const routes: Routes = [
 
   // Ruta para proveedores
   { path: 'proveedores', component: ProveedoresComponent },
+
+  // Ruta para gastos
+  { path: 'gastos', component: GastosComponent },
   
   {
     path: 'contabilidad',
