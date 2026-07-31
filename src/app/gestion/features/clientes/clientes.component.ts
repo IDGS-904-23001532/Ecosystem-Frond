@@ -71,8 +71,8 @@ export class ClientesComponent implements OnInit {
       next: (data) => {
         this.datosClientes = data.map((c: any) => ({
           ...c,
-          nombreCompleto: `${c.nombre || ''} ${c.apellido || ''}`.trim() || 'Sin Nombre',
-          direccionInstalacion: c.localidad || 'Sin dirección'
+          nombreCompleto: c.nombreCompleto || `${c.nombre || ''} ${c.apellido || ''}`.trim() || 'Sin Nombre',
+          direccionInstalacion: c.direccionInstalacion || c.localidad || 'Sin dirección'
         }));
         this.totalClientes = data.length;
         this.clientesActivos = data.length;
