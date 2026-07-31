@@ -15,6 +15,14 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/registro-cliente`, userData);
   }
 
+  actualizarCliente(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/cliente/${id}`, data);
+  }
+
+  eliminarCliente(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/cliente/${id}`);
+  }
+
   registroEmpleado(userData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/registro-empleado`, userData);
   }

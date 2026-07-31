@@ -39,7 +39,7 @@
       </div>
 
       <!-- Modal -->
-      <app-modal-cliente [isVisible]="mostrarModalCliente" (close)="mostrarModalCliente = false" (save)="guardarNuevoCliente($event)"></app-modal-cliente>
+      <app-modal-cliente [isVisible]="mostrarModalCliente" [clienteEditar]="clienteEditar" (close)="mostrarModalCliente = false" (save)="guardarCliente($event)"></app-modal-cliente>
 
     </div>
   </main>

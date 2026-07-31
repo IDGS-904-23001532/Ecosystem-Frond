@@ -17,6 +17,7 @@ import { ProspectosComponent } from './gestion/features/prospectos/prospectos.co
 import { CotizacionesComponent } from './gestion/features/cotizaciones/cotizaciones.component';
 import { PlaceholderPageComponent } from './gestion/shared/components/placeholder-page/placeholder-page.component';
 import { ClientesComponent } from './gestion/features/clientes/clientes.component';
+import { VentasComponent } from './gestion/features/ventas/ventas.component';
 import { UsuariosComponent } from './gestion/features/usuarios/usuarios.component';
 import { ContactoComponent } from './ecommerce/features/home/components/contacto/contacto';
 import { ProveedoresComponent } from './gestion/features/proveedores/proveedores';
@@ -48,6 +49,9 @@ export const routes: Routes = [
   
   // Rutas para clientes
   { path: 'clientes', component: ClientesComponent },
+
+  // Rutas para ventas
+  { path: 'ventas', component: VentasComponent },
 
   // Ruta para empleados (antes usuarios)
   { path: 'empleados', component: UsuariosComponent },

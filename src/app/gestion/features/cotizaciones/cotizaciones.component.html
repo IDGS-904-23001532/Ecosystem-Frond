@@ -1,37 +1,45 @@
-<div class="cotizaciones-layout">
-   <app-sidebar></app-sidebar>
+<div class="min-h-[100dvh] bg-slate-50 flex">
+  <app-sidebar></app-sidebar>
 
-  <main class="main-content">
+  <main class="flex-1 flex flex-col w-full lg:pl-[280px] min-w-0 transition-all">
+    <div class="p-6 pt-20 lg:pt-8 lg:p-8 flex flex-col gap-6 max-w-[1600px] w-full mx-auto">
 
-    <!-- Título y subtítulo de cotizaciones -->
-    <app-header-title
-      [title]="title"
-      [subtitle]="subtitle"
-      [username]="username"
-      [userInitials]="userInitials">
-    </app-header-title>    
+      <ng-container *ngIf="!isCreating; else createTemplate">
+        <!-- Título y subtítulo de cotizaciones -->
+        <app-header-title
+          [title]="title"
+          [subtitle]="subtitle"
+          [username]="username"
+          [userInitials]="userInitials">
+        </app-header-title>    
 
-    <section class="top-actions">
-      <div class="left-group">
-        <app-button [text]="'Filtrar Estatus'" [type]="'button'" [buttonClass]="'btn-filter'">
-                    <span class="caret">▼</span>
-        </app-button>
-          
-        <input type="text" placeholder="Buscar" class="input-search" />
-      </div>
+        <section class="flex flex-col sm:flex-row gap-4 items-center justify-between bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+          <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <input type="text" placeholder="Buscar cotización..." class="w-full sm:w-64 pl-4 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all" />
+          </div>
 
-        <app-button [text]="'Nueva Cotización'" [type]="'button'" [buttonClass]="'btn-agregar'">
-          <span class="icon">⭳</span>
-        </app-button>
-      </section>
+          <app-button [text]="'Nueva Cotización'" [type]="'button'" [buttonClass]="'bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2.5 px-5 rounded-xl transition-all shadow-sm shadow-emerald-600/10 flex items-center gap-2'" (buttonClick)="isCreating = true; selectedProspectoIdForNewQuote = null; selectedCotizacionIdForEdit = null">
+            <span class="material-symbols-rounded text-lg">add</span>
+          </app-button>
+        </section>
 
-    <app-table
-  [columns]="columnasCotizacion"
-  [data]="datosCotizacion"
-  [showActions]="true"
-  emptyMessage="No se encontraron cotizaciones registradas."
-  (actionClick)="manejarAccion($event)">
-</app-table>
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+          <app-table
+            [columns]="columnasCotizacion"
+            [data]="datosCotizacion"
+            [showActions]="true"
+            [showAcceptReject]="true"
+            [isLoading]="isLoading"
+            emptyMessage="No se encontraron cotizaciones registradas."
+            (actionClick)="manejarAccion($event)">
+          </app-table>
+        </div>
+      </ng-container>
 
+      <ng-template #createTemplate>
+        <app-nueva-cotizacion [preselectedProspectoId]="selectedProspectoIdForNewQuote" [editingCotizacionId]="selectedCotizacionIdForEdit" (back)="isCreating = false" (save)="cargarCotizaciones(); isCreating = false"></app-nueva-cotizacion>
+      </ng-template>
+
+    </div>
   </main>
 </div>

@@ -39,6 +39,16 @@
           
           <td *ngIf="showActions" class="px-6 py-4 whitespace-nowrap text-right">
             <div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <!-- Botones de Aceptar/Rechazar Cotización -->
+              <ng-container *ngIf="showAcceptReject && row.estatus === 'Pendiente'">
+                <button class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-green-600 hover:bg-green-50 transition-colors" (click)="onAction('accept', row)" title="Aceptar Cotización">
+                  <span class="material-symbols-rounded text-[18px]">check_circle</span>
+                </button>
+                <button class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-amber-600 hover:bg-amber-50 transition-colors" (click)="onAction('reject', row)" title="Rechazar Cotización">
+                  <span class="material-symbols-rounded text-[18px]">cancel</span>
+                </button>
+              </ng-container>
+
               <button class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 transition-colors" (click)="onAction('edit', row)" title="Editar">
                 <span class="material-symbols-rounded text-[18px]">edit</span>
               </button>

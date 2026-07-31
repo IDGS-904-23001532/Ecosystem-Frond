@@ -26,6 +26,7 @@ export class TableComponent {
   @Input() emptyMessage: string = 'No se encontraron registros.';
   @Input() showActions: boolean = true;
   @Input() isLoading: boolean = false;
+  @Input() showAcceptReject: boolean = false;
 
   // Salida para notificar al componente padre de una acción
   @Output() actionClick = new EventEmitter<TableAction>();
