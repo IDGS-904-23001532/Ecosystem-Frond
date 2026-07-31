@@ -8,10 +8,46 @@
 
       <!-- Top Actions -->
       <section class="flex flex-col sm:flex-row gap-4 items-center justify-between bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
-        <div class="relative">
-          <span class="material-symbols-rounded absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
-          <input type="text" placeholder="Buscar prospecto..." [(ngModel)]="terminoBusqueda"
-            class="w-full sm:w-64 pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all" />
+        <div class="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+          <!-- Search -->
+          <div class="relative w-full sm:w-auto">
+            <span class="material-symbols-rounded absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+            <input type="text" placeholder="Buscar prospecto..." [(ngModel)]="terminoBusqueda"
+              class="w-full sm:w-56 pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all" />
+          </div>
+
+          <!-- Status Filter Pills -->
+          <div class="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl">
+            <button
+              (click)="filtroEstado = 'todos'"
+              [class.bg-white]="filtroEstado === 'todos'"
+              [class.shadow-sm]="filtroEstado === 'todos'"
+              [class.text-slate-800]="filtroEstado === 'todos'"
+              [class.font-semibold]="filtroEstado === 'todos'"
+              class="px-3 py-1 rounded-lg text-xs text-slate-500 transition-all">
+              Todos
+            </button>
+            <button
+              (click)="filtroEstado = 'Pendiente'"
+              [class.bg-white]="filtroEstado === 'Pendiente'"
+              [class.shadow-sm]="filtroEstado === 'Pendiente'"
+              [class.text-amber-700]="filtroEstado === 'Pendiente'"
+              [class.font-semibold]="filtroEstado === 'Pendiente'"
+              class="px-3 py-1 rounded-lg text-xs text-slate-500 transition-all flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+              Pendiente
+            </button>
+            <button
+              (click)="filtroEstado = 'Cancelado'"
+              [class.bg-white]="filtroEstado === 'Cancelado'"
+              [class.shadow-sm]="filtroEstado === 'Cancelado'"
+              [class.text-red-700]="filtroEstado === 'Cancelado'"
+              [class.font-semibold]="filtroEstado === 'Cancelado'"
+              class="px-3 py-1 rounded-lg text-xs text-slate-500 transition-all flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-red-400"></span>
+              Cancelados
+            </button>
+          </div>
         </div>
 
         <app-button [text]="'Nuevo Prospecto'" [type]="'button'"
@@ -20,6 +56,7 @@
           <span class="material-symbols-rounded text-sm">person_add</span>
         </app-button>
       </section>
+
 
       <!-- Tarjetas KPI -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

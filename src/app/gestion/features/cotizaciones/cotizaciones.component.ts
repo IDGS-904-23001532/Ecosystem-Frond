@@ -23,6 +23,7 @@ export class CotizacionesComponent implements OnInit {
 
   isCreating = false;
   isLoading = false;
+  isReadOnly = false;
 
   columnasCotizacion: TableColumn[] = [
     { key: 'folio', label: 'Folio' },
@@ -49,9 +50,9 @@ export class CotizacionesComponent implements OnInit {
   }
 
   cargarProspectos(): void {
-    this.prospectoService.listarProspectos().subscribe({
-      next: (data) => {
-        this.prospectos = data;
+    this.prospectoService.listarTodosProspectos().subscribe({
+      next: (data: any) => {
+        this.prospectos = Array.isArray(data) ? data : (data?.Datos ?? []);
         this.cargarCotizaciones();
       },
       error: (err) => {
@@ -99,8 +100,14 @@ export class CotizacionesComponent implements OnInit {
     } else if (evento.actionName === 'edit') {
       this.selectedProspectoIdForNewQuote = evento.rowData.idProspecto;
       this.selectedCotizacionIdForEdit = id;
+      this.isReadOnly = this.esRechazada(evento.rowData);
       this.isCreating = true;
     }
+  }
+
+  esRechazada(cotizacion: any): boolean {
+    const estatus = (cotizacion.estatus || '').toLowerCase();
+    return estatus === 'rechazada' || estatus === 'rechazado';
   }
 
   aceptarCotizacionFlow(idCotizacion: number): void {

@@ -33,6 +33,13 @@ export class ProspectosComponent implements OnInit {
 
   terminoBusqueda: string = '';
 
+  private _filtroEstado: string = 'Pendiente';
+  get filtroEstado(): string { return this._filtroEstado; }
+  set filtroEstado(value: string) {
+    this._filtroEstado = value;
+    this.cargarProspectos();
+  }
+
   columnasProspectos: TableColumn[] = [
     { key: 'idProspecto', label: 'ID' },
     { key: 'nombre', label: 'Nombre' },
@@ -71,25 +78,43 @@ export class ProspectosComponent implements OnInit {
   }
 
   get prospectosFiltrados(): any[] {
-    if (!this.terminoBusqueda) return this.datosProspectos;
-    const term = this.terminoBusqueda.toLowerCase().trim();
-    return this.datosProspectos.filter(p =>
-      p.nombre?.toLowerCase().includes(term) ||
-      p.apellido?.toLowerCase().includes(term) ||
-      p.telefono?.toLowerCase().includes(term) ||
-      p.corporativo?.toLowerCase().includes(term) ||
-      p.localidad?.toLowerCase().includes(term) ||
-      p.estatus?.toLowerCase().includes(term)
-    );
+    let result = this.datosProspectos;
+
+    // Filtro por estado
+    if (this.filtroEstado !== 'todos') {
+      result = result.filter(p => p.estatus === this.filtroEstado);
+    }
+
+    // Filtro por texto
+    if (this.terminoBusqueda) {
+      const term = this.terminoBusqueda.toLowerCase().trim();
+      result = result.filter(p =>
+        p.nombre?.toLowerCase().includes(term) ||
+        p.apellido?.toLowerCase().includes(term) ||
+        p.telefono?.toLowerCase().includes(term) ||
+        p.corporativo?.toLowerCase().includes(term) ||
+        p.localidad?.toLowerCase().includes(term) ||
+        p.estatus?.toLowerCase().includes(term)
+      );
+    }
+
+    return result;
   }
 
   cargarProspectos(): void {
     this.isLoading = true;
-    this.prospectoService.listarProspectos().subscribe({
-      next: (data) => {
-        this.datosProspectos = data;
-        this.totalProspectos = data.length;
-        this.prospectosActivos = data.filter((p: any) => p.estatus === 'Pendiente').length;
+
+    const peticion$ = this._filtroEstado === 'todos'
+      ? this.prospectoService.listarTodosProspectos()
+      : this.prospectoService.listarProspectosPorEstado(this._filtroEstado);
+
+    peticion$.subscribe({
+      next: (data: any) => {
+        // El endpoint por estado puede devolver { Mensaje, Datos } cuando está vacío
+        const lista: any[] = Array.isArray(data) ? data : (data?.Datos ?? []);
+        this.datosProspectos = lista;
+        this.totalProspectos = lista.length;
+        this.prospectosActivos = lista.filter((p: any) => p.estatus === 'Pendiente').length;
         this.tarjetasProspectos = [
           { label: 'Total Prospectos', value: this.totalProspectos, icon: 'group', iconClass: 'icon-pink' },
           { label: 'Prospectos Activos', value: this.prospectosActivos, icon: 'check_circle', iconClass: 'icon-outline' }
@@ -97,7 +122,7 @@ export class ProspectosComponent implements OnInit {
         this.isLoading = false;
         this.cdr.detectChanges();
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error al cargar prospectos:', err);
         this.isLoading = false;
         this.cdr.detectChanges();

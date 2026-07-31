@@ -15,10 +15,12 @@ import Swal from 'sweetalert2';
 export class NuevaCotizacionComponent implements OnInit {
   @Input() preselectedProspectoId: number | null = null;
   @Input() editingCotizacionId: number | null = null;
+  @Input() readonlyMode: boolean = false;
   @Output() back = new EventEmitter<void>();
   @Output() save = new EventEmitter<void>();
 
   prospectos: any[] = [];
+  prospectosSelect: any[] = [];
   productos: Producto[] = [];
 
   selectedProspectoId: number | null = null;
@@ -55,22 +57,55 @@ export class NuevaCotizacionComponent implements OnInit {
   }
 
   cargarProspectos(): void {
-    this.prospectoService.listarProspectos().subscribe({
-      next: (data) => {
-        // filter or list only pending/active prospects
-        this.prospectos = data.filter((p: any) => p.estatus === 'Pendiente');
-        
+    this.prospectoService.listarTodosProspectos().subscribe({
+      next: (data: any) => {
+        const lista: any[] = Array.isArray(data) ? data : (data?.Datos ?? []);
+        this.prospectos = lista;
+        this.actualizarProspectosSelect();
+
         if (this.preselectedProspectoId) {
           this.selectedProspectoId = Number(this.preselectedProspectoId);
           this.onProspectoChange();
         }
-        
+
         this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('Error al cargar prospectos:', err);
       }
     });
+  }
+
+  actualizarProspectosSelect(): void {
+    const ordenEstatus: Record<string, number> = {
+      'Pendiente': 0,
+      'Cliente': 1,
+      'Aceptado': 1,
+      'Aceptada': 1,
+      'Cancelado': 2,
+      'Rechazado': 2,
+      'Rechazada': 2
+    };
+
+    this.prospectosSelect = [...this.prospectos].sort((a, b) => {
+      const ea = ordenEstatus[a.estatus] ?? 3;
+      const eb = ordenEstatus[b.estatus] ?? 3;
+      return ea - eb;
+    });
+
+    if (this.selectedProspectoId) {
+      const yaIncluido = this.prospectosSelect.some(
+        (p) => (p.idProspecto || p.id) === Number(this.selectedProspectoId)
+      );
+      if (!yaIncluido) {
+        const seleccionado = this.prospectos.find(
+          (p) => (p.idProspecto || p.id) === Number(this.selectedProspectoId)
+        );
+        if (seleccionado) {
+          this.prospectosSelect.push(seleccionado);
+        }
+      }
+    }
   }
 
   cargarProductos(): void {
@@ -104,6 +139,7 @@ export class NuevaCotizacionComponent implements OnInit {
 
         this.selectedProspectoId = quote.idProspecto;
         this.costoInstalacion = quote.costoInstalacion || 0;
+        this.actualizarProspectosSelect();
         this.onProspectoChange();
 
         const details = quote.detalles || quote.detalleCotizaciones || quote.detalleCotizacion || [];
