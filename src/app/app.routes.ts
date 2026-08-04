@@ -23,6 +23,7 @@ import { ContactoComponent } from './ecommerce/features/home/components/contacto
 import { ProveedoresComponent } from './gestion/features/proveedores/proveedores';
 import { GastosComponent } from './gestion/features/gastos/gastos.component';
 import { OrdenServicioComponent } from './gestion/features/orden-servicio/orden-servicio.component';
+import { IngresosComponent } from './gestion/features/ingresos/ingresos.component';
 
 export const routes: Routes = [
   // Si la ruta está vacía, redirige automáticamente al login
@@ -66,6 +67,9 @@ export const routes: Routes = [
 
   // Ruta para gastos
   { path: 'gastos', component: GastosComponent },
+  
+  // Ruta para ingresos
+  { path: 'ingresos', component: IngresosComponent },
   
   // Ruta para ordenes de servicio
   { path: 'ordenes-servicio', component: OrdenServicioComponent },

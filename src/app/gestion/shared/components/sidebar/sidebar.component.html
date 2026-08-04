@@ -20,11 +20,11 @@
   [class.-translate-x-full]="!isMobileMenuOpen"
 >
   <div class="h-20 flex items-center px-6 border-b border-slate-100 shrink-0">
-    <img src="/Ecosystem.jpeg" class="w-8 h-8 rounded-lg mr-3 object-cover shadow-sm" />
-    <span
-      class="text-xl font-bold text-[#1B3B2B]"
-      >Ecosystem</span
-    >
+    <img src="/Ecosystem.jpeg" class="w-10 h-10 rounded-xl mr-3 object-cover shadow-sm border border-slate-100" />
+    <div class="flex flex-col overflow-hidden">
+      <span class="text-[15px] font-bold text-[#1B3B2B] truncate leading-tight" [title]="userName">{{ userName }}</span>
+      <span class="text-[12px] text-slate-500 font-medium truncate">{{ userRole }}</span>
+    </div>
   </div>
 
   <div class="flex-1 overflow-y-auto py-6 px-4 flex flex-col gap-1 sidebar-scroll">
@@ -35,7 +35,7 @@
         [routerLink]="section.route"
         routerLinkActive="bg-emerald-50 text-emerald-700 font-bold"
         [routerLinkActiveOptions]="{ exact: section.exact ?? true }"
-        (click)="closeMobileMenu()"
+        (click)="handleItemClick(section, $event)"
         class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 font-medium hover:bg-slate-50 transition-colors group"
       >
         <span

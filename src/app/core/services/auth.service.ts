@@ -8,6 +8,7 @@ import { shareReplay } from 'rxjs/operators';
 })
 export class AuthService {
   private apiUrl = '/api/Usuario';
+  private authApiUrl = '/api/Auth';
 
   constructor(private http: HttpClient) {}
 
@@ -47,5 +48,42 @@ export class AuthService {
       );
     }
     return this.empleadosCache$;
+  }
+
+  login(credentials: { correo: string; password: string }): Observable<any> {
+    return this.http.post(`${this.authApiUrl}/login`, credentials, { responseType: 'text' as 'json' });
+  }
+
+  logout(): Observable<any> {
+    return this.http.post(`${this.authApiUrl}/logout`, {});
+  }
+
+  setToken(token: string): void {
+    localStorage.setItem('token', token);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  removeToken(): void {
+    localStorage.removeItem('token');
+  }
+
+  getUserInfo(): any {
+    const token = this.getToken();
+    if (!token) return null;
+    
+    try {
+      let payload = token.split('.')[1];
+      payload = payload.replace(/-/g, '+').replace(/_/g, '/');
+      const decoded = JSON.parse(decodeURIComponent(window.atob(payload).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join('')));
+      return decoded;
+    } catch (e) {
+      console.error('Error al decodificar el token', e);
+      return null;
+    }
   }
 }
