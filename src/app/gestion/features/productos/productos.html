@@ -1,0 +1,209 @@
+<!-- Navegación Superior y Lateral -->
+<app-sidebar></app-sidebar>
+
+<!-- Contenedor Principal con margen para la navegación en pantallas grandes -->
+<main class="lg:ml-[280px] lg:pt-20 min-h-screen bg-slate-50/50">
+  
+  <div class="p-6 max-w-7xl mx-auto space-y-6">
+    
+    <!-- Header Card -->
+    <div class="bg-white rounded-2xl p-6 border border-slate-200 flex justify-between items-center shadow-sm">
+      <div>
+        <h1 class="text-2xl font-bold text-[#1a2332]">Productos</h1>
+        <p class="text-slate-500 text-sm mt-1">Gestión de productos y catálogo de suministros.</p>
+      </div>
+      
+      <!-- Profile Badge -->
+      <div class="flex items-center gap-3">
+        <div class="text-right hidden sm:block">
+          <p class="text-sm font-semibold text-slate-800">Karla Martinez</p>
+          <p class="text-xs text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full inline-block mt-0.5">Administrador</p>
+        </div>
+        <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+          KM
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra de Búsqueda y Botón Nuevo -->
+    <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="relative w-full sm:w-80">
+        <span class="material-symbols-rounded absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+        <input 
+          type="text" 
+          [ngModel]="searchTerm()"
+          (ngModelChange)="searchTerm.set($event)"
+          placeholder="Buscar producto..." 
+          class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
+        >
+      </div>
+      
+      <button 
+        (click)="abrirModalCrear()"
+        class="w-full sm:w-auto bg-[#009b72] hover:bg-[#00825f] text-white px-5 py-2.5 rounded-xl font-medium text-sm transition-colors flex items-center justify-center gap-2 shadow-sm">
+        Nuevo Producto
+      </button>
+    </div>
+
+    <!-- Tabla de Productos -->
+    <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm text-slate-600">
+          <thead class="bg-white border-b border-slate-100 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+            <tr>
+              <th class="px-6 py-4">IMAGEN</th>
+              <th class="px-6 py-4">NOMBRE</th>
+              <th class="px-6 py-4">DESCRIPCIÓN</th>
+              <th class="px-6 py-4">PRECIO</th>
+              <th class="px-6 py-4 text-right">ACCIONES</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr *ngFor="let producto of productosFiltrados()" class="hover:bg-slate-50 transition-colors group">
+              <td class="px-6 py-4">
+                <!-- Imagen con validación inteligente para rutas locales o externas -->
+                <img [src]="producto.rutaImagen?.startsWith('http') ? producto.rutaImagen : 'https://ecosystem-back-production.up.railway.app' + producto.rutaImagen" 
+                     [alt]="producto.nombre" 
+                     class="w-12 h-12 rounded-lg object-cover border border-slate-200">
+              </td>
+              <td class="px-6 py-4 font-medium text-slate-700 w-1/4">
+                {{ producto.nombre }}
+              </td>
+              <td class="px-6 py-4 w-2/5">
+                <p class="text-slate-500 line-clamp-2">{{ producto.descripcion }}</p>
+              </td>
+              <td class="px-6 py-4 font-medium text-slate-700">
+                {{ producto.precio | currency:'MXN' }}
+              </td>
+              <td class="px-6 py-4 text-right">
+                <div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button (click)="abrirModalEditar(producto)" class="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors" title="Editar">
+                    <span class="material-symbols-rounded text-xl">edit</span>
+                  </button>
+                  <button (click)="abrirModalEliminar(producto)" class="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors" title="Eliminar">
+                    <span class="material-symbols-rounded text-xl">delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            
+            <!-- Estado Vacío -->
+            <tr *ngIf="productosFiltrados().length === 0">
+              <td colspan="5" class="px-6 py-12 text-center text-slate-500">
+                No se encontraron productos con la búsqueda actual.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ========================================== -->
+<!-- MODALES (Superpuestos con fixed y z-index) -->
+<!-- ========================================== -->
+
+<!-- Backdrop oscuro compartido -->
+<div *ngIf="isModalOpen() || isDeleteModalOpen()" 
+     class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[100] transition-opacity"
+     (click)="cerrarModales()">
+</div>
+
+<!-- Modal Crear / Editar -->
+<div *ngIf="isModalOpen()" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-white rounded-2xl shadow-xl z-[101] overflow-hidden">
+  <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center">
+    <h3 class="text-lg font-bold text-slate-800">
+      {{ selectedProducto() ? 'Editar Producto' : 'Nuevo Producto' }}
+    </h3>
+    <button (click)="cerrarModales()" class="text-slate-400 hover:text-slate-600">
+      <span class="material-symbols-rounded">close</span>
+    </button>
+  </div>
+  
+  <!-- INICIO DEL FORMULARIO -->
+  <form #productoForm="ngForm" (ngSubmit)="procesarFormulario(productoForm)">
+    <div class="p-6 space-y-4 max-h-[70vh] overflow-y-auto sidebar-scroll">
+      
+      <!-- Nombre -->
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Nombre del producto</label>
+        <input type="text" name="nombre" [ngModel]="selectedProducto()?.nombre" required
+               class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
+               placeholder="Ej. Panel Solar Monocristalino 550W">
+      </div>
+
+      <!-- Precio -->
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Precio (MXN)</label>
+        <div class="relative">
+          <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">$</span>
+          <input type="number" name="precio" [ngModel]="selectedProducto()?.precio" required min="0" step="0.01"
+                 class="w-full pl-8 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
+                 placeholder="0.00">
+        </div>
+      </div>
+
+      <!-- Descripción -->
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Descripción</label>
+        <textarea name="descripcion" [ngModel]="selectedProducto()?.descripcion" rows="3" required
+                  class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all resize-none"
+                  placeholder="Detalles técnicos del producto..."></textarea>
+      </div>
+
+      <!-- Subida de Imagen (PNG, JPG) -->
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Fotografía del producto</label>
+        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-xl hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors bg-slate-50 group relative">
+          <div class="space-y-2 text-center">
+            
+            <!-- Vista previa condicional si hay archivo seleccionado -->
+            <div *ngIf="nombreArchivoTemporal" class="flex flex-col items-center gap-2">
+              <span class="material-symbols-rounded text-4xl text-emerald-500">check_circle</span>
+              <p class="text-sm text-emerald-600 font-medium truncate max-w-[200px]">{{ nombreArchivoTemporal }}</p>
+            </div>
+
+            <!-- Icono por defecto si no hay archivo -->
+            <span *ngIf="!nombreArchivoTemporal" class="material-symbols-rounded text-4xl text-slate-400 group-hover:text-emerald-500 transition-colors">image</span>
+            
+            <div class="flex text-sm text-slate-600 justify-center">
+              <label for="file-upload" class="relative cursor-pointer bg-transparent rounded-md font-medium text-emerald-600 hover:text-emerald-500 focus-within:outline-none">
+                <span>{{ nombreArchivoTemporal ? 'Cambiar archivo' : 'Subir un archivo' }}</span>
+                <input id="file-upload" name="file-upload" type="file" class="sr-only" accept=".png, .jpg, .jpeg" (change)="onFileSelected($event)">
+              </label>
+            </div>
+            <p *ngIf="!nombreArchivoTemporal" class="text-xs text-slate-500">PNG, JPG (Máx. 5MB)</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    
+    <!-- Footer del Modal -->
+    <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex justify-end gap-3 rounded-b-2xl">
+      <button type="button" (click)="cerrarModales()" class="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200 rounded-lg transition-colors">Cancelar</button>
+      <button type="submit" [disabled]="productoForm.invalid" class="px-4 py-2 text-sm font-medium bg-[#009b72] text-white hover:bg-[#00825f] rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+        Guardar
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- Modal Confirmar Eliminación -->
+<div *ngIf="isDeleteModalOpen()" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-sm bg-white rounded-2xl shadow-xl z-[101] overflow-hidden text-center">
+  <div class="p-6">
+    <div class="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+      <span class="material-symbols-rounded text-3xl">delete_forever</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-800 mb-2">¿Eliminar producto?</h3>
+    <p class="text-sm text-slate-500">
+      Estás a punto de eliminar <strong>{{ selectedProducto()?.nombre }}</strong> (ID: {{ selectedProducto()?.idProducto }}). Esta acción no se puede deshacer.
+    </p>
+  </div>
+  <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex justify-center gap-3">
+    <button (click)="cerrarModales()" class="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200 rounded-lg transition-colors w-full">Cancelar</button>
+    <button (click)="confirmarEliminacion()" class="px-4 py-2 text-sm font-medium bg-red-500 text-white hover:bg-red-600 rounded-lg transition-colors w-full">Eliminar</button>
+  </div>
+</div>
