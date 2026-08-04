@@ -3,5 +3,11 @@
     "target": "https://ecosystem-back-production.up.railway.app",
     "secure": false,
     "changeOrigin": true
+  },
+  "/Uploads": {
+    "target": "https://ecosystem-back-production.up.railway.app",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
   }
 }
