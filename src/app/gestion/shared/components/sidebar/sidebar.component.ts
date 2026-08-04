@@ -1,6 +1,7 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
+import { AuthService } from '../../../../core/services/auth.service';
 
 interface SidebarItem {
   label: string;
@@ -26,8 +27,36 @@ interface SidebarSection {
   templateUrl: './sidebar.component.html'
 })
 
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   isMobileMenuOpen = false;
+  userInfo: any = null;
+  
+  constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.userInfo = this.authService.getUserInfo();
+    console.log('Información del usuario:', this.userInfo);
+  }
+
+  get userName(): string {
+    if (!this.userInfo) return 'Ecosystem';
+    return this.userInfo.nombreCompleto || 
+           this.userInfo.name || 
+           this.userInfo['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'] || 
+           'Ecosystem';
+  }
+
+  get userRole(): string {
+    if (!this.userInfo) return 'Administrador';
+    const role = this.userInfo.puesto || 
+                 this.userInfo.role || 
+                 this.userInfo['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] || 
+                 'Administrador';
+    if (role === '1') return 'Super Admin';
+    if (role === '2') return 'Administrador';
+    if (role === '3') return 'Empleado';
+    return role;
+  }
 
   sections: SidebarSection[] = [
     {
@@ -52,7 +81,7 @@ export class SidebarComponent {
       icon: 'account_balance',
       isOpen: false,
       children: [
-        { label: 'Ingresos', icon: 'attach_money', route: '/facturas', exact: true },
+        { label: 'Ingresos', icon: 'attach_money', route: '/ingresos', exact: true },
         { label: 'Gastos', icon: 'money_off', route: '/gastos', exact: true }
       ]
     },
@@ -97,6 +126,24 @@ export class SidebarComponent {
   closeMobileMenu(): void {
     if (window.innerWidth <= 1024) {
       this.isMobileMenuOpen = false;
+    }
+  }
+
+  handleItemClick(section: SidebarSection, event: Event): void {
+    if (section.label === 'Salir') {
+      event.preventDefault();
+      this.authService.logout().subscribe({
+        next: () => {
+          this.authService.removeToken();
+          this.router.navigate(['/login']);
+        },
+        error: () => {
+          this.authService.removeToken();
+          this.router.navigate(['/login']);
+        }
+      });
+    } else {
+      this.closeMobileMenu();
     }
   }
 

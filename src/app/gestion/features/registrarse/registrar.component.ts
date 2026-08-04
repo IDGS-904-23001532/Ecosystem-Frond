@@ -43,8 +43,7 @@ export class RegistrarComponent implements OnInit {
         correo: formValues.email,
         password: formValues.password,
         nombreCompleto: formValues.name,
-        direccionInstalacion: formValues.direccionInstalacion,
-        telefono: formValues.phone
+        puesto: 'Administrador' // Temporal ya que no existe registro-cliente en back
       };
 
       Swal.fire({
@@ -56,7 +55,7 @@ export class RegistrarComponent implements OnInit {
         }
       });
 
-      this.authService.registroCliente(payload).subscribe({
+      this.authService.registroEmpleado(payload).subscribe({
         next: (res) => {
           this.isLoading = false;
           Swal.fire({
