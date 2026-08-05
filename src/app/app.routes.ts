@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-
+import { authGuard } from './guards/auth.guard';
 // Importar los componentes de las rutas ecommerce publicas
 import { HomeComponent } from './ecommerce/features/home/home.component';
 import { CalculadoraAhorroComponent } from './ecommerce/features/calculadora-ahorro/calculadora-ahorro.component';
@@ -30,59 +30,42 @@ import { IngresosComponent } from './gestion/features/ingresos/ingresos.componen
 
 
 export const routes: Routes = [
-  // Si la ruta está vacía, redirige automáticamente al login
+  // ==========================================
+  // RUTAS PÚBLICAS (Sin protección)
+  // ==========================================
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  
-  // Ruta para la página de inicio pública
-  {path: 'home', component: HomeComponent},
-  // Ruta para el inicio de sesión
+  { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  
-  // Ruta para el registro de nuevos usuarios
   { path: 'registrarse', component: RegistrarComponent },
-
-  // Ruta para salir del sistema y volver al login
   { path: 'logout', redirectTo: 'login' },
   
-  // Ruta para el panel de control
-  { path: 'dashboard', component: DashboardComponent },
-
-  // Ruta para prospectos
-  { path: 'prospectos', component: ProspectosComponent },
-
-  // Rutas para cotizaciones
-  { path: 'cotizaciones', component: CotizacionesComponent},
-  
-  // Rutas para clientes
-  { path: 'clientes', component: ClientesComponent },
-
-  // Rutas para ventas
-  { path: 'ventas', component: VentasComponent },
-
-  // Ruta para empleados (antes usuarios)
-  { path: 'empleados', component: UsuariosComponent },
-  { path: 'usuarios', redirectTo: 'empleados', pathMatch: 'full' },
-
-  // Ruta para contacto
+  // Rutas de la Landing Page
+  { path: 'paquetes/hogar', component: PaqueteHogarComponent },
+  { path: 'paquetes/empresarial', component: PaqueteEmpresarialComponent },
+  { path: 'conocenos/nosotros', component: NosotrosComponent },
+  { path: 'calculadora-ahorro', component: CalculadoraAhorroComponent },
   { path: 'conocenos/contactar', component: ContactoComponent },
 
-  // Ruta para proveedores
-  { path: 'proveedores', component: ProveedoresComponent },
-
-  // Ruta para gastos
-  { path: 'gastos', component: GastosComponent },
-  
-  // Ruta para ingresos
-  { path: 'ingresos', component: IngresosComponent },
-  
-  // Ruta para ordenes de servicio
-  { path: 'ordenes-servicio', component: OrdenServicioComponent },
-
-  { path: 'productos', component: ProductosComponent},
+  // ==========================================
+  // RUTAS PRIVADAS / GESTIÓN (Protegidas)
+  // ==========================================
+  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] }, // <-- PROTEGIDA
+  { path: 'prospectos', component: ProspectosComponent, canActivate: [authGuard] }, // <-- PROTEGIDA
+  { path: 'cotizaciones', component: CotizacionesComponent, canActivate: [authGuard] }, // <-- PROTEGIDA
+  { path: 'clientes', component: ClientesComponent, canActivate: [authGuard] }, // <-- PROTEGIDA
+  { path: 'ventas', component: VentasComponent, canActivate: [authGuard] }, // <-- PROTEGIDA
+  { path: 'empleados', component: UsuariosComponent, canActivate: [authGuard] }, // <-- PROTEGIDA
+  { path: 'usuarios', redirectTo: 'empleados', pathMatch: 'full' },
+  { path: 'proveedores', component: ProveedoresComponent, canActivate: [authGuard] }, // <-- PROTEGIDA
+  { path: 'gastos', component: GastosComponent, canActivate: [authGuard] }, // <-- PROTEGIDA
+  { path: 'ingresos', component: IngresosComponent, canActivate: [authGuard] }, // <-- PROTEGIDA
+  { path: 'ordenes-servicio', component: OrdenServicioComponent, canActivate: [authGuard] }, // <-- PROTEGIDA
+  { path: 'productos', component: ProductosComponent, canActivate: [authGuard] }, // <-- PROTEGIDA
   
   {
     path: 'contabilidad',
     component: PlaceholderPageComponent,
+    canActivate: [authGuard], // <-- PROTEGIDA
     data: {
       title: 'Contabilidad',
       description: 'Este modulo mostrara facturacion, ingresos y reportes financieros.',
@@ -92,30 +75,12 @@ export const routes: Routes = [
   {
     path: 'configuracion',
     component: PlaceholderPageComponent,
+    canActivate: [authGuard], // <-- PROTEGIDA
     data: {
       title: 'Configuracion',
       description: 'Administra usuarios, permisos y preferencias del sistema.',
       icon: '⚙️'
     }
-  },
-  
-  // Rutas de la Landing Page
-  {
-    path: 'paquetes/hogar',
-    component: PaqueteHogarComponent
-  },
-  {
-    path: 'paquetes/empresarial',
-    component: PaqueteEmpresarialComponent
-  },
-  {
-    path: 'conocenos/nosotros',
-    component: NosotrosComponent
-  },
-
-  {
-    path: 'calculadora-ahorro',
-    component: CalculadoraAhorroComponent
   },
 
   // Comodín por si escriben una ruta inexistente, redirige al login

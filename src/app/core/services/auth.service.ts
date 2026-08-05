@@ -28,6 +28,14 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/registro-empleado`, userData);
   }
 
+  actualizarEmpleado(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/empleado/${id}`, data);
+  }
+
+  eliminarEmpleado(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/empleado/${id}`);
+  }
+
   private clientesCache$: Observable<any[]> | null = null;
 
   listarClientes(forceRefresh: boolean = false): Observable<any[]> {

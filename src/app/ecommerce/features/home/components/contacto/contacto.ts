@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { TopBarComponent } from '../../../../shared/components/topbar/topbar.component';
 import { ProspectoService } from '../../../../../core/services/prospecto';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-contacto',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TopBarComponent],
 templateUrl: './contacto.html'
 })
 export class ContactoComponent {

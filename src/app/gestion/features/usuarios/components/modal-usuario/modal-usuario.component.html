@@ -2,7 +2,7 @@
   <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden flex flex-col animate-in zoom-in-95 duration-200">
     
     <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-      <h2 class="text-xl font-bold text-slate-800">Registrar Empleado</h2>
+      <h2 class="text-xl font-bold text-slate-800">{{ empleadoData ? 'Editar Empleado' : 'Registrar Empleado' }}</h2>
       <button class="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-600 hover:bg-slate-200 transition-colors" (click)="cerrar()">
         <span class="material-symbols-rounded text-[20px]">close</span>
       </button>
@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <div class="flex flex-col gap-1.5">
+      <div class="flex flex-col gap-1.5" *ngIf="!empleadoData">
         <label class="text-sm font-semibold text-slate-700">Correo electrónico</label>
         <div class="relative">
           <span class="material-symbols-rounded absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">mail</span>
@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <div class="flex flex-col gap-1.5">
+      <div class="flex flex-col gap-1.5" *ngIf="!empleadoData">
         <label class="text-sm font-semibold text-slate-700">Contraseña temporal</label>
         <div class="relative">
           <span class="material-symbols-rounded absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">lock</span>
@@ -56,7 +56,7 @@
         Cancelar
       </button>
       <button type="button" class="px-6 py-2 rounded-xl text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 hover:shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed" [disabled]="userForm.invalid" (click)="guardar()">
-        Registrar
+        {{ empleadoData ? 'Guardar Cambios' : 'Registrar' }}
       </button>
     </div>
   </div>
