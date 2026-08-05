@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HeaderTitleComponent } from '../../../shared/components/header-title/header-title.component';
 import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
 import { TableColumn, TableComponent } from '../../../shared/components/table/table.component';
+import { VentaService } from '../../../core/services/venta';
 import { IngresosService } from '../../../core/services/ingresos.service';
 
 @Component({
@@ -48,7 +49,11 @@ export class IngresosComponent implements OnInit {
   anioGrafica: number = new Date().getFullYear();
   mesesGrafica: any[] = [];
   
-  constructor(private ingresosService: IngresosService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private ingresosService: IngresosService, 
+    private ventaService: VentaService,
+    private cdr: ChangeDetectorRef
+  ) {}
   
   ngOnInit(): void {
     // Inicializar fechas: primer y último día del mes actual
@@ -73,8 +78,7 @@ export class IngresosComponent implements OnInit {
   cargarResumen(): void {
     this.ingresosService.getResumen().subscribe({
       next: (data: any) => {
-        this.tarjetasIngresos[0].value = `$${(data?.total || 0).toLocaleString()}`;
-        this.tarjetasIngresos[1].value = `$${(data?.ingresosMes || 0).toLocaleString()}`;
+        this.tarjetasIngresos[0].value = `$${(Number(data?.totalVentas) || 0).toLocaleString()}`;
         this.cdr.detectChanges();
       },
       error: (err) => {
@@ -87,24 +91,47 @@ export class IngresosComponent implements OnInit {
     if (!this.fechaInicio || !this.fechaFin) return;
     
     this.isLoadingTabla = true;
+    
+    // 1. Cargar resumen del periodo para la segunda tarjeta
     this.ingresosService.getPeriodo(this.fechaInicio, this.fechaFin).subscribe({
       next: (data: any) => {
-        const dataArray = Array.isArray(data) ? data : (data?.data || data?.items || data?.ingresos || []);
-        this.datosIngresos = dataArray.map((item: any) => ({
-          ...item,
-          monto: item.monto != null ? `$${Number(item.monto).toLocaleString()}` : '$0.00'
-        }));
-        this.isLoadingTabla = false;
-        this.cdr.detectChanges();
+        if (this.tarjetasIngresos.length > 1) {
+          this.tarjetasIngresos[1].value = `$${(Number(data?.totalVentas) || 0).toLocaleString()}`;
+        }
+        
+        // 2. Cargar ventas para la tabla
+        this.ventaService.listarVentas().subscribe({
+          next: (ventas: any[]) => {
+            const start = new Date(this.fechaInicio + 'T00:00:00').getTime();
+            const end = new Date(this.fechaFin + 'T23:59:59').getTime();
+            
+            const filteredVentas = ventas.filter(v => {
+              if (!v.fecha) return false;
+              const vDate = new Date(v.fecha).getTime();
+              return vDate >= start && vDate <= end;
+            });
+            
+            this.datosIngresos = filteredVentas.map(v => ({
+              id: v.idVenta,
+              fecha: new Date(v.fecha).toLocaleDateString(),
+              concepto: v.descripcion || 'Venta',
+              monto: v.total != null ? `$${Number(v.total).toLocaleString()}` : '$0.00'
+            }));
+            this.isLoadingTabla = false;
+            this.cdr.detectChanges();
+          },
+          error: (err) => {
+            console.error('Error cargando ventas', err);
+            this.isLoadingTabla = false;
+            this.datosIngresos = [];
+            this.cdr.detectChanges();
+          }
+        });
       },
       error: (err) => {
         console.error('Error cargando periodo', err);
         this.isLoadingTabla = false;
-        // Mock data in case endpoint is not ready yet to not leave it empty
-        this.datosIngresos = [
-          { id: 1, fecha: '2026-08-01', concepto: 'Venta de equipo solar', monto: '$1,500.00' },
-          { id: 2, fecha: '2026-08-02', concepto: 'Servicio de mantenimiento', monto: '$350.00' }
-        ];
+        this.datosIngresos = [];
         this.cdr.detectChanges();
       }
     });
@@ -113,7 +140,16 @@ export class IngresosComponent implements OnInit {
   cargarGrafica(): void {
     this.ingresosService.getGraficaAnual(this.anioGrafica).subscribe({
       next: (data: any) => {
-        this.mesesGrafica = data?.meses || this.generarMesesPorDefecto();
+        if (Array.isArray(data)) {
+          const maxIngreso = Math.max(...data.map(m => m.ingresos), 1);
+          this.mesesGrafica = data.map(m => ({
+            nombre: m.nombreMes.substring(0, 3),
+            valor: m.ingresos,
+            porcentaje: Math.floor((m.ingresos / maxIngreso) * 100) || 0
+          }));
+        } else {
+          this.mesesGrafica = this.generarMesesPorDefecto();
+        }
         this.cdr.detectChanges();
       },
       error: (err) => {
