@@ -35,15 +35,19 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.userInfo = this.authService.getUserInfo();
-    console.log('Información del usuario:', this.userInfo);
+    console.log('JWT Claims del usuario:', this.userInfo);
   }
 
   get userName(): string {
-    if (!this.userInfo) return 'Ecosystem';
-    return this.userInfo.nombreCompleto || 
-           this.userInfo.name || 
-           this.userInfo['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'] || 
-           'Ecosystem';
+    if (!this.userInfo) return 'Ecosystem User';
+    return this.userInfo.nombreCompleto
+      || this.userInfo.unique_name
+      || this.userInfo.given_name
+      || this.userInfo.name
+      || this.userInfo['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
+      || this.userInfo['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname']
+      || this.userInfo.sub
+      || 'Usuario';
   }
 
   get userRole(): string {

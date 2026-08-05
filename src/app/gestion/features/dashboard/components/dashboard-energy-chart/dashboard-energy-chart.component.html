@@ -1,32 +1,80 @@
 <section class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 mt-2">
-  <div class="mb-8 flex justify-between items-end">
+  <!-- Cabecera -->
+  <div class="mb-6 flex justify-between items-center">
     <div>
-      <h3 class="text-xl font-bold text-slate-800">Histórico de Rendimiento</h3>
-      <p class="text-slate-500 text-sm mt-1">Producción solar mensual en los últimos meses (Simulado)</p>
+      <h3 class="text-xl font-bold text-slate-800">Histórico de Ingresos</h3>
+      <p class="text-slate-500 text-sm mt-1">Ingresos mensuales por ventas — {{ anioActual }}</p>
     </div>
     <span class="material-symbols-rounded text-emerald-500 bg-emerald-50 p-2 rounded-lg">insights</span>
   </div>
-  
-  <div class="flex items-end justify-between gap-2 h-64 mt-4 w-full px-2 sm:px-8 border-b-2 border-slate-100 pb-2">
-    <div class="relative flex flex-col items-center justify-end h-full w-full group">
-      <div class="w-full sm:w-16 bg-emerald-100 group-hover:bg-emerald-200 rounded-t-xl transition-all duration-500" style="height: 45%;"></div>
-      <span class="mt-4 text-sm font-medium text-slate-500">Ene</span>
+
+  <!-- Skeleton loader -->
+  <div *ngIf="isLoading" class="flex items-end justify-between gap-2 h-64 w-full px-2 sm:px-4 pb-2">
+    <div *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]"
+      class="flex flex-col items-center justify-end h-full w-full gap-2">
+      <div class="w-full rounded-t-xl bg-slate-200 animate-pulse"
+        [style.height.%]="20 + (i * 5) % 60"></div>
+      <div class="h-3 w-8 bg-slate-200 rounded animate-pulse"></div>
     </div>
-    <div class="relative flex flex-col items-center justify-end h-full w-full group">
-      <div class="w-full sm:w-16 bg-emerald-200 group-hover:bg-emerald-300 rounded-t-xl transition-all duration-500" style="height: 60%;"></div>
-      <span class="mt-4 text-sm font-medium text-slate-500">Feb</span>
+  </div>
+
+  <!-- Aviso de error -->
+  <div *ngIf="!isLoading && hasError"
+    class="flex items-center gap-3 text-amber-700 bg-amber-50 border border-amber-200 rounded-xl p-4 mb-4">
+    <span class="material-symbols-rounded">warning</span>
+    <span class="text-sm">No se pudo cargar la gráfica de ingresos.</span>
+  </div>
+
+  <!-- Gráfica de barras dinámica -->
+  <div *ngIf="!isLoading"
+    class="flex items-end justify-between gap-1 sm:gap-2 h-64 w-full px-0 sm:px-4 border-b-2 border-slate-100 pb-2">
+    <div
+      *ngFor="let mes of meses; let i = index"
+      class="relative flex flex-col items-center justify-end h-full w-full group cursor-pointer">
+
+      <!-- Tooltip -->
+      <div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 z-10
+                  opacity-0 group-hover:opacity-100 transition-opacity duration-200
+                  bg-slate-800 text-white text-xs rounded-lg px-2 py-1 whitespace-nowrap pointer-events-none shadow-lg">
+        {{ formatearValor(mes.valor) }}
+      </div>
+
+      <!-- Barra -->
+      <div
+        class="w-full rounded-t-xl transition-all duration-700 ease-out"
+        [style.height.%]="mes.porcentaje"
+        [ngClass]="{
+          'bg-emerald-500 shadow-md shadow-emerald-500/20 group-hover:bg-emerald-600': mes.valor === mesConMayorIngreso && mes.valor > 0,
+          'bg-emerald-200 group-hover:bg-emerald-300': mes.valor > 0 && mes.valor !== mesConMayorIngreso,
+          'bg-slate-100 group-hover:bg-slate-200': mes.valor === 0
+        }">
+      </div>
+
+      <!-- Etiqueta del mes -->
+      <span class="mt-3 text-xs font-medium"
+        [ngClass]="{
+          'text-emerald-700 font-bold': mes.valor === mesConMayorIngreso && mes.valor > 0,
+          'text-slate-400': mes.valor === 0,
+          'text-slate-500': mes.valor > 0 && mes.valor !== mesConMayorIngreso
+        }">
+        {{ mes.nombre }}
+      </span>
     </div>
-    <div class="relative flex flex-col items-center justify-end h-full w-full group">
-      <div class="w-full sm:w-16 bg-emerald-300 group-hover:bg-emerald-400 rounded-t-xl transition-all duration-500" style="height: 80%;"></div>
-      <span class="mt-4 text-sm font-medium text-slate-500">Mar</span>
-    </div>
-    <div class="relative flex flex-col items-center justify-end h-full w-full group">
-      <div class="w-full sm:w-16 bg-emerald-400 group-hover:bg-emerald-500 rounded-t-xl transition-all duration-500" style="height: 75%;"></div>
-      <span class="mt-4 text-sm font-medium text-slate-500">Abr</span>
-    </div>
-    <div class="relative flex flex-col items-center justify-end h-full w-full group">
-      <div class="w-full sm:w-16 bg-emerald-500 group-hover:bg-emerald-600 shadow-md shadow-emerald-500/20 rounded-t-xl transition-all duration-500" style="height: 95%;"></div>
-      <span class="mt-4 text-sm font-bold text-emerald-700">May</span>
-    </div>
+  </div>
+
+  <!-- Leyenda inferior -->
+  <div *ngIf="!isLoading" class="mt-4 flex items-center gap-6 text-sm text-slate-500">
+    <span class="flex items-center gap-2">
+      <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+      Mes con mayor ingreso
+    </span>
+    <span class="flex items-center gap-2">
+      <span class="w-3 h-3 rounded-full bg-emerald-200 inline-block"></span>
+      Otros meses
+    </span>
+    <span class="flex items-center gap-2">
+      <span class="w-3 h-3 rounded-full bg-slate-100 inline-block"></span>
+      Sin ingresos
+    </span>
   </div>
 </section>
