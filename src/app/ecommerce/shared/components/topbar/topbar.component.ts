@@ -52,8 +52,8 @@ export class TopBarComponent {
       exact: true
     },
     {
-      label: 'Cotización',
-      icon: 'receipt_long',
+      label: 'Calculadora',
+      icon: 'calculate',
       route: '/calculadora-ahorro',
       exact: true
     }

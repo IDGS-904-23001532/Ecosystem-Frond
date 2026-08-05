@@ -1,121 +1,283 @@
-<div class="min-h-screen w-full bg-[#111] relative font-sans overflow-x-hidden flex flex-col" style="background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&q=80'); background-size: cover; background-position: center;">
-  
-  <!-- Overlay oscuro para darle el tono verde/negro de la imagen -->
-  <div class="absolute inset-0 z-0 bg-gradient-to-r from-black/80 via-black/60 to-black/80"></div>
-  <div class="absolute inset-0 z-0 bg-emerald-900/20 mix-blend-overlay"></div>
-  
-  <!-- TopBar -->
+<div
+  class="min-h-screen w-full relative font-sans overflow-x-hidden flex flex-col"
+  style="
+    background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&q=80');
+    background-size: cover;
+    background-position: center;
+  "
+>
+  <div class="absolute inset-0 z-0 bg-gradient-to-br from-black/90 via-black/75 to-emerald-950/80"></div>
+  <div class="absolute inset-0 z-0 bg-emerald-900/10 mix-blend-overlay"></div>
+
   <div class="relative z-20">
     <app-top-bar></app-top-bar>
   </div>
 
-  <div class="relative z-10 container mx-auto px-8 lg:px-20 pt-24 flex flex-col flex-grow text-white">
-    
-    <!-- Headers -->
-    <div class="mb-14 max-w-2xl mt-8">
-      <h1 class="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight">tarifa fija</h1>
-      <p class="text-lg md:text-xl text-gray-200 leading-relaxed font-light">
-        Ingresa tu consumo actual y estima el ahorro en tu factura eléctrica con PPA y<br>SaaS.
+  <!-- ===== PASO 1: FORMULARIO ===== -->
+  <div *ngIf="paso === 1"
+       class="relative z-10 container mx-auto px-6 lg:px-20 pt-20 pb-24 flex flex-col flex-grow text-white calc-fade">
+
+    <div class="mb-10 max-w-3xl mt-6">
+      <span class="inline-block bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-5">
+        Calculadora de ahorro
+      </span>
+      <h1 class="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight leading-tight">
+        Descubre cuánto<br>
+        <span class="text-emerald-400">ahorrarías</span>
+      </h1>
+      <p class="text-lg text-gray-300 leading-relaxed font-light max-w-xl">
+        Ingresa tu consumo actual y estima el ahorro en tu factura eléctrica con energía solar en cuestión de segundos.
       </p>
     </div>
 
-    <!-- Stepper (Barra oscura con círculos) -->
-    <div class="mb-12 max-w-4xl w-full">
-      <div class="relative flex items-center justify-between w-full h-12 bg-[#2c3e2e]/70 backdrop-blur-sm rounded-full px-1 border border-white/5 shadow-lg">
-        <!-- Linea divisoria imaginaria o espacio, en la imagen es solo la barra -->
-        
-        <!-- Step 1 (Active) -->
-        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-[#00b894] text-white font-bold text-lg ml-1">
-          1
-        </div>
-        
-        <!-- Step 2 (Inactive) -->
-        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-[#1e4a3b]/60 text-[#00b894] font-bold text-lg">
-          2
-        </div>
-        
-        <!-- Step 3 (Inactive) -->
-        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-[#1e4a3b]/60 text-[#00b894] font-bold text-lg mr-1">
-          3
-        </div>
+    <!-- Stepper -->
+    <div class="mb-12 max-w-xs w-full">
+      <div class="flex items-center justify-between w-full h-12 bg-white/5 backdrop-blur-sm rounded-full px-2 border border-white/10">
+        <div class="flex items-center justify-center w-9 h-9 rounded-full bg-emerald-500 text-white font-bold text-sm shadow-lg shadow-emerald-500/30">1</div>
+        <div class="flex-1 h-px bg-white/10 mx-1"></div>
+        <div class="flex items-center justify-center w-9 h-9 rounded-full bg-white/5 border border-white/10 text-gray-500 font-bold text-sm">2</div>
+        <div class="flex-1 h-px bg-white/10 mx-1"></div>
+        <div class="flex items-center justify-center w-9 h-9 rounded-full bg-white/5 border border-white/10 text-gray-500 font-bold text-sm">3</div>
+      </div>
+      <div class="flex justify-between mt-2 px-1">
+        <span class="text-xs text-emerald-400 font-medium">Tus datos</span>
+        <span class="text-xs text-gray-500">Analizando</span>
+        <span class="text-xs text-gray-500">Resultados</span>
       </div>
     </div>
 
-    <!-- Form Section -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 max-w-6xl">
-      
-      <!-- Field 1 -->
-      <div class="flex flex-col gap-3">
-        <div class="bg-[#384336]/80 rounded-md overflow-hidden backdrop-blur-sm h-14 flex items-center px-4">
-          <input 
-            type="text" 
-            [(ngModel)]="consumoPromedio"
-            placeholder="Consumo promedio" 
-            class="w-full bg-transparent border-none text-white focus:outline-none placeholder-gray-300 text-sm"
-          >
-        </div>
-        <label class="text-base font-bold text-white leading-tight">Consumo promedio mensual del último año (kWh)</label>
+    <!-- Formulario -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10 max-w-6xl">
+
+      <!-- Consumo -->
+      <div class="flex flex-col gap-2">
+        <label class="text-xs font-semibold text-gray-300 uppercase tracking-wider">Consumo promedio (kWh)</label>
+        <input
+          type="number"
+          [(ngModel)]="consumoPromedio"
+          placeholder="Ej. 500"
+          class="w-full border rounded-xl text-white placeholder-gray-500 text-sm px-4 py-3.5 focus:outline-none transition-all duration-300"
+          [ngClass]="errores['consumo'] ? 'border-red-500 bg-red-900/10' : 'border-white/15 bg-white/5 focus:border-emerald-400'"
+        >
+        <p *ngIf="errores['consumo']" class="text-red-400 text-xs">{{ errores['consumo'] }}</p>
       </div>
 
-      <!-- Field 2 -->
-      <div class="flex flex-col gap-3">
-        <div class="bg-[#384336]/80 rounded-md overflow-hidden backdrop-blur-sm h-14 flex items-center px-4 relative">
-          <select 
+      <!-- Estado -->
+      <div class="flex flex-col gap-2">
+        <label class="text-xs font-semibold text-gray-300 uppercase tracking-wider">Estado de la República</label>
+        <div class="relative">
+          <select
             [(ngModel)]="estado"
-            class="w-full bg-transparent border-none text-white focus:outline-none appearance-none cursor-pointer text-sm"
+            class="w-full border rounded-xl text-white text-sm px-4 py-3.5 focus:outline-none transition-all duration-300 appearance-none cursor-pointer"
+            [ngClass]="errores['estado'] ? 'border-red-500 bg-red-900/10' : 'border-white/15 bg-white/5 focus:border-emerald-400'"
+            style="background-color: rgba(15,30,20,0.85);"
           >
-            <option value="" disabled selected class="text-black">- Selecciona -</option>
-            <option value="CDMX" class="text-black">Ciudad de México</option>
-            <option value="JAL" class="text-black">Jalisco</option>
-            <option value="NL" class="text-black">Nuevo León</option>
+            <option value="" disabled style="background:#0f1e14;">Selecciona tu estado</option>
+            <option *ngFor="let e of estados" [value]="e" style="background:#0f1e14;">{{ e }}</option>
           </select>
-          <!-- Custom arrow icon -->
-          <span class="material-symbols-rounded absolute right-3 text-gray-300 pointer-events-none text-sm">expand_more</span>
+          <span class="material-symbols-rounded absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-base">expand_more</span>
         </div>
-        <label class="text-base font-bold text-white leading-tight">Estado de la República donde está la empresa</label>
+        <p *ngIf="errores['estado']" class="text-red-400 text-xs">{{ errores['estado'] }}</p>
       </div>
 
-      <!-- Field 3 -->
-      <div class="flex flex-col gap-3">
-        <div class="bg-[#384336]/80 rounded-md overflow-hidden backdrop-blur-sm h-14 flex items-center px-4 relative">
-          <select 
+      <!-- Tarifa -->
+      <div class="flex flex-col gap-2">
+        <label class="text-xs font-semibold text-gray-300 uppercase tracking-wider">Tarifa de CFE</label>
+        <div class="relative">
+          <select
             [(ngModel)]="tarifa"
-            class="w-full bg-transparent border-none text-white focus:outline-none appearance-none cursor-pointer text-sm"
+            class="w-full border rounded-xl text-white text-sm px-4 py-3.5 focus:outline-none transition-all duration-300 appearance-none cursor-pointer"
+            [ngClass]="errores['tarifa'] ? 'border-red-500 bg-red-900/10' : 'border-white/15 bg-white/5 focus:border-emerald-400'"
+            style="background-color: rgba(15,30,20,0.85);"
           >
-            <option value="" disabled selected class="text-black">- Selecciona -</option>
-            <option value="GDMTH" class="text-black">GDMTH</option>
-            <option value="GDMTO" class="text-black">GDMTO</option>
-            <option value="PDBT" class="text-black">PDBT</option>
+            <option value="" disabled style="background:#0f1e14;">Selecciona tu tarifa</option>
+            <option *ngFor="let t of tarifas" [value]="t.value" style="background:#0f1e14;">{{ t.label }}</option>
           </select>
-          <span class="material-symbols-rounded absolute right-3 text-gray-300 pointer-events-none text-sm">expand_more</span>
+          <span class="material-symbols-rounded absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-base">expand_more</span>
         </div>
-        <label class="text-base font-bold text-white leading-tight">Tarifa que tiene asignada por CFE</label>
+        <p *ngIf="errores['tarifa']" class="text-red-400 text-xs">{{ errores['tarifa'] }}</p>
       </div>
 
-      <!-- Field 4 -->
-      <div class="flex flex-col gap-3">
-        <div class="bg-[#384336]/80 rounded-md overflow-hidden backdrop-blur-sm h-14 flex items-center px-4">
-          <input 
-            type="text" 
-            [(ngModel)]="demandaHorarioPunta"
-            placeholder="Demanda horario punta (kW)" 
-            class="w-full bg-transparent border-none text-white focus:outline-none placeholder-gray-300 text-sm"
-          >
-        </div>
-        <label class="text-base font-bold text-white leading-tight">Demanda horario punta (kW)</label>
+      <!-- Demanda punta -->
+      <div class="flex flex-col gap-2">
+        <label class="text-xs font-semibold text-gray-300 uppercase tracking-wider">
+          Demanda punta (kW) <span class="text-gray-500 normal-case font-normal">(opcional)</span>
+        </label>
+        <input
+          type="number"
+          [(ngModel)]="demandaHorarioPunta"
+          placeholder="Ej. 50"
+          class="w-full border border-white/15 bg-white/5 rounded-xl text-white placeholder-gray-500 text-sm px-4 py-3.5 focus:outline-none focus:border-emerald-400 transition-all duration-300"
+        >
+        <p class="text-gray-500 text-xs">Solo para tarifas GDMTH / GDMTO</p>
       </div>
-      
+
     </div>
 
-    <!-- Actions -->
-    <div class="pb-20">
-      <button 
-        (click)="siguientePaso()"
-        class="bg-[#00b894] hover:bg-[#00a383] text-white font-bold px-8 py-3 rounded-md text-base transition-colors shadow-lg cursor-pointer"
+    <!-- Botón -->
+    <div>
+      <button
+        (click)="calcular()"
+        class="group inline-flex items-center gap-3 bg-emerald-500 hover:bg-emerald-400 text-white font-bold px-8 py-4 rounded-xl text-base transition-all duration-300 shadow-lg shadow-emerald-500/30 hover:-translate-y-0.5 cursor-pointer"
       >
-        Siguiente
+        <span>Calcular mi ahorro</span>
+        <span class="material-symbols-rounded text-lg transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
+      </button>
+      <p class="text-gray-600 text-xs mt-3">* Estimación referencial basada en tarifas CFE 2024.</p>
+    </div>
+  </div>
+
+
+  <!-- ===== PASO 3: RESULTADOS ===== -->
+  <div *ngIf="paso === 3"
+       class="relative z-10 container mx-auto px-6 lg:px-20 pt-20 pb-24 flex flex-col flex-grow text-white calc-fade">
+
+    <div class="mb-10 max-w-xs w-full mt-6">
+      <div class="flex items-center justify-between w-full h-12 bg-white/5 backdrop-blur-sm rounded-full px-2 border border-white/10">
+        <div class="flex items-center justify-center w-9 h-9 rounded-full bg-emerald-500/30 text-emerald-400 font-bold text-sm">
+          <span class="material-symbols-rounded text-base">check</span>
+        </div>
+        <div class="flex-1 h-px bg-emerald-500/40 mx-1"></div>
+        <div class="flex items-center justify-center w-9 h-9 rounded-full bg-emerald-500/30 text-emerald-400 font-bold text-sm">
+          <span class="material-symbols-rounded text-base">check</span>
+        </div>
+        <div class="flex-1 h-px bg-emerald-500/40 mx-1"></div>
+        <div class="flex items-center justify-center w-9 h-9 rounded-full bg-emerald-500 text-white font-bold text-sm shadow-lg shadow-emerald-500/30">3</div>
+      </div>
+      <div class="flex justify-between mt-2 px-1">
+        <span class="text-xs text-emerald-400/60">Datos</span>
+        <span class="text-xs text-emerald-400/60">Análisis</span>
+        <span class="text-xs text-emerald-400 font-medium">Resultados</span>
+      </div>
+    </div>
+
+    <div class="mb-8 max-w-3xl">
+      <h2 class="text-4xl md:text-5xl font-extrabold mb-3 tracking-tight">
+        Tu potencial de <span class="text-emerald-400">ahorro</span>
+      </h2>
+      <p class="text-gray-400 text-sm">
+        {{ consumoPromedio }} kWh/mes · {{ estado }} · Tarifa {{ tarifa }}
+      </p>
+    </div>
+
+    <!-- Barra de ahorro -->
+    <div class="mb-10 max-w-2xl">
+      <div class="flex justify-between text-sm mb-2">
+        <span class="text-gray-400">Ahorro vs. factura actual</span>
+        <span class="text-emerald-400 font-bold text-lg">{{ formatNum(porcentajeAhorro) }}%</span>
+      </div>
+      <div class="w-full bg-white/10 rounded-full h-4 overflow-hidden">
+        <div
+          class="h-full rounded-full bg-gradient-to-r from-emerald-600 to-emerald-400 shadow-lg shadow-emerald-500/30"
+          [style.width]="formatNum(porcentajeAhorro) + '%'"
+          style="transition: width 1.2s ease-out;"
+        ></div>
+      </div>
+      <div class="flex justify-between text-xs text-gray-500 mt-1">
+        <span>0%</span><span>50%</span><span>100%</span>
+      </div>
+    </div>
+
+    <!-- Cards métricas -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10 max-w-6xl">
+
+      <div class="bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/30 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/15 flex items-center justify-center">
+            <span class="material-symbols-rounded text-emerald-400 text-xl">savings</span>
+          </div>
+          <span class="text-xs text-gray-400 uppercase tracking-wider">Ahorro mensual</span>
+        </div>
+        <p class="text-3xl font-black text-white mb-1">{{ formatMXN(ahorroMensual) }}</p>
+        <p class="text-xs text-gray-500">vs. {{ formatMXN(costoActualMensual) }} factura actual</p>
+      </div>
+
+      <div class="bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/30 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/15 flex items-center justify-center">
+            <span class="material-symbols-rounded text-emerald-400 text-xl">calendar_month</span>
+          </div>
+          <span class="text-xs text-gray-400 uppercase tracking-wider">Ahorro anual</span>
+        </div>
+        <p class="text-3xl font-black text-white mb-1">{{ formatMXN(ahorroAnual) }}</p>
+        <p class="text-xs text-gray-500">acumulado en 12 meses</p>
+      </div>
+
+      <div class="bg-white/5 hover:bg-white/10 border border-white/10 hover:border-yellow-500/30 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-xl bg-yellow-500/15 flex items-center justify-center">
+            <span class="material-symbols-rounded text-yellow-400 text-xl">wb_sunny</span>
+          </div>
+          <span class="text-xs text-gray-400 uppercase tracking-wider">Sistema solar</span>
+        </div>
+        <p class="text-3xl font-black text-white mb-1">{{ formatNum(potenciaSistema) }} kWp</p>
+        <p class="text-xs text-gray-500">aprox. {{ numeroPaneles }} paneles de 550W</p>
+      </div>
+
+      <div class="bg-white/5 hover:bg-white/10 border border-white/10 hover:border-teal-500/30 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-xl bg-teal-500/15 flex items-center justify-center">
+            <span class="material-symbols-rounded text-teal-400 text-xl">eco</span>
+          </div>
+          <span class="text-xs text-gray-400 uppercase tracking-wider">CO₂ evitado/año</span>
+        </div>
+        <p class="text-3xl font-black text-white mb-1">{{ formatNum(co2EvitadoAnual, 2) }} t</p>
+        <p class="text-xs text-gray-500">toneladas de CO₂ al año</p>
+      </div>
+
+    </div>
+
+    <!-- Inversión y ROI -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10 max-w-3xl">
+      <div class="bg-gradient-to-br from-emerald-500/10 to-emerald-900/10 border border-emerald-500/20 rounded-2xl p-6">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="material-symbols-rounded text-emerald-400 text-xl">trending_up</span>
+          <span class="text-sm text-gray-300 font-medium">Inversión aproximada</span>
+        </div>
+        <p class="text-4xl font-black text-emerald-400">{{ formatMXN(inversionAproximada) }}</p>
+        <p class="text-xs text-gray-500 mt-2">Estimación de instalación completa</p>
+      </div>
+      <div class="bg-gradient-to-br from-blue-500/10 to-blue-900/10 border border-blue-500/20 rounded-2xl p-6">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="material-symbols-rounded text-blue-400 text-xl">schedule</span>
+          <span class="text-sm text-gray-300 font-medium">Retorno de inversión</span>
+        </div>
+        <p class="text-4xl font-black text-blue-400">{{ formatNum(retornoInversion) }} años</p>
+        <p class="text-xs text-gray-500 mt-2">Con ahorros en factura CFE</p>
+      </div>
+    </div>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+      <button
+        (click)="irACotizar()"
+        class="group inline-flex items-center gap-3 bg-emerald-500 hover:bg-emerald-400 text-white font-bold px-8 py-4 rounded-xl text-base transition-all duration-300 shadow-lg shadow-emerald-500/30 hover:-translate-y-0.5 cursor-pointer"
+      >
+        <span>Quiero mi cotización</span>
+        <span class="material-symbols-rounded text-lg transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
+      </button>
+      <button
+        (click)="recalcular()"
+        class="inline-flex items-center gap-2 text-gray-400 hover:text-white border border-white/15 hover:border-white/30 px-6 py-4 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer hover:bg-white/5"
+      >
+        <span class="material-symbols-rounded text-base">refresh</span>
+        Recalcular
       </button>
     </div>
 
+    <p class="text-gray-600 text-xs mt-6 max-w-2xl">
+      * Estimación referencial basada en tarifas CFE 2024 y condiciones estándar de irradiación solar en México.
+    </p>
   </div>
+
 </div>
+
+<style>
+  .calc-fade { animation: calcFadeIn 0.5s ease-out; }
+  @keyframes calcFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+</style>
