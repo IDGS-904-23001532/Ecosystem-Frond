@@ -90,8 +90,7 @@ export class SidebarComponent implements OnInit {
       icon: 'folder',
       isOpen: false,
       children: [
-        { label: 'Ordenes de Servicio', icon: 'assignment', route: '/ordenes-servicio', exact: true },
-        { label: 'Bitácoras', icon: 'menu_book', route: '/bitacoras', exact: true }
+        { label: 'Ordenes de Servicio', icon: 'assignment', route: '/ordenes-servicio', exact: true }
       ]
     },
     {

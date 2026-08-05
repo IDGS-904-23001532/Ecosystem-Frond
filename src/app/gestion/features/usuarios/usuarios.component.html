@@ -2,27 +2,34 @@
   <app-sidebar></app-sidebar>
   <main class="flex-1 flex flex-col w-full lg:pl-[280px] min-w-0 transition-all">
     <div class="p-6 pt-20 lg:pt-8 lg:p-8 flex flex-col gap-6 max-w-[1600px] w-full mx-auto">
-      
+
       <!-- Título -->
-      <app-header-title [title]="title" [subtitle]="subtitle" [username]="username" [userInitials]="userInitials"></app-header-title>
+      <app-header-title [title]="title" [subtitle]="subtitle" [username]="username"
+        [userInitials]="userInitials"></app-header-title>
 
       <!-- Top Actions -->
-      <section class="flex flex-col sm:flex-row gap-4 items-center justify-between bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+      <section
+        class="flex flex-col sm:flex-row gap-4 items-center justify-between bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
         <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <div class="relative">
-            <span class="material-symbols-rounded absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
-            <input type="text" placeholder="Buscar empleado..." [(ngModel)]="terminoBusqueda" class="w-full sm:w-64 pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all" />
+            <span
+              class="material-symbols-rounded absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+            <input type="text" placeholder="Buscar empleado..." [(ngModel)]="terminoBusqueda"
+              class="w-full sm:w-64 pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all" />
           </div>
         </div>
 
-        <app-button [text]="'Nuevo Empleado'" [type]="'button'" [buttonClass]="'bg-emerald-600 hover:bg-emerald-700 hover:shadow-md hover:shadow-emerald-600/20 w-full sm:w-auto transition-all rounded-xl py-2 px-4 flex items-center justify-center gap-2'" (click)="mostrarModalUsuario = true">
+        <app-button [text]="'Nuevo Empleado'" [type]="'button'"
+          [buttonClass]="'bg-emerald-600 hover:bg-emerald-700 hover:shadow-md hover:shadow-emerald-600/20 w-full sm:w-auto transition-all rounded-xl py-2 px-4 flex items-center justify-center gap-2'"
+          (click)="agregarUsuario()">
           <span class="material-symbols-rounded text-sm">add</span>
         </app-button>
       </section>
 
       <!-- Tarjetas -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div *ngFor="let card of tarjetasUsuarios" class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex items-center gap-4">
+        <div *ngFor="let card of tarjetasUsuarios"
+          class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex items-center gap-4">
           <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl bg-emerald-50 text-emerald-600">
             <span class="material-symbols-rounded">{{ card.icon }}</span>
           </div>
@@ -35,12 +42,16 @@
 
       <!-- Tabla -->
       <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-        <app-table [columns]="columnasUsuarios" [data]="empleadosFiltrados" [isLoading]="isLoading" [showActions]="true" emptyMessage="No se encontraron empleados registrados." (actionClick)="manejarAccion($event)"></app-table>
+        <app-table [columns]="columnasUsuarios" [data]="empleadosFiltrados" [isLoading]="isLoading" [showActions]="true"
+          emptyMessage="No se encontraron empleados registrados." (actionClick)="manejarAccion($event)"></app-table>
       </div>
 
       <!-- Modales -->
-      <app-modal-usuario [isVisible]="mostrarModalUsuario" (close)="mostrarModalUsuario = false" (save)="guardarNuevoUsuario($event)"></app-modal-usuario>
-      <app-modal-permisos [isVisible]="mostrarModalPermisos" [areaEmpleado]="areaEmpleadoSeleccionada" (close)="mostrarModalPermisos = false"></app-modal-permisos>
+      <app-modal-usuario [isVisible]="mostrarModalUsuario" [empleadoData]="empleadoSeleccionado"
+        (close)="mostrarModalUsuario = false" (save)="guardarNuevoUsuario($event)">
+      </app-modal-usuario>
+      <app-modal-permisos [isVisible]="mostrarModalPermisos" [areaEmpleado]="areaEmpleadoSeleccionada"
+        (close)="mostrarModalPermisos = false"></app-modal-permisos>
 
     </div>
   </main>

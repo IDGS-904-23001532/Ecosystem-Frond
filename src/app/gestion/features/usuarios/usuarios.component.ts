@@ -61,28 +61,44 @@ export class UsuariosComponent implements OnInit {
   mostrarModalUsuario: boolean = false;
   mostrarModalPermisos: boolean = false;
   areaEmpleadoSeleccionada: string = '';
+  empleadoSeleccionado: any = null;
 
   // Método para abrir el modal de usuario
   agregarUsuario(): void {
+    this.empleadoSeleccionado = null;
     this.mostrarModalUsuario = true;
   }
 
-  guardarNuevoUsuario(datosUsuario: any): void {
+guardarNuevoUsuario(datosUsuario: any): void {
     Swal.fire({
       title: 'Guardando...',
       allowOutsideClick: false,
       didOpen: () => { Swal.showLoading(); }
     });
 
-    this.authService.registroEmpleado(datosUsuario).subscribe({
-      next: () => {
-        Swal.fire('¡Éxito!', 'Empleado registrado correctamente.', 'success');
-        this.cargarEmpleados(true);
-      },
-      error: () => {
-        Swal.fire('Error', 'No se pudo registrar al empleado.', 'error');
-      }
-    });
+    // Si el objeto trae ID, significa que estamos EDITANDO
+    if (datosUsuario.idEmpleado) {
+      this.authService.actualizarEmpleado(datosUsuario.idEmpleado, datosUsuario).subscribe({
+        next: () => {
+          Swal.fire('¡Éxito!', 'Empleado actualizado correctamente.', 'success');
+          this.cargarEmpleados(true);
+        },
+        error: () => {
+          Swal.fire('Error', 'No se pudo actualizar al empleado.', 'error');
+        }
+      });
+    } else {
+      // Si NO trae ID, significa que es un REGISTRO NUEVO
+      this.authService.registroEmpleado(datosUsuario).subscribe({
+        next: () => {
+          Swal.fire('¡Éxito!', 'Empleado registrado correctamente.', 'success');
+          this.cargarEmpleados(true);
+        },
+        error: () => {
+          Swal.fire('Error', 'No se pudo registrar al empleado.', 'error');
+        }
+      });
+    }
   }
 
 // Metodo para filtrar por estado de usuario
@@ -150,7 +166,37 @@ filtrarPorTipo(): void {
   
   manejarAccion(evento: TableAction) {
     if (evento.actionName === 'edit') {
-      console.log('Editando el usuario:', evento.rowData);
+      this.empleadoSeleccionado = evento.rowData;
+      this.mostrarModalUsuario = true;
+    } 
+    else if (evento.actionName === 'delete') {
+      // Pedimos confirmación antes de disparar al backend
+      Swal.fire({
+        title: '¿Estás seguro?',
+        text: `Vas a dar de baja a ${evento.rowData.nombreCompleto}. No podrá acceder al sistema.`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#059669', // Verde Esmeralda (como tu diseño)
+        cancelButtonColor: '#ef4444', // Rojo
+        confirmButtonText: 'Sí, dar de baja',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Si dijo que sí, mostramos el loading y llamamos al API
+          Swal.fire({ title: 'Eliminando...', allowOutsideClick: false, didOpen: () => { Swal.showLoading(); } });
+          
+          this.authService.eliminarEmpleado(evento.rowData.idEmpleado).subscribe({
+            next: () => {
+              Swal.fire('¡Eliminado!', 'El empleado fue dado de baja correctamente.', 'success');
+              // Recargamos la tabla para que desaparezca
+              this.cargarEmpleados(true); 
+            },
+            error: () => {
+              Swal.fire('Error', 'No se pudo dar de baja al empleado.', 'error');
+            }
+          });
+        }
+      });
     }
   }
 
