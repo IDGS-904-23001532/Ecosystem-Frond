@@ -258,6 +258,89 @@
     </section>
 
 
+    <!-- SECCIÓN DESCARGA APP MÓVIL -->
+    <section class="py-32 w-full bg-[#f4f5f4] relative overflow-hidden">
+      <div class="absolute -top-40 -left-40 w-96 h-96 bg-[#00E676] rounded-full blur-[200px] opacity-10 pointer-events-none"></div>
+      <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-[#00E676] rounded-full blur-[200px] opacity-5 pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+
+        <!-- Header -->
+        <div class="text-center mb-16">
+          <span class="inline-block px-4 py-1.5 rounded-full bg-[#1B3B2B]/8 border border-[#1B3B2B]/15 text-[#1B3B2B] text-xs font-bold tracking-widest uppercase mb-5">
+            App Móvil
+          </span>
+          <h2 class="text-4xl md:text-5xl font-extrabold text-[#1B3B2B] mb-5 tracking-tight">
+            Tu energía en la palma de tu mano
+          </h2>
+          <p class="text-slate-500 text-lg max-w-xl mx-auto leading-relaxed">
+            Descarga la app de Ecosystem y monitorea tu sistema solar en tiempo real desde cualquier lugar.
+          </p>
+        </div>
+
+        <!-- Layout -->
+        <div class="flex flex-col lg:flex-row items-stretch gap-10 max-w-6xl mx-auto">
+
+          <!-- Lista de features -->
+          <div class="flex-1 bg-white rounded-[2.5rem] p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col justify-center">
+            <div class="space-y-1 border-t border-slate-200/60">
+              <div class="flex flex-col gap-1 py-5 border-b border-slate-200/60 hover:bg-[#f4f5f4]/60 px-3 rounded-xl transition-all">
+                <div class="flex items-center gap-4">
+                  <span class="text-sm font-mono text-slate-400">01</span>
+                  <h4 class="text-lg font-extrabold text-[#1B3B2B]">Monitoreo en tiempo real</h4>
+                </div>
+                <p class="text-slate-500 text-sm leading-relaxed pl-8">Visualiza tu producción solar, consumo y excedentes en cada momento del día.</p>
+              </div>
+              <div class="flex flex-col gap-1 py-5 border-b border-slate-200/60 hover:bg-[#f4f5f4]/60 px-3 rounded-xl transition-all">
+                <div class="flex items-center gap-4">
+                  <span class="text-sm font-mono text-slate-400">02</span>
+                  <h4 class="text-lg font-extrabold text-[#1B3B2B]">Reporte de ahorros</h4>
+                </div>
+                <p class="text-slate-500 text-sm leading-relaxed pl-8">Consulta cuánto ahorraste cada mes comparado con tu factura anterior de CFE.</p>
+              </div>
+              <div class="flex flex-col gap-1 py-5 border-b border-slate-200/60 hover:bg-[#f4f5f4]/60 px-3 rounded-xl transition-all">
+                <div class="flex items-center gap-4">
+                  <span class="text-sm font-mono text-slate-400">03</span>
+                  <h4 class="text-lg font-extrabold text-[#1B3B2B]">Alertas inteligentes</h4>
+                </div>
+                <p class="text-slate-500 text-sm leading-relaxed pl-8">Recibe notificaciones si detectamos anomalías o caídas en tu sistema solar.</p>
+              </div>
+              <div class="flex flex-col gap-1 py-5 hover:bg-[#f4f5f4]/60 px-3 rounded-xl transition-all">
+                <div class="flex items-center gap-4">
+                  <span class="text-sm font-mono text-slate-400">04</span>
+                  <h4 class="text-lg font-extrabold text-[#1B3B2B]">Huella de carbono</h4>
+                </div>
+                <p class="text-slate-500 text-sm leading-relaxed pl-8">Mide el CO₂ que evitaste emitir y tu impacto ambiental acumulado.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card descarga -->
+          <div class="w-full lg:w-[360px] shrink-0">
+            <div class="bg-[#1B3B2B] rounded-[2.5rem] p-10 shadow-[0_8px_30px_rgba(27,59,43,0.15)] border border-[#244f39] flex flex-col items-center text-white h-full">
+              <div class="w-20 h-20 bg-white/10 rounded-3xl flex items-center justify-center mb-6 border border-white/10">
+                <span class="material-symbols-rounded text-5xl text-[#00E676]">android</span>
+              </div>
+              <h3 class="text-2xl font-extrabold text-white mb-2 text-center">Ecosystem App</h3>
+              <p class="text-emerald-100/60 text-sm mb-8 text-center">Para Android 8.0 o superior</p>
+              <hr class="border-t border-white/10 w-full mb-8" />
+              <p class="text-emerald-100/70 text-xs font-semibold uppercase tracking-widest mb-4">Escanea para descargar</p>
+              <div class="bg-white p-3 rounded-2xl shadow-lg mb-8">
+                <img [src]="qrUrl" alt="QR descarga Ecosystem App" width="160" height="160" class="block rounded-lg" />
+              </div>
+              <a href="/downloads/ecosystem.apk"
+                 download="Ecosystem.apk"
+                 class="group mt-auto w-full py-4 rounded-2xl bg-[#00E676] text-[#1B3B2B] font-extrabold text-center hover:bg-[#00c853] hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+                <span class="material-symbols-rounded text-xl">download</span>
+                Descargar APK
+              </a>
+              <p class="text-white/30 text-xs mt-4 text-center">Permite instalación desde fuentes desconocidas</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
 
     <!-- SECCIÓN CONTÁCTANOS (FOOTER CTA) -->
     <section class="w-full bg-[#fcfdfc] pt-32 pb-16">
