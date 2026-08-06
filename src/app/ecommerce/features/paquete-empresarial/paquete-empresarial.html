@@ -155,6 +155,51 @@
       </div>
     </section>
 
+    <!-- Sección de Productos Empresariales -->
+    <section class="py-24 w-full bg-white relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16">
+          <span class="inline-block px-4 py-1.5 rounded-full bg-[#1B3B2B]/5 border border-[#1B3B2B]/10 text-[#1B3B2B] text-xs font-bold tracking-widest uppercase mb-4">
+            Expansión de Capacidad
+          </span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#1B3B2B] tracking-tight">
+            Equipamiento Industrial
+          </h2>
+          <p class="text-slate-500 text-base max-w-xl mx-auto mt-4">
+            Lleva la eficiencia de tu empresa al siguiente nivel con nuestras soluciones corporativas.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+          @for (producto of productos(); track producto.idProducto) {
+            <div class="flex flex-col rounded-[2rem] overflow-hidden bg-[#f4f5f4] group">
+              <div class="w-full h-[300px] sm:h-[400px] overflow-hidden bg-white flex items-center justify-center p-8">
+                <img [src]="producto.rutaImagen || '/placeholder.png'" [alt]="producto.nombre" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" />
+              </div>
+              <div class="p-8 md:p-10 flex flex-col flex-grow text-center items-center justify-between">
+                <div class="flex-grow flex flex-col items-center">
+                  <h3 class="text-2xl font-extrabold text-[#1B3B2B] mb-4">{{ producto.nombre }}</h3>
+                  <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-6 line-clamp-4">
+                    {{ producto.descripcion }}
+                  </p>
+                  <p class="text-2xl font-black text-emerald-600 mb-8 mt-auto">
+                    {{ producto.precio | currency }}
+                  </p>
+                </div>
+                <button routerLink="/registrarse" class="px-10 py-3.5 rounded-full border-2 border-[#1B3B2B] text-[#1B3B2B] font-bold text-sm hover:bg-[#1B3B2B] hover:text-white transition-colors duration-300">
+                  Cotizar sistema
+                </button>
+              </div>
+            </div>
+          } @empty {
+             <div class="col-span-1 md:col-span-2 text-center py-20 text-slate-500">
+               Cargando productos disponibles...
+             </div>
+          }
+        </div>
+      </div>
+    </section>
+
     <!-- Banner de Contacto CTA -->
     <section class="w-full bg-[#fcfdfc] pt-24 pb-16">
       <div class="max-w-7xl mx-auto px-6">
